@@ -32,13 +32,17 @@ frontend/dist/
 # OS
 .DS_Store
 Thumbs.db
-
 # Data files (large)
-data/raw/
 *.parquet
 *.sas7bdat
 *.dat
-data
+data/AdjacencyMatrixUnified/
+data/ComorbidityNetworksData/
+data/Benefits_Cost_Sharing_PUF.csv
+data/plan_attributes_PUF.csv
+data/Rate_PUF.csv
+data/h233.csv
+data/h233cb.pdf
 
 # Supabase
 .supabase/

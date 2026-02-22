@@ -1,0 +1,37 @@
+{
+  "diabetes_hypertension": {
+    "n_both": 2491,
+    "mean_exp_both": 17916.1,
+    "mean_exp_a_only": 13033.12,
+    "mean_exp_b_only": 11570.5,
+    "mean_oop_both": 1338.74
+  },
+  "diabetes_cholesterol": {
+    "n_both": 2379,
+    "mean_exp_both": 17646.1,
+    "mean_exp_a_only": 14375.36,
+    "mean_exp_b_only": 11501.3,
+    "mean_oop_both": 1226.63
+  },
+  "hypertension_cholesterol": {
+    "n_both": 5321,
+    "mean_exp_both": 15135.22,
+    "mean_exp_a_only": 10587.91,
+    "mean_exp_b_only": 9689.63,
+    "mean_oop_both": 1343.71
+  },
+  "diabetes_heart_disease": {
+    "n_both": 559,
+    "mean_exp_both": 24099.0,
+    "mean_exp_a_only": 15242.16,
+    "mean_exp_b_only": 19490.52,
+    "mean_oop_both": 1438.57
+  },
+  "hypertension_heart_disease": {
+    "n_both": 1215,
+    "mean_exp_both": 21282.66,
+    "mean_exp_a_only": 12117.63,
+    "mean_exp_b_only": 21270.38,
+    "mean_oop_both": 1636.96
+  }
+}

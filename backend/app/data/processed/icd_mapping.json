@@ -1,0 +1,5402 @@
+[
+  {
+    "index": 0,
+    "icd_code": "A00",
+    "description": "Cholera"
+  },
+  {
+    "index": 1,
+    "icd_code": "A01",
+    "description": "Typhoid and paratyphoid fevers"
+  },
+  {
+    "index": 2,
+    "icd_code": "A02",
+    "description": "Other salmonella infections"
+  },
+  {
+    "index": 3,
+    "icd_code": "A03",
+    "description": "Shigellosis"
+  },
+  {
+    "index": 4,
+    "icd_code": "A04",
+    "description": "Other bacterial intestinal infections"
+  },
+  {
+    "index": 5,
+    "icd_code": "A05",
+    "description": "Oth bacterial foodborne intoxications, NEC"
+  },
+  {
+    "index": 6,
+    "icd_code": "A06",
+    "description": "Amebiasis"
+  },
+  {
+    "index": 7,
+    "icd_code": "A07",
+    "description": "Other protozoal intestinal diseases"
+  },
+  {
+    "index": 8,
+    "icd_code": "A08",
+    "description": "Viral and other specified intestinal infections"
+  },
+  {
+    "index": 9,
+    "icd_code": "A09",
+    "description": "Infectious gastroenteritis and colitis, unspecified"
+  },
+  {
+    "index": 10,
+    "icd_code": "A15",
+    "description": "Respiratory tuberculosis"
+  },
+  {
+    "index": 11,
+    "icd_code": "A16",
+    "description": "A16"
+  },
+  {
+    "index": 12,
+    "icd_code": "A17",
+    "description": "Tuberculosis of nervous system"
+  },
+  {
+    "index": 13,
+    "icd_code": "A18",
+    "description": "Tuberculosis of other organs"
+  },
+  {
+    "index": 14,
+    "icd_code": "A19",
+    "description": "Miliary tuberculosis"
+  },
+  {
+    "index": 15,
+    "icd_code": "A20",
+    "description": "Plague"
+  },
+  {
+    "index": 16,
+    "icd_code": "A21",
+    "description": "Tularemia"
+  },
+  {
+    "index": 17,
+    "icd_code": "A22",
+    "description": "Anthrax"
+  },
+  {
+    "index": 18,
+    "icd_code": "A23",
+    "description": "Brucellosis"
+  },
+  {
+    "index": 19,
+    "icd_code": "A24",
+    "description": "Glanders and melioidosis"
+  },
+  {
+    "index": 20,
+    "icd_code": "A25",
+    "description": "Rat-bite fevers"
+  },
+  {
+    "index": 21,
+    "icd_code": "A26",
+    "description": "Erysipeloid"
+  },
+  {
+    "index": 22,
+    "icd_code": "A27",
+    "description": "Leptospirosis"
+  },
+  {
+    "index": 23,
+    "icd_code": "A28",
+    "description": "Other zoonotic bacterial diseases, not elsewhere classified"
+  },
+  {
+    "index": 24,
+    "icd_code": "A30",
+    "description": "Leprosy [Hansen's disease]"
+  },
+  {
+    "index": 25,
+    "icd_code": "A31",
+    "description": "Infection due to other mycobacteria"
+  },
+  {
+    "index": 26,
+    "icd_code": "A32",
+    "description": "Listeriosis"
+  },
+  {
+    "index": 27,
+    "icd_code": "A33",
+    "description": "Tetanus neonatorum"
+  },
+  {
+    "index": 28,
+    "icd_code": "A34",
+    "description": "Obstetrical tetanus"
+  },
+  {
+    "index": 29,
+    "icd_code": "A35",
+    "description": "Other tetanus"
+  },
+  {
+    "index": 30,
+    "icd_code": "A36",
+    "description": "Diphtheria"
+  },
+  {
+    "index": 31,
+    "icd_code": "A37",
+    "description": "Whooping cough"
+  },
+  {
+    "index": 32,
+    "icd_code": "A38",
+    "description": "Scarlet fever"
+  },
+  {
+    "index": 33,
+    "icd_code": "A39",
+    "description": "Meningococcal infection"
+  },
+  {
+    "index": 34,
+    "icd_code": "A40",
+    "description": "Streptococcal sepsis"
+  },
+  {
+    "index": 35,
+    "icd_code": "A41",
+    "description": "Other sepsis"
+  },
+  {
+    "index": 36,
+    "icd_code": "A42",
+    "description": "Actinomycosis"
+  },
+  {
+    "index": 37,
+    "icd_code": "A43",
+    "description": "Nocardiosis"
+  },
+  {
+    "index": 38,
+    "icd_code": "A44",
+    "description": "Bartonellosis"
+  },
+  {
+    "index": 39,
+    "icd_code": "A46",
+    "description": "Erysipelas"
+  },
+  {
+    "index": 40,
+    "icd_code": "A48",
+    "description": "Other bacterial diseases, not elsewhere classified"
+  },
+  {
+    "index": 41,
+    "icd_code": "A49",
+    "description": "Bacterial infection of unspecified site"
+  },
+  {
+    "index": 42,
+    "icd_code": "A50",
+    "description": "Congenital syphilis"
+  },
+  {
+    "index": 43,
+    "icd_code": "A51",
+    "description": "Early syphilis"
+  },
+  {
+    "index": 44,
+    "icd_code": "A52",
+    "description": "Late syphilis"
+  },
+  {
+    "index": 45,
+    "icd_code": "A53",
+    "description": "Other and unspecified syphilis"
+  },
+  {
+    "index": 46,
+    "icd_code": "A54",
+    "description": "Gonococcal infection"
+  },
+  {
+    "index": 47,
+    "icd_code": "A55",
+    "description": "Chlamydial lymphogranuloma (venereum)"
+  },
+  {
+    "index": 48,
+    "icd_code": "A56",
+    "description": "Other sexually transmitted chlamydial diseases"
+  },
+  {
+    "index": 49,
+    "icd_code": "A57",
+    "description": "Chancroid"
+  },
+  {
+    "index": 50,
+    "icd_code": "A58",
+    "description": "Granuloma inguinale"
+  },
+  {
+    "index": 51,
+    "icd_code": "A59",
+    "description": "Trichomoniasis"
+  },
+  {
+    "index": 52,
+    "icd_code": "A60",
+    "description": "Anogenital herpesviral [herpes simplex] infections"
+  },
+  {
+    "index": 53,
+    "icd_code": "A63",
+    "description": "Oth predominantly sexually transmitted diseases, NEC"
+  },
+  {
+    "index": 54,
+    "icd_code": "A64",
+    "description": "Unspecified sexually transmitted disease"
+  },
+  {
+    "index": 55,
+    "icd_code": "A65",
+    "description": "Nonvenereal syphilis"
+  },
+  {
+    "index": 56,
+    "icd_code": "A66",
+    "description": "Yaws"
+  },
+  {
+    "index": 57,
+    "icd_code": "A67",
+    "description": "Pinta [carate]"
+  },
+  {
+    "index": 58,
+    "icd_code": "A68",
+    "description": "Relapsing fevers"
+  },
+  {
+    "index": 59,
+    "icd_code": "A69",
+    "description": "Other spirochetal infections"
+  },
+  {
+    "index": 60,
+    "icd_code": "A70",
+    "description": "Chlamydia psittaci infections"
+  },
+  {
+    "index": 61,
+    "icd_code": "A71",
+    "description": "Trachoma"
+  },
+  {
+    "index": 62,
+    "icd_code": "A74",
+    "description": "Other diseases caused by chlamydiae"
+  },
+  {
+    "index": 63,
+    "icd_code": "A75",
+    "description": "Typhus fever"
+  },
+  {
+    "index": 64,
+    "icd_code": "A77",
+    "description": "Spotted fever [tick-borne rickettsioses]"
+  },
+  {
+    "index": 65,
+    "icd_code": "A78",
+    "description": "Q fever"
+  },
+  {
+    "index": 66,
+    "icd_code": "A79",
+    "description": "Other rickettsioses"
+  },
+  {
+    "index": 67,
+    "icd_code": "A80",
+    "description": "Acute poliomyelitis"
+  },
+  {
+    "index": 68,
+    "icd_code": "A81",
+    "description": "Atypical virus infections of central nervous system"
+  },
+  {
+    "index": 69,
+    "icd_code": "A82",
+    "description": "Rabies"
+  },
+  {
+    "index": 70,
+    "icd_code": "A83",
+    "description": "Mosquito-borne viral encephalitis"
+  },
+  {
+    "index": 71,
+    "icd_code": "A84",
+    "description": "Tick-borne viral encephalitis"
+  },
+  {
+    "index": 72,
+    "icd_code": "A85",
+    "description": "Other viral encephalitis, not elsewhere classified"
+  },
+  {
+    "index": 73,
+    "icd_code": "A86",
+    "description": "Unspecified viral encephalitis"
+  },
+  {
+    "index": 74,
+    "icd_code": "A87",
+    "description": "Viral meningitis"
+  },
+  {
+    "index": 75,
+    "icd_code": "A88",
+    "description": "Oth viral infections of central nervous system, NEC"
+  },
+  {
+    "index": 76,
+    "icd_code": "A89",
+    "description": "Unspecified viral infection of central nervous system"
+  },
+  {
+    "index": 77,
+    "icd_code": "A90",
+    "description": "Dengue fever [classical dengue]"
+  },
+  {
+    "index": 78,
+    "icd_code": "A91",
+    "description": "Dengue hemorrhagic fever"
+  },
+  {
+    "index": 79,
+    "icd_code": "A92",
+    "description": "Other mosquito-borne viral fevers"
+  },
+  {
+    "index": 80,
+    "icd_code": "A93",
+    "description": "Other arthropod-borne viral fevers, not elsewhere classified"
+  },
+  {
+    "index": 81,
+    "icd_code": "A94",
+    "description": "Unspecified arthropod-borne viral fever"
+  },
+  {
+    "index": 82,
+    "icd_code": "A95",
+    "description": "Yellow fever"
+  },
+  {
+    "index": 83,
+    "icd_code": "A96",
+    "description": "Arenaviral hemorrhagic fever"
+  },
+  {
+    "index": 84,
+    "icd_code": "A97",
+    "description": "A97"
+  },
+  {
+    "index": 85,
+    "icd_code": "A98",
+    "description": "Other viral hemorrhagic fevers, not elsewhere classified"
+  },
+  {
+    "index": 86,
+    "icd_code": "A99",
+    "description": "Unspecified viral hemorrhagic fever"
+  },
+  {
+    "index": 87,
+    "icd_code": "B00",
+    "description": "Herpesviral [herpes simplex] infections"
+  },
+  {
+    "index": 88,
+    "icd_code": "B01",
+    "description": "Varicella [chickenpox]"
+  },
+  {
+    "index": 89,
+    "icd_code": "B02",
+    "description": "Zoster [herpes zoster]"
+  },
+  {
+    "index": 90,
+    "icd_code": "B03",
+    "description": "Smallpox"
+  },
+  {
+    "index": 91,
+    "icd_code": "B04",
+    "description": "Monkeypox"
+  },
+  {
+    "index": 92,
+    "icd_code": "B05",
+    "description": "Measles"
+  },
+  {
+    "index": 93,
+    "icd_code": "B06",
+    "description": "Rubella [German measles]"
+  },
+  {
+    "index": 94,
+    "icd_code": "B07",
+    "description": "Viral warts"
+  },
+  {
+    "index": 95,
+    "icd_code": "B08",
+    "description": "Oth viral infect with skin and mucous membrane lesions, NEC"
+  },
+  {
+    "index": 96,
+    "icd_code": "B09",
+    "description": "Unsp viral infection with skin and mucous membrane lesions"
+  },
+  {
+    "index": 97,
+    "icd_code": "B15",
+    "description": "Acute hepatitis A"
+  },
+  {
+    "index": 98,
+    "icd_code": "B16",
+    "description": "Acute hepatitis B"
+  },
+  {
+    "index": 99,
+    "icd_code": "B17",
+    "description": "Other acute viral hepatitis"
+  },
+  {
+    "index": 100,
+    "icd_code": "B18",
+    "description": "Chronic viral hepatitis"
+  },
+  {
+    "index": 101,
+    "icd_code": "B19",
+    "description": "Unspecified viral hepatitis"
+  },
+  {
+    "index": 102,
+    "icd_code": "B20",
+    "description": "Human immunodeficiency virus [HIV] disease"
+  },
+  {
+    "index": 103,
+    "icd_code": "B21",
+    "description": "B21"
+  },
+  {
+    "index": 104,
+    "icd_code": "B22",
+    "description": "B22"
+  },
+  {
+    "index": 105,
+    "icd_code": "B23",
+    "description": "B23"
+  },
+  {
+    "index": 106,
+    "icd_code": "B24",
+    "description": "B24"
+  },
+  {
+    "index": 107,
+    "icd_code": "B25",
+    "description": "Cytomegaloviral disease"
+  },
+  {
+    "index": 108,
+    "icd_code": "B26",
+    "description": "Mumps"
+  },
+  {
+    "index": 109,
+    "icd_code": "B27",
+    "description": "Infectious mononucleosis"
+  },
+  {
+    "index": 110,
+    "icd_code": "B30",
+    "description": "Viral conjunctivitis"
+  },
+  {
+    "index": 111,
+    "icd_code": "B33",
+    "description": "Other viral diseases, not elsewhere classified"
+  },
+  {
+    "index": 112,
+    "icd_code": "B34",
+    "description": "Viral infection of unspecified site"
+  },
+  {
+    "index": 113,
+    "icd_code": "B35",
+    "description": "Dermatophytosis"
+  },
+  {
+    "index": 114,
+    "icd_code": "B36",
+    "description": "Other superficial mycoses"
+  },
+  {
+    "index": 115,
+    "icd_code": "B37",
+    "description": "Candidiasis"
+  },
+  {
+    "index": 116,
+    "icd_code": "B38",
+    "description": "Coccidioidomycosis"
+  },
+  {
+    "index": 117,
+    "icd_code": "B39",
+    "description": "Histoplasmosis"
+  },
+  {
+    "index": 118,
+    "icd_code": "B40",
+    "description": "Blastomycosis"
+  },
+  {
+    "index": 119,
+    "icd_code": "B41",
+    "description": "Paracoccidioidomycosis"
+  },
+  {
+    "index": 120,
+    "icd_code": "B42",
+    "description": "Sporotrichosis"
+  },
+  {
+    "index": 121,
+    "icd_code": "B43",
+    "description": "Chromomycosis and pheomycotic abscess"
+  },
+  {
+    "index": 122,
+    "icd_code": "B44",
+    "description": "Aspergillosis"
+  },
+  {
+    "index": 123,
+    "icd_code": "B45",
+    "description": "Cryptococcosis"
+  },
+  {
+    "index": 124,
+    "icd_code": "B46",
+    "description": "Zygomycosis"
+  },
+  {
+    "index": 125,
+    "icd_code": "B47",
+    "description": "Mycetoma"
+  },
+  {
+    "index": 126,
+    "icd_code": "B48",
+    "description": "Other mycoses, not elsewhere classified"
+  },
+  {
+    "index": 127,
+    "icd_code": "B49",
+    "description": "Unspecified mycosis"
+  },
+  {
+    "index": 128,
+    "icd_code": "B50",
+    "description": "Plasmodium falciparum malaria"
+  },
+  {
+    "index": 129,
+    "icd_code": "B51",
+    "description": "Plasmodium vivax malaria"
+  },
+  {
+    "index": 130,
+    "icd_code": "B52",
+    "description": "Plasmodium malariae malaria"
+  },
+  {
+    "index": 131,
+    "icd_code": "B53",
+    "description": "Other specified malaria"
+  },
+  {
+    "index": 132,
+    "icd_code": "B54",
+    "description": "Unspecified malaria"
+  },
+  {
+    "index": 133,
+    "icd_code": "B55",
+    "description": "Leishmaniasis"
+  },
+  {
+    "index": 134,
+    "icd_code": "B56",
+    "description": "African trypanosomiasis"
+  },
+  {
+    "index": 135,
+    "icd_code": "B57",
+    "description": "Chagas' disease"
+  },
+  {
+    "index": 136,
+    "icd_code": "B58",
+    "description": "Toxoplasmosis"
+  },
+  {
+    "index": 137,
+    "icd_code": "B59",
+    "description": "Pneumocystosis"
+  },
+  {
+    "index": 138,
+    "icd_code": "B60",
+    "description": "Other protozoal diseases, not elsewhere classified"
+  },
+  {
+    "index": 139,
+    "icd_code": "B64",
+    "description": "Unspecified protozoal disease"
+  },
+  {
+    "index": 140,
+    "icd_code": "B65",
+    "description": "Schistosomiasis [bilharziasis]"
+  },
+  {
+    "index": 141,
+    "icd_code": "B66",
+    "description": "Other fluke infections"
+  },
+  {
+    "index": 142,
+    "icd_code": "B67",
+    "description": "Echinococcosis"
+  },
+  {
+    "index": 143,
+    "icd_code": "B68",
+    "description": "Taeniasis"
+  },
+  {
+    "index": 144,
+    "icd_code": "B69",
+    "description": "Cysticercosis"
+  },
+  {
+    "index": 145,
+    "icd_code": "B70",
+    "description": "Diphyllobothriasis and sparganosis"
+  },
+  {
+    "index": 146,
+    "icd_code": "B71",
+    "description": "Other cestode infections"
+  },
+  {
+    "index": 147,
+    "icd_code": "B72",
+    "description": "Dracunculiasis"
+  },
+  {
+    "index": 148,
+    "icd_code": "B73",
+    "description": "Onchocerciasis"
+  },
+  {
+    "index": 149,
+    "icd_code": "B74",
+    "description": "Filariasis"
+  },
+  {
+    "index": 150,
+    "icd_code": "B75",
+    "description": "Trichinellosis"
+  },
+  {
+    "index": 151,
+    "icd_code": "B76",
+    "description": "Hookworm diseases"
+  },
+  {
+    "index": 152,
+    "icd_code": "B77",
+    "description": "Ascariasis"
+  },
+  {
+    "index": 153,
+    "icd_code": "B78",
+    "description": "Strongyloidiasis"
+  },
+  {
+    "index": 154,
+    "icd_code": "B79",
+    "description": "Trichuriasis"
+  },
+  {
+    "index": 155,
+    "icd_code": "B80",
+    "description": "Enterobiasis"
+  },
+  {
+    "index": 156,
+    "icd_code": "B81",
+    "description": "Other intestinal helminthiases, not elsewhere classified"
+  },
+  {
+    "index": 157,
+    "icd_code": "B82",
+    "description": "Unspecified intestinal parasitism"
+  },
+  {
+    "index": 158,
+    "icd_code": "B83",
+    "description": "Other helminthiases"
+  },
+  {
+    "index": 159,
+    "icd_code": "B85",
+    "description": "Pediculosis and phthiriasis"
+  },
+  {
+    "index": 160,
+    "icd_code": "B86",
+    "description": "Scabies"
+  },
+  {
+    "index": 161,
+    "icd_code": "B87",
+    "description": "Myiasis"
+  },
+  {
+    "index": 162,
+    "icd_code": "B88",
+    "description": "Other infestations"
+  },
+  {
+    "index": 163,
+    "icd_code": "B89",
+    "description": "Unspecified parasitic disease"
+  },
+  {
+    "index": 164,
+    "icd_code": "B90",
+    "description": "Sequelae of tuberculosis"
+  },
+  {
+    "index": 165,
+    "icd_code": "B91",
+    "description": "Sequelae of poliomyelitis"
+  },
+  {
+    "index": 166,
+    "icd_code": "B92",
+    "description": "Sequelae of leprosy"
+  },
+  {
+    "index": 167,
+    "icd_code": "B94",
+    "description": "Sequelae of other and unsp infectious and parasitic diseases"
+  },
+  {
+    "index": 168,
+    "icd_code": "B95",
+    "description": "Strep as the cause of diseases classified elsewhere"
+  },
+  {
+    "index": 169,
+    "icd_code": "B96",
+    "description": "Oth bacterial agents as the cause of diseases classd elswhr"
+  },
+  {
+    "index": 170,
+    "icd_code": "B97",
+    "description": "Viral agents as the cause of diseases classified elsewhere"
+  },
+  {
+    "index": 171,
+    "icd_code": "B98",
+    "description": "B98"
+  },
+  {
+    "index": 172,
+    "icd_code": "B99",
+    "description": "Other and unspecified infectious diseases"
+  },
+  {
+    "index": 173,
+    "icd_code": "C00",
+    "description": "Malignant neoplasm of lip"
+  },
+  {
+    "index": 174,
+    "icd_code": "C01",
+    "description": "Malignant neoplasm of base of tongue"
+  },
+  {
+    "index": 175,
+    "icd_code": "C02",
+    "description": "Malignant neoplasm of other and unspecified parts of tongue"
+  },
+  {
+    "index": 176,
+    "icd_code": "C03",
+    "description": "Malignant neoplasm of gum"
+  },
+  {
+    "index": 177,
+    "icd_code": "C04",
+    "description": "Malignant neoplasm of floor of mouth"
+  },
+  {
+    "index": 178,
+    "icd_code": "C05",
+    "description": "Malignant neoplasm of palate"
+  },
+  {
+    "index": 179,
+    "icd_code": "C06",
+    "description": "Malignant neoplasm of other and unspecified parts of mouth"
+  },
+  {
+    "index": 180,
+    "icd_code": "C07",
+    "description": "Malignant neoplasm of parotid gland"
+  },
+  {
+    "index": 181,
+    "icd_code": "C08",
+    "description": "Malignant neoplasm of other and unsp major salivary glands"
+  },
+  {
+    "index": 182,
+    "icd_code": "C09",
+    "description": "Malignant neoplasm of tonsil"
+  },
+  {
+    "index": 183,
+    "icd_code": "C10",
+    "description": "Malignant neoplasm of oropharynx"
+  },
+  {
+    "index": 184,
+    "icd_code": "C11",
+    "description": "Malignant neoplasm of nasopharynx"
+  },
+  {
+    "index": 185,
+    "icd_code": "C12",
+    "description": "Malignant neoplasm of pyriform sinus"
+  },
+  {
+    "index": 186,
+    "icd_code": "C13",
+    "description": "Malignant neoplasm of hypopharynx"
+  },
+  {
+    "index": 187,
+    "icd_code": "C14",
+    "description": "Malig neoplasm of sites in the lip, oral cavity and pharynx"
+  },
+  {
+    "index": 188,
+    "icd_code": "C15",
+    "description": "Malignant neoplasm of esophagus"
+  },
+  {
+    "index": 189,
+    "icd_code": "C16",
+    "description": "Malignant neoplasm of stomach"
+  },
+  {
+    "index": 190,
+    "icd_code": "C17",
+    "description": "Malignant neoplasm of small intestine"
+  },
+  {
+    "index": 191,
+    "icd_code": "C18",
+    "description": "Malignant neoplasm of colon"
+  },
+  {
+    "index": 192,
+    "icd_code": "C19",
+    "description": "Malignant neoplasm of rectosigmoid junction"
+  },
+  {
+    "index": 193,
+    "icd_code": "C20",
+    "description": "Malignant neoplasm of rectum"
+  },
+  {
+    "index": 194,
+    "icd_code": "C21",
+    "description": "Malignant neoplasm of anus and anal canal"
+  },
+  {
+    "index": 195,
+    "icd_code": "C22",
+    "description": "Malignant neoplasm of liver and intrahepatic bile ducts"
+  },
+  {
+    "index": 196,
+    "icd_code": "C23",
+    "description": "Malignant neoplasm of gallbladder"
+  },
+  {
+    "index": 197,
+    "icd_code": "C24",
+    "description": "Malignant neoplasm of other and unsp parts of biliary tract"
+  },
+  {
+    "index": 198,
+    "icd_code": "C25",
+    "description": "Malignant neoplasm of pancreas"
+  },
+  {
+    "index": 199,
+    "icd_code": "C26",
+    "description": "Malignant neoplasm of other and ill-defined digestive organs"
+  },
+  {
+    "index": 200,
+    "icd_code": "C30",
+    "description": "Malignant neoplasm of nasal cavity and middle ear"
+  },
+  {
+    "index": 201,
+    "icd_code": "C31",
+    "description": "Malignant neoplasm of accessory sinuses"
+  },
+  {
+    "index": 202,
+    "icd_code": "C32",
+    "description": "Malignant neoplasm of larynx"
+  },
+  {
+    "index": 203,
+    "icd_code": "C33",
+    "description": "Malignant neoplasm of trachea"
+  },
+  {
+    "index": 204,
+    "icd_code": "C34",
+    "description": "Malignant neoplasm of bronchus and lung"
+  },
+  {
+    "index": 205,
+    "icd_code": "C37",
+    "description": "Malignant neoplasm of thymus"
+  },
+  {
+    "index": 206,
+    "icd_code": "C38",
+    "description": "Malignant neoplasm of heart, mediastinum and pleura"
+  },
+  {
+    "index": 207,
+    "icd_code": "C39",
+    "description": "Malig neoplm of sites in the resp sys and intrathorac organs"
+  },
+  {
+    "index": 208,
+    "icd_code": "C40",
+    "description": "Malignant neoplasm of bone and articular cartilage of limbs"
+  },
+  {
+    "index": 209,
+    "icd_code": "C41",
+    "description": "Malignant neoplasm of bone/artic cartl of and unsp sites"
+  },
+  {
+    "index": 210,
+    "icd_code": "C43",
+    "description": "Malignant melanoma of skin"
+  },
+  {
+    "index": 211,
+    "icd_code": "C44",
+    "description": "Other and unspecified malignant neoplasm of skin"
+  },
+  {
+    "index": 212,
+    "icd_code": "C45",
+    "description": "Mesothelioma"
+  },
+  {
+    "index": 213,
+    "icd_code": "C46",
+    "description": "Kaposi's sarcoma"
+  },
+  {
+    "index": 214,
+    "icd_code": "C47",
+    "description": "Malignant neoplasm of prph nerves and autonomic nervous sys"
+  },
+  {
+    "index": 215,
+    "icd_code": "C48",
+    "description": "Malignant neoplasm of retroperitoneum and peritoneum"
+  },
+  {
+    "index": 216,
+    "icd_code": "C49",
+    "description": "Malignant neoplasm of other connective and soft tissue"
+  },
+  {
+    "index": 217,
+    "icd_code": "C50",
+    "description": "Malignant neoplasm of breast"
+  },
+  {
+    "index": 218,
+    "icd_code": "C51",
+    "description": "Malignant neoplasm of vulva"
+  },
+  {
+    "index": 219,
+    "icd_code": "C52",
+    "description": "Malignant neoplasm of vagina"
+  },
+  {
+    "index": 220,
+    "icd_code": "C53",
+    "description": "Malignant neoplasm of cervix uteri"
+  },
+  {
+    "index": 221,
+    "icd_code": "C54",
+    "description": "Malignant neoplasm of corpus uteri"
+  },
+  {
+    "index": 222,
+    "icd_code": "C55",
+    "description": "Malignant neoplasm of uterus, part unspecified"
+  },
+  {
+    "index": 223,
+    "icd_code": "C56",
+    "description": "Malignant neoplasm of ovary"
+  },
+  {
+    "index": 224,
+    "icd_code": "C57",
+    "description": "Malignant neoplasm of other and unsp female genital organs"
+  },
+  {
+    "index": 225,
+    "icd_code": "C58",
+    "description": "Malignant neoplasm of placenta"
+  },
+  {
+    "index": 226,
+    "icd_code": "C60",
+    "description": "Malignant neoplasm of penis"
+  },
+  {
+    "index": 227,
+    "icd_code": "C61",
+    "description": "Malignant neoplasm of prostate"
+  },
+  {
+    "index": 228,
+    "icd_code": "C62",
+    "description": "Malignant neoplasm of testis"
+  },
+  {
+    "index": 229,
+    "icd_code": "C63",
+    "description": "Malignant neoplasm of other and unsp male genital organs"
+  },
+  {
+    "index": 230,
+    "icd_code": "C64",
+    "description": "Malignant neoplasm of kidney, except renal pelvis"
+  },
+  {
+    "index": 231,
+    "icd_code": "C65",
+    "description": "Malignant neoplasm of renal pelvis"
+  },
+  {
+    "index": 232,
+    "icd_code": "C66",
+    "description": "Malignant neoplasm of ureter"
+  },
+  {
+    "index": 233,
+    "icd_code": "C67",
+    "description": "Malignant neoplasm of bladder"
+  },
+  {
+    "index": 234,
+    "icd_code": "C68",
+    "description": "Malignant neoplasm of other and unspecified urinary organs"
+  },
+  {
+    "index": 235,
+    "icd_code": "C69",
+    "description": "Malignant neoplasm of eye and adnexa"
+  },
+  {
+    "index": 236,
+    "icd_code": "C70",
+    "description": "Malignant neoplasm of meninges"
+  },
+  {
+    "index": 237,
+    "icd_code": "C71",
+    "description": "Malignant neoplasm of brain"
+  },
+  {
+    "index": 238,
+    "icd_code": "C72",
+    "description": "Malig neoplm of spinal cord, cranial nerves and oth prt cnsl"
+  },
+  {
+    "index": 239,
+    "icd_code": "C73",
+    "description": "Malignant neoplasm of thyroid gland"
+  },
+  {
+    "index": 240,
+    "icd_code": "C74",
+    "description": "Malignant neoplasm of adrenal gland"
+  },
+  {
+    "index": 241,
+    "icd_code": "C75",
+    "description": "Malignant neoplasm of endo glands and related structures"
+  },
+  {
+    "index": 242,
+    "icd_code": "C76",
+    "description": "Malignant neoplasm of other and ill-defined sites"
+  },
+  {
+    "index": 243,
+    "icd_code": "C77",
+    "description": "Secondary and unspecified malignant neoplasm of lymph nodes"
+  },
+  {
+    "index": 244,
+    "icd_code": "C78",
+    "description": "Secondary malignant neoplasm of resp and digestive organs"
+  },
+  {
+    "index": 245,
+    "icd_code": "C79",
+    "description": "Secondary malignant neoplasm of other and unspecified sites"
+  },
+  {
+    "index": 246,
+    "icd_code": "C80",
+    "description": "Malignant neoplasm without specification of site"
+  },
+  {
+    "index": 247,
+    "icd_code": "C81",
+    "description": "Hodgkin lymphoma"
+  },
+  {
+    "index": 248,
+    "icd_code": "C82",
+    "description": "Follicular lymphoma"
+  },
+  {
+    "index": 249,
+    "icd_code": "C83",
+    "description": "Non-follicular lymphoma"
+  },
+  {
+    "index": 250,
+    "icd_code": "C84",
+    "description": "Mature T/NK-cell lymphomas"
+  },
+  {
+    "index": 251,
+    "icd_code": "C85",
+    "description": "Oth and unspecified types of non-Hodgkin lymphoma"
+  },
+  {
+    "index": 252,
+    "icd_code": "C86",
+    "description": "Other specified types of T/NK-cell lymphoma"
+  },
+  {
+    "index": 253,
+    "icd_code": "C88",
+    "description": "Malig immunoproliferative dis and certain oth B-cell lymph"
+  },
+  {
+    "index": 254,
+    "icd_code": "C90",
+    "description": "Multiple myeloma and malignant plasma cell neoplasms"
+  },
+  {
+    "index": 255,
+    "icd_code": "C91",
+    "description": "Lymphoid leukemia"
+  },
+  {
+    "index": 256,
+    "icd_code": "C92",
+    "description": "Myeloid leukemia"
+  },
+  {
+    "index": 257,
+    "icd_code": "C93",
+    "description": "Monocytic leukemia"
+  },
+  {
+    "index": 258,
+    "icd_code": "C94",
+    "description": "Other leukemias of specified cell type"
+  },
+  {
+    "index": 259,
+    "icd_code": "C95",
+    "description": "Leukemia of unspecified cell type"
+  },
+  {
+    "index": 260,
+    "icd_code": "C96",
+    "description": "Oth & unsp malig neoplm of lymphoid, hematpoetc and rel tiss"
+  },
+  {
+    "index": 261,
+    "icd_code": "C97",
+    "description": "C97"
+  },
+  {
+    "index": 262,
+    "icd_code": "D00",
+    "description": "Carcinoma in situ of oral cavity, esophagus and stomach"
+  },
+  {
+    "index": 263,
+    "icd_code": "D01",
+    "description": "Carcinoma in situ of other and unspecified digestive organs"
+  },
+  {
+    "index": 264,
+    "icd_code": "D02",
+    "description": "Carcinoma in situ of middle ear and respiratory system"
+  },
+  {
+    "index": 265,
+    "icd_code": "D03",
+    "description": "Melanoma in situ"
+  },
+  {
+    "index": 266,
+    "icd_code": "D04",
+    "description": "Carcinoma in situ of skin"
+  },
+  {
+    "index": 267,
+    "icd_code": "D05",
+    "description": "Carcinoma in situ of breast"
+  },
+  {
+    "index": 268,
+    "icd_code": "D06",
+    "description": "Carcinoma in situ of cervix uteri"
+  },
+  {
+    "index": 269,
+    "icd_code": "D07",
+    "description": "Carcinoma in situ of other and unspecified genital organs"
+  },
+  {
+    "index": 270,
+    "icd_code": "D09",
+    "description": "Carcinoma in situ of other and unspecified sites"
+  },
+  {
+    "index": 271,
+    "icd_code": "D10",
+    "description": "Benign neoplasm of mouth and pharynx"
+  },
+  {
+    "index": 272,
+    "icd_code": "D11",
+    "description": "Benign neoplasm of major salivary glands"
+  },
+  {
+    "index": 273,
+    "icd_code": "D12",
+    "description": "Benign neoplasm of colon, rectum, anus and anal canal"
+  },
+  {
+    "index": 274,
+    "icd_code": "D13",
+    "description": "Benign neoplasm of and ill-defined parts of digestive system"
+  },
+  {
+    "index": 275,
+    "icd_code": "D14",
+    "description": "Benign neoplasm of middle ear and respiratory system"
+  },
+  {
+    "index": 276,
+    "icd_code": "D15",
+    "description": "Benign neoplasm of other and unsp intrathoracic organs"
+  },
+  {
+    "index": 277,
+    "icd_code": "D16",
+    "description": "Benign neoplasm of bone and articular cartilage"
+  },
+  {
+    "index": 278,
+    "icd_code": "D17",
+    "description": "Benign lipomatous neoplasm"
+  },
+  {
+    "index": 279,
+    "icd_code": "D18",
+    "description": "Hemangioma and lymphangioma, any site"
+  },
+  {
+    "index": 280,
+    "icd_code": "D19",
+    "description": "Benign neoplasm of mesothelial tissue"
+  },
+  {
+    "index": 281,
+    "icd_code": "D20",
+    "description": "Benign neoplm of soft tissue of retroperiton and peritoneum"
+  },
+  {
+    "index": 282,
+    "icd_code": "D21",
+    "description": "Other benign neoplasms of connective and other soft tissue"
+  },
+  {
+    "index": 283,
+    "icd_code": "D22",
+    "description": "Melanocytic nevi"
+  },
+  {
+    "index": 284,
+    "icd_code": "D23",
+    "description": "Other benign neoplasms of skin"
+  },
+  {
+    "index": 285,
+    "icd_code": "D24",
+    "description": "Benign neoplasm of breast"
+  },
+  {
+    "index": 286,
+    "icd_code": "D25",
+    "description": "Leiomyoma of uterus"
+  },
+  {
+    "index": 287,
+    "icd_code": "D26",
+    "description": "Other benign neoplasms of uterus"
+  },
+  {
+    "index": 288,
+    "icd_code": "D27",
+    "description": "Benign neoplasm of ovary"
+  },
+  {
+    "index": 289,
+    "icd_code": "D28",
+    "description": "Benign neoplasm of other and unsp female genital organs"
+  },
+  {
+    "index": 290,
+    "icd_code": "D29",
+    "description": "Benign neoplasm of male genital organs"
+  },
+  {
+    "index": 291,
+    "icd_code": "D30",
+    "description": "Benign neoplasm of urinary organs"
+  },
+  {
+    "index": 292,
+    "icd_code": "D31",
+    "description": "Benign neoplasm of eye and adnexa"
+  },
+  {
+    "index": 293,
+    "icd_code": "D32",
+    "description": "Benign neoplasm of meninges"
+  },
+  {
+    "index": 294,
+    "icd_code": "D33",
+    "description": "Benign neoplasm of brain and oth prt central nervous system"
+  },
+  {
+    "index": 295,
+    "icd_code": "D34",
+    "description": "Benign neoplasm of thyroid gland"
+  },
+  {
+    "index": 296,
+    "icd_code": "D35",
+    "description": "Benign neoplasm of other and unspecified endocrine glands"
+  },
+  {
+    "index": 297,
+    "icd_code": "D36",
+    "description": "Benign neoplasm of other and unspecified sites"
+  },
+  {
+    "index": 298,
+    "icd_code": "D37",
+    "description": "Neoplasm of uncrt behavior of oral cavity and dgstv organs"
+  },
+  {
+    "index": 299,
+    "icd_code": "D38",
+    "description": "Neoplm of uncrt behav of mid ear & resp and intrathorac org"
+  },
+  {
+    "index": 300,
+    "icd_code": "D39",
+    "description": "Neoplasm of uncertain behavior of female genital organs"
+  },
+  {
+    "index": 301,
+    "icd_code": "D40",
+    "description": "Neoplasm of uncertain behavior of male genital organs"
+  },
+  {
+    "index": 302,
+    "icd_code": "D41",
+    "description": "Neoplasm of uncertain behavior of urinary organs"
+  },
+  {
+    "index": 303,
+    "icd_code": "D42",
+    "description": "Neoplasm of uncertain behavior of meninges"
+  },
+  {
+    "index": 304,
+    "icd_code": "D43",
+    "description": "Neoplasm of uncertain behavior of brain and cnsl"
+  },
+  {
+    "index": 305,
+    "icd_code": "D44",
+    "description": "Neoplasm of uncertain behavior of endocrine glands"
+  },
+  {
+    "index": 306,
+    "icd_code": "D45",
+    "description": "Polycythemia vera"
+  },
+  {
+    "index": 307,
+    "icd_code": "D46",
+    "description": "Myelodysplastic syndromes"
+  },
+  {
+    "index": 308,
+    "icd_code": "D47",
+    "description": "Oth neoplm of uncrt behav of lymphoid, hematpoetc & rel tiss"
+  },
+  {
+    "index": 309,
+    "icd_code": "D48",
+    "description": "Neoplasm of uncertain behavior of other and unsp sites"
+  },
+  {
+    "index": 310,
+    "icd_code": "D50",
+    "description": "Iron deficiency anemia"
+  },
+  {
+    "index": 311,
+    "icd_code": "D51",
+    "description": "Vitamin B12 deficiency anemia"
+  },
+  {
+    "index": 312,
+    "icd_code": "D52",
+    "description": "Folate deficiency anemia"
+  },
+  {
+    "index": 313,
+    "icd_code": "D53",
+    "description": "Other nutritional anemias"
+  },
+  {
+    "index": 314,
+    "icd_code": "D55",
+    "description": "Anemia due to enzyme disorders"
+  },
+  {
+    "index": 315,
+    "icd_code": "D56",
+    "description": "Thalassemia"
+  },
+  {
+    "index": 316,
+    "icd_code": "D57",
+    "description": "Sickle-cell disorders"
+  },
+  {
+    "index": 317,
+    "icd_code": "D58",
+    "description": "Other hereditary hemolytic anemias"
+  },
+  {
+    "index": 318,
+    "icd_code": "D59",
+    "description": "Acquired hemolytic anemia"
+  },
+  {
+    "index": 319,
+    "icd_code": "D60",
+    "description": "Acquired pure red cell aplasia [erythroblastopenia]"
+  },
+  {
+    "index": 320,
+    "icd_code": "D61",
+    "description": "Oth aplastic anemias and other bone marrow failure syndromes"
+  },
+  {
+    "index": 321,
+    "icd_code": "D62",
+    "description": "Acute posthemorrhagic anemia"
+  },
+  {
+    "index": 322,
+    "icd_code": "D63",
+    "description": "Anemia in chronic diseases classified elsewhere"
+  },
+  {
+    "index": 323,
+    "icd_code": "D64",
+    "description": "Other anemias"
+  },
+  {
+    "index": 324,
+    "icd_code": "D65",
+    "description": "Disseminated intravascular coagulation"
+  },
+  {
+    "index": 325,
+    "icd_code": "D66",
+    "description": "Hereditary factor VIII deficiency"
+  },
+  {
+    "index": 326,
+    "icd_code": "D67",
+    "description": "Hereditary factor IX deficiency"
+  },
+  {
+    "index": 327,
+    "icd_code": "D68",
+    "description": "Other coagulation defects"
+  },
+  {
+    "index": 328,
+    "icd_code": "D69",
+    "description": "Purpura and other hemorrhagic conditions"
+  },
+  {
+    "index": 329,
+    "icd_code": "D70",
+    "description": "Neutropenia"
+  },
+  {
+    "index": 330,
+    "icd_code": "D71",
+    "description": "Functional disorders of polymorphonuclear neutrophils"
+  },
+  {
+    "index": 331,
+    "icd_code": "D72",
+    "description": "Other disorders of white blood cells"
+  },
+  {
+    "index": 332,
+    "icd_code": "D73",
+    "description": "Diseases of spleen"
+  },
+  {
+    "index": 333,
+    "icd_code": "D74",
+    "description": "Methemoglobinemia"
+  },
+  {
+    "index": 334,
+    "icd_code": "D75",
+    "description": "Other and unsp diseases of blood and blood-forming organs"
+  },
+  {
+    "index": 335,
+    "icd_code": "D76",
+    "description": "Oth dis with lymphoreticular and reticulohistiocytic tissue"
+  },
+  {
+    "index": 336,
+    "icd_code": "D77",
+    "description": "Oth disord of bld/bld-frm organs in diseases classd elswhr"
+  },
+  {
+    "index": 337,
+    "icd_code": "D80",
+    "description": "Immunodeficiency with predominantly antibody defects"
+  },
+  {
+    "index": 338,
+    "icd_code": "D81",
+    "description": "Combined immunodeficiencies"
+  },
+  {
+    "index": 339,
+    "icd_code": "D82",
+    "description": "Immunodeficiency associated with other major defects"
+  },
+  {
+    "index": 340,
+    "icd_code": "D83",
+    "description": "Common variable immunodeficiency"
+  },
+  {
+    "index": 341,
+    "icd_code": "D84",
+    "description": "Other immunodeficiencies"
+  },
+  {
+    "index": 342,
+    "icd_code": "D86",
+    "description": "Sarcoidosis"
+  },
+  {
+    "index": 343,
+    "icd_code": "D89",
+    "description": "Oth disorders involving the immune mechanism, NEC"
+  },
+  {
+    "index": 344,
+    "icd_code": "E00",
+    "description": "Congenital iodine-deficiency syndrome"
+  },
+  {
+    "index": 345,
+    "icd_code": "E01",
+    "description": "Iodine-deficiency related thyroid disorders and allied cond"
+  },
+  {
+    "index": 346,
+    "icd_code": "E02",
+    "description": "Subclinical iodine-deficiency hypothyroidism"
+  },
+  {
+    "index": 347,
+    "icd_code": "E03",
+    "description": "Other hypothyroidism"
+  },
+  {
+    "index": 348,
+    "icd_code": "E04",
+    "description": "Other nontoxic goiter"
+  },
+  {
+    "index": 349,
+    "icd_code": "E05",
+    "description": "Thyrotoxicosis [hyperthyroidism]"
+  },
+  {
+    "index": 350,
+    "icd_code": "E06",
+    "description": "Thyroiditis"
+  },
+  {
+    "index": 351,
+    "icd_code": "E07",
+    "description": "Other disorders of thyroid"
+  },
+  {
+    "index": 352,
+    "icd_code": "E10",
+    "description": "Type 1 diabetes mellitus"
+  },
+  {
+    "index": 353,
+    "icd_code": "E11",
+    "description": "Type 2 diabetes mellitus"
+  },
+  {
+    "index": 354,
+    "icd_code": "E12",
+    "description": "E12"
+  },
+  {
+    "index": 355,
+    "icd_code": "E13",
+    "description": "Other specified diabetes mellitus"
+  },
+  {
+    "index": 356,
+    "icd_code": "E14",
+    "description": "E14"
+  },
+  {
+    "index": 357,
+    "icd_code": "E15",
+    "description": "Nondiabetic hypoglycemic coma"
+  },
+  {
+    "index": 358,
+    "icd_code": "E16",
+    "description": "Other disorders of pancreatic internal secretion"
+  },
+  {
+    "index": 359,
+    "icd_code": "E20",
+    "description": "Hypoparathyroidism"
+  },
+  {
+    "index": 360,
+    "icd_code": "E21",
+    "description": "Hyperparathyroidism and other disorders of parathyroid gland"
+  },
+  {
+    "index": 361,
+    "icd_code": "E22",
+    "description": "Hyperfunction of pituitary gland"
+  },
+  {
+    "index": 362,
+    "icd_code": "E23",
+    "description": "Hypofunction and other disorders of the pituitary gland"
+  },
+  {
+    "index": 363,
+    "icd_code": "E24",
+    "description": "Cushing's syndrome"
+  },
+  {
+    "index": 364,
+    "icd_code": "E25",
+    "description": "Adrenogenital disorders"
+  },
+  {
+    "index": 365,
+    "icd_code": "E26",
+    "description": "Hyperaldosteronism"
+  },
+  {
+    "index": 366,
+    "icd_code": "E27",
+    "description": "Other disorders of adrenal gland"
+  },
+  {
+    "index": 367,
+    "icd_code": "E28",
+    "description": "Ovarian dysfunction"
+  },
+  {
+    "index": 368,
+    "icd_code": "E29",
+    "description": "Testicular dysfunction"
+  },
+  {
+    "index": 369,
+    "icd_code": "E30",
+    "description": "Disorders of puberty, not elsewhere classified"
+  },
+  {
+    "index": 370,
+    "icd_code": "E31",
+    "description": "Polyglandular dysfunction"
+  },
+  {
+    "index": 371,
+    "icd_code": "E32",
+    "description": "Diseases of thymus"
+  },
+  {
+    "index": 372,
+    "icd_code": "E34",
+    "description": "Other endocrine disorders"
+  },
+  {
+    "index": 373,
+    "icd_code": "E35",
+    "description": "Disorders of endocrine glands in diseases classd elswhr"
+  },
+  {
+    "index": 374,
+    "icd_code": "E40",
+    "description": "Kwashiorkor"
+  },
+  {
+    "index": 375,
+    "icd_code": "E41",
+    "description": "Nutritional marasmus"
+  },
+  {
+    "index": 376,
+    "icd_code": "E42",
+    "description": "Marasmic kwashiorkor"
+  },
+  {
+    "index": 377,
+    "icd_code": "E43",
+    "description": "Unspecified severe protein-calorie malnutrition"
+  },
+  {
+    "index": 378,
+    "icd_code": "E44",
+    "description": "Protein-calorie malnutrition of moderate and mild degree"
+  },
+  {
+    "index": 379,
+    "icd_code": "E45",
+    "description": "Retarded development following protein-calorie malnutrition"
+  },
+  {
+    "index": 380,
+    "icd_code": "E46",
+    "description": "Unspecified protein-calorie malnutrition"
+  },
+  {
+    "index": 381,
+    "icd_code": "E50",
+    "description": "Vitamin A deficiency"
+  },
+  {
+    "index": 382,
+    "icd_code": "E51",
+    "description": "Thiamine deficiency"
+  },
+  {
+    "index": 383,
+    "icd_code": "E52",
+    "description": "Niacin deficiency [pellagra]"
+  },
+  {
+    "index": 384,
+    "icd_code": "E53",
+    "description": "Deficiency of other B group vitamins"
+  },
+  {
+    "index": 385,
+    "icd_code": "E54",
+    "description": "Ascorbic acid deficiency"
+  },
+  {
+    "index": 386,
+    "icd_code": "E55",
+    "description": "Vitamin D deficiency"
+  },
+  {
+    "index": 387,
+    "icd_code": "E56",
+    "description": "Other vitamin deficiencies"
+  },
+  {
+    "index": 388,
+    "icd_code": "E58",
+    "description": "Dietary calcium deficiency"
+  },
+  {
+    "index": 389,
+    "icd_code": "E59",
+    "description": "Dietary selenium deficiency"
+  },
+  {
+    "index": 390,
+    "icd_code": "E60",
+    "description": "Dietary zinc deficiency"
+  },
+  {
+    "index": 391,
+    "icd_code": "E61",
+    "description": "Deficiency of other nutrient elements"
+  },
+  {
+    "index": 392,
+    "icd_code": "E63",
+    "description": "Other nutritional deficiencies"
+  },
+  {
+    "index": 393,
+    "icd_code": "E64",
+    "description": "Sequelae of malnutrition and other nutritional deficiencies"
+  },
+  {
+    "index": 394,
+    "icd_code": "E65",
+    "description": "Localized adiposity"
+  },
+  {
+    "index": 395,
+    "icd_code": "E66",
+    "description": "Overweight and obesity"
+  },
+  {
+    "index": 396,
+    "icd_code": "E67",
+    "description": "Other hyperalimentation"
+  },
+  {
+    "index": 397,
+    "icd_code": "E68",
+    "description": "Sequelae of hyperalimentation"
+  },
+  {
+    "index": 398,
+    "icd_code": "E70",
+    "description": "Disorders of aromatic amino-acid metabolism"
+  },
+  {
+    "index": 399,
+    "icd_code": "E71",
+    "description": "Disord of branched-chain amino-acid metab & fatty-acid metab"
+  },
+  {
+    "index": 400,
+    "icd_code": "E72",
+    "description": "Other disorders of amino-acid metabolism"
+  },
+  {
+    "index": 401,
+    "icd_code": "E73",
+    "description": "Lactose intolerance"
+  },
+  {
+    "index": 402,
+    "icd_code": "E74",
+    "description": "Other disorders of carbohydrate metabolism"
+  },
+  {
+    "index": 403,
+    "icd_code": "E75",
+    "description": "Disord of sphingolipid metab and oth lipid storage disorders"
+  },
+  {
+    "index": 404,
+    "icd_code": "E76",
+    "description": "Disorders of glycosaminoglycan metabolism"
+  },
+  {
+    "index": 405,
+    "icd_code": "E77",
+    "description": "Disorders of glycoprotein metabolism"
+  },
+  {
+    "index": 406,
+    "icd_code": "E78",
+    "description": "Disorders of lipoprotein metabolism and other lipidemias"
+  },
+  {
+    "index": 407,
+    "icd_code": "E79",
+    "description": "Disorders of purine and pyrimidine metabolism"
+  },
+  {
+    "index": 408,
+    "icd_code": "E80",
+    "description": "Disorders of porphyrin and bilirubin metabolism"
+  },
+  {
+    "index": 409,
+    "icd_code": "E83",
+    "description": "Disorders of mineral metabolism"
+  },
+  {
+    "index": 410,
+    "icd_code": "E84",
+    "description": "Cystic fibrosis"
+  },
+  {
+    "index": 411,
+    "icd_code": "E85",
+    "description": "Amyloidosis"
+  },
+  {
+    "index": 412,
+    "icd_code": "E86",
+    "description": "Volume depletion"
+  },
+  {
+    "index": 413,
+    "icd_code": "E87",
+    "description": "Other disorders of fluid, electrolyte and acid-base balance"
+  },
+  {
+    "index": 414,
+    "icd_code": "E88",
+    "description": "Other and unspecified metabolic disorders"
+  },
+  {
+    "index": 415,
+    "icd_code": "E89",
+    "description": "Postproc endocrine and metabolic comp and disorders, NEC"
+  },
+  {
+    "index": 416,
+    "icd_code": "E90",
+    "description": "E90"
+  },
+  {
+    "index": 417,
+    "icd_code": "F00",
+    "description": "F00"
+  },
+  {
+    "index": 418,
+    "icd_code": "F01",
+    "description": "Vascular dementia"
+  },
+  {
+    "index": 419,
+    "icd_code": "F02",
+    "description": "Dementia in other diseases classified elsewhere"
+  },
+  {
+    "index": 420,
+    "icd_code": "F03",
+    "description": "Unspecified dementia"
+  },
+  {
+    "index": 421,
+    "icd_code": "F04",
+    "description": "Amnestic disorder due to known physiological condition"
+  },
+  {
+    "index": 422,
+    "icd_code": "F05",
+    "description": "Delirium due to known physiological condition"
+  },
+  {
+    "index": 423,
+    "icd_code": "F06",
+    "description": "Other mental disorders due to known physiological condition"
+  },
+  {
+    "index": 424,
+    "icd_code": "F07",
+    "description": "Personality & behavrl disorders due to known physiol cond"
+  },
+  {
+    "index": 425,
+    "icd_code": "F09",
+    "description": "Unsp mental disorder due to known physiological condition"
+  },
+  {
+    "index": 426,
+    "icd_code": "F10",
+    "description": "Alcohol related disorders"
+  },
+  {
+    "index": 427,
+    "icd_code": "F11",
+    "description": "Opioid related disorders"
+  },
+  {
+    "index": 428,
+    "icd_code": "F12",
+    "description": "Cannabis related disorders"
+  },
+  {
+    "index": 429,
+    "icd_code": "F13",
+    "description": "Sedative, hypnotic, or anxiolytic related disorders"
+  },
+  {
+    "index": 430,
+    "icd_code": "F14",
+    "description": "Cocaine related disorders"
+  },
+  {
+    "index": 431,
+    "icd_code": "H43",
+    "description": "Other stimulant related disorders"
+  },
+  {
+    "index": 432,
+    "icd_code": "F15",
+    "description": "Hallucinogen related disorders"
+  },
+  {
+    "index": 433,
+    "icd_code": "F16",
+    "description": "Nicotine dependence"
+  },
+  {
+    "index": 434,
+    "icd_code": "F17",
+    "description": "Inhalant related disorders"
+  },
+  {
+    "index": 435,
+    "icd_code": "F18",
+    "description": "Other psychoactive substance related disorders"
+  },
+  {
+    "index": 436,
+    "icd_code": "F19",
+    "description": "Schizophrenia"
+  },
+  {
+    "index": 437,
+    "icd_code": "F20",
+    "description": "Schizotypal disorder"
+  },
+  {
+    "index": 438,
+    "icd_code": "F21",
+    "description": "Delusional disorders"
+  },
+  {
+    "index": 439,
+    "icd_code": "F22",
+    "description": "Brief psychotic disorder"
+  },
+  {
+    "index": 440,
+    "icd_code": "F23",
+    "description": "Shared psychotic disorder"
+  },
+  {
+    "index": 441,
+    "icd_code": "F24",
+    "description": "Schizoaffective disorders"
+  },
+  {
+    "index": 442,
+    "icd_code": "F25",
+    "description": "Oth psych disorder not due to a sub or known physiol cond"
+  },
+  {
+    "index": 443,
+    "icd_code": "F28",
+    "description": "Unsp psychosis not due to a substance or known physiol cond"
+  },
+  {
+    "index": 444,
+    "icd_code": "F29",
+    "description": "Manic episode"
+  },
+  {
+    "index": 445,
+    "icd_code": "F30",
+    "description": "Bipolar disorder"
+  },
+  {
+    "index": 446,
+    "icd_code": "F31",
+    "description": "Major depressive disorder, single episode"
+  },
+  {
+    "index": 447,
+    "icd_code": "F32",
+    "description": "Major depressive disorder, recurrent"
+  },
+  {
+    "index": 448,
+    "icd_code": "F33",
+    "description": "Persistent mood [affective] disorders"
+  },
+  {
+    "index": 449,
+    "icd_code": "F34",
+    "description": "F34"
+  },
+  {
+    "index": 450,
+    "icd_code": "F38",
+    "description": "Unspecified mood [affective] disorder"
+  },
+  {
+    "index": 451,
+    "icd_code": "F39",
+    "description": "Phobic anxiety disorders"
+  },
+  {
+    "index": 452,
+    "icd_code": "F40",
+    "description": "Other anxiety disorders"
+  },
+  {
+    "index": 453,
+    "icd_code": "F41",
+    "description": "Obsessive-compulsive disorder"
+  },
+  {
+    "index": 454,
+    "icd_code": "F42",
+    "description": "Reaction to severe stress, and adjustment disorders"
+  },
+  {
+    "index": 455,
+    "icd_code": "F43",
+    "description": "Dissociative and conversion disorders"
+  },
+  {
+    "index": 456,
+    "icd_code": "F44",
+    "description": "Somatoform disorders"
+  },
+  {
+    "index": 457,
+    "icd_code": "F45",
+    "description": "Other nonpsychotic mental disorders"
+  },
+  {
+    "index": 458,
+    "icd_code": "F48",
+    "description": "Eating disorders"
+  },
+  {
+    "index": 459,
+    "icd_code": "F50",
+    "description": "Sleep disorders not due to a substance or known physiol cond"
+  },
+  {
+    "index": 460,
+    "icd_code": "F51",
+    "description": "Sexual dysfnct not due to a substance or known physiol cond"
+  },
+  {
+    "index": 461,
+    "icd_code": "F52",
+    "description": "Mental and behavrl disorders assoc with the puerperium, NEC"
+  },
+  {
+    "index": 462,
+    "icd_code": "F53",
+    "description": "Psych & behavrl factors assoc w disord or dis classd elswhr"
+  },
+  {
+    "index": 463,
+    "icd_code": "F54",
+    "description": "Abuse of non-psychoactive substances"
+  },
+  {
+    "index": 464,
+    "icd_code": "F55",
+    "description": "Unsp behavrl synd assoc w physiol disturb and physcl factors"
+  },
+  {
+    "index": 465,
+    "icd_code": "F59",
+    "description": "Specific personality disorders"
+  },
+  {
+    "index": 466,
+    "icd_code": "F60",
+    "description": "F60"
+  },
+  {
+    "index": 467,
+    "icd_code": "F61",
+    "description": "F61"
+  },
+  {
+    "index": 468,
+    "icd_code": "F62",
+    "description": "Impulse disorders"
+  },
+  {
+    "index": 469,
+    "icd_code": "F63",
+    "description": "Gender identity disorders"
+  },
+  {
+    "index": 470,
+    "icd_code": "F64",
+    "description": "Paraphilias"
+  },
+  {
+    "index": 471,
+    "icd_code": "F65",
+    "description": "Other sexual disorders"
+  },
+  {
+    "index": 472,
+    "icd_code": "F66",
+    "description": "Other disorders of adult personality and behavior"
+  },
+  {
+    "index": 473,
+    "icd_code": "F68",
+    "description": "Unspecified disorder of adult personality and behavior"
+  },
+  {
+    "index": 474,
+    "icd_code": "F69",
+    "description": "Mild intellectual disabilities"
+  },
+  {
+    "index": 475,
+    "icd_code": "F70",
+    "description": "Moderate intellectual disabilities"
+  },
+  {
+    "index": 476,
+    "icd_code": "F71",
+    "description": "Severe intellectual disabilities"
+  },
+  {
+    "index": 477,
+    "icd_code": "F72",
+    "description": "Profound intellectual disabilities"
+  },
+  {
+    "index": 478,
+    "icd_code": "F73",
+    "description": "Other intellectual disabilities"
+  },
+  {
+    "index": 479,
+    "icd_code": "F78",
+    "description": "Unspecified intellectual disabilities"
+  },
+  {
+    "index": 480,
+    "icd_code": "F79",
+    "description": "Specific developmental disorders of speech and language"
+  },
+  {
+    "index": 481,
+    "icd_code": "F80",
+    "description": "Specific developmental disorders of scholastic skills"
+  },
+  {
+    "index": 482,
+    "icd_code": "F81",
+    "description": "Specific developmental disorder of motor function"
+  },
+  {
+    "index": 483,
+    "icd_code": "F82",
+    "description": "F82"
+  },
+  {
+    "index": 484,
+    "icd_code": "F83",
+    "description": "Pervasive developmental disorders"
+  },
+  {
+    "index": 485,
+    "icd_code": "F84",
+    "description": "Other disorders of psychological development"
+  },
+  {
+    "index": 486,
+    "icd_code": "F88",
+    "description": "Unspecified disorder of psychological development"
+  },
+  {
+    "index": 487,
+    "icd_code": "F89",
+    "description": "Attention-deficit hyperactivity disorders"
+  },
+  {
+    "index": 488,
+    "icd_code": "F90",
+    "description": "Conduct disorders"
+  },
+  {
+    "index": 489,
+    "icd_code": "F91",
+    "description": "F91"
+  },
+  {
+    "index": 490,
+    "icd_code": "F92",
+    "description": "Emotional disorders with onset specific to childhood"
+  },
+  {
+    "index": 491,
+    "icd_code": "F93",
+    "description": "Disord social w onset specific to childhood and adolescence"
+  },
+  {
+    "index": 492,
+    "icd_code": "F94",
+    "description": "Tic disorder"
+  },
+  {
+    "index": 493,
+    "icd_code": "F95",
+    "description": "Oth behav/emotn disord w onset usly occur in chldhd and adol"
+  },
+  {
+    "index": 494,
+    "icd_code": "F98",
+    "description": "Mental disorder, not otherwise specified"
+  },
+  {
+    "index": 495,
+    "icd_code": "F99",
+    "description": "Bacterial meningitis, not elsewhere classified"
+  },
+  {
+    "index": 496,
+    "icd_code": "G00",
+    "description": "Meningitis in bacterial diseases classified elsewhere"
+  },
+  {
+    "index": 497,
+    "icd_code": "G01",
+    "description": "Meningitis in oth infec/parastc diseases classd elswhr"
+  },
+  {
+    "index": 498,
+    "icd_code": "G02",
+    "description": "Meningitis due to other and unspecified causes"
+  },
+  {
+    "index": 499,
+    "icd_code": "G03",
+    "description": "Encephalitis, myelitis and encephalomyelitis"
+  },
+  {
+    "index": 500,
+    "icd_code": "G04",
+    "description": "Encphlts, myelitis & encephalomyelitis in dis classd elswhr"
+  },
+  {
+    "index": 501,
+    "icd_code": "G05",
+    "description": "Intracranial and intraspinal abscess and granuloma"
+  },
+  {
+    "index": 502,
+    "icd_code": "G06",
+    "description": "Intcrn & intraspinal abscs & granuloma in dis classd elswhr"
+  },
+  {
+    "index": 503,
+    "icd_code": "G07",
+    "description": "Intracranial and intraspinal phlebitis and thrombophlebitis"
+  },
+  {
+    "index": 504,
+    "icd_code": "G08",
+    "description": "Sequelae of inflammatory diseases of central nervous system"
+  },
+  {
+    "index": 505,
+    "icd_code": "G09",
+    "description": "Huntington's disease"
+  },
+  {
+    "index": 506,
+    "icd_code": "G10",
+    "description": "Hereditary ataxia"
+  },
+  {
+    "index": 507,
+    "icd_code": "G11",
+    "description": "Spinal muscular atrophy and related syndromes"
+  },
+  {
+    "index": 508,
+    "icd_code": "G12",
+    "description": "Systemic atrophies aff cnsl in diseases classd elswhr"
+  },
+  {
+    "index": 509,
+    "icd_code": "G13",
+    "description": "Postpolio syndrome"
+  },
+  {
+    "index": 510,
+    "icd_code": "G14",
+    "description": "Parkinson's disease"
+  },
+  {
+    "index": 511,
+    "icd_code": "G20",
+    "description": "Secondary parkinsonism"
+  },
+  {
+    "index": 512,
+    "icd_code": "G21",
+    "description": "G21"
+  },
+  {
+    "index": 513,
+    "icd_code": "G22",
+    "description": "Other degenerative diseases of basal ganglia"
+  },
+  {
+    "index": 514,
+    "icd_code": "G23",
+    "description": "Dystonia"
+  },
+  {
+    "index": 515,
+    "icd_code": "G24",
+    "description": "Other extrapyramidal and movement disorders"
+  },
+  {
+    "index": 516,
+    "icd_code": "G25",
+    "description": "Extrapyramidal and movement disord in diseases classd elswhr"
+  },
+  {
+    "index": 517,
+    "icd_code": "G26",
+    "description": "Alzheimer's disease"
+  },
+  {
+    "index": 518,
+    "icd_code": "G30",
+    "description": "Oth degenerative diseases of nervous system, NEC"
+  },
+  {
+    "index": 519,
+    "icd_code": "G31",
+    "description": "Oth degeneratv disord of nervous sys in dis classd elswhr"
+  },
+  {
+    "index": 520,
+    "icd_code": "G32",
+    "description": "Multiple sclerosis"
+  },
+  {
+    "index": 521,
+    "icd_code": "G35",
+    "description": "Other acute disseminated demyelination"
+  },
+  {
+    "index": 522,
+    "icd_code": "G36",
+    "description": "Other demyelinating diseases of central nervous system"
+  },
+  {
+    "index": 523,
+    "icd_code": "G37",
+    "description": "Epilepsy and recurrent seizures"
+  },
+  {
+    "index": 524,
+    "icd_code": "G40",
+    "description": "G40"
+  },
+  {
+    "index": 525,
+    "icd_code": "G41",
+    "description": "Migraine"
+  },
+  {
+    "index": 526,
+    "icd_code": "G43",
+    "description": "Other headache syndromes"
+  },
+  {
+    "index": 527,
+    "icd_code": "G44",
+    "description": "Transient cerebral ischemic attacks and related syndromes"
+  },
+  {
+    "index": 528,
+    "icd_code": "G45",
+    "description": "Vascular syndromes of brain in cerebrovascular diseases"
+  },
+  {
+    "index": 529,
+    "icd_code": "G46",
+    "description": "Sleep disorders"
+  },
+  {
+    "index": 530,
+    "icd_code": "G47",
+    "description": "Disorders of trigeminal nerve"
+  },
+  {
+    "index": 531,
+    "icd_code": "G50",
+    "description": "Facial nerve disorders"
+  },
+  {
+    "index": 532,
+    "icd_code": "G51",
+    "description": "Disorders of other cranial nerves"
+  },
+  {
+    "index": 533,
+    "icd_code": "G52",
+    "description": "Cranial nerve disorders in diseases classified elsewhere"
+  },
+  {
+    "index": 534,
+    "icd_code": "G53",
+    "description": "Nerve root and plexus disorders"
+  },
+  {
+    "index": 535,
+    "icd_code": "G54",
+    "description": "Nerve root and plexus compressions in diseases classd elswhr"
+  },
+  {
+    "index": 536,
+    "icd_code": "G55",
+    "description": "Mononeuropathies of upper limb"
+  },
+  {
+    "index": 537,
+    "icd_code": "G56",
+    "description": "Mononeuropathies of lower limb"
+  },
+  {
+    "index": 538,
+    "icd_code": "G57",
+    "description": "Other mononeuropathies"
+  },
+  {
+    "index": 539,
+    "icd_code": "G58",
+    "description": "Mononeuropathy in diseases classified elsewhere"
+  },
+  {
+    "index": 540,
+    "icd_code": "G59",
+    "description": "Hereditary and idiopathic neuropathy"
+  },
+  {
+    "index": 541,
+    "icd_code": "G60",
+    "description": "Inflammatory polyneuropathy"
+  },
+  {
+    "index": 542,
+    "icd_code": "G61",
+    "description": "Other and unspecified polyneuropathies"
+  },
+  {
+    "index": 543,
+    "icd_code": "G62",
+    "description": "Polyneuropathy in diseases classified elsewhere"
+  },
+  {
+    "index": 544,
+    "icd_code": "G63",
+    "description": "Other disorders of peripheral nervous system"
+  },
+  {
+    "index": 545,
+    "icd_code": "G64",
+    "description": "Myasthenia gravis and other myoneural disorders"
+  },
+  {
+    "index": 546,
+    "icd_code": "G70",
+    "description": "Primary disorders of muscles"
+  },
+  {
+    "index": 547,
+    "icd_code": "G71",
+    "description": "Other and unspecified myopathies"
+  },
+  {
+    "index": 548,
+    "icd_code": "G72",
+    "description": "Disord of myoneural junction and muscle in dis classd elswhr"
+  },
+  {
+    "index": 549,
+    "icd_code": "G73",
+    "description": "Cerebral palsy"
+  },
+  {
+    "index": 550,
+    "icd_code": "G80",
+    "description": "Hemiplegia and hemiparesis"
+  },
+  {
+    "index": 551,
+    "icd_code": "G81",
+    "description": "Paraplegia (paraparesis) and quadriplegia (quadriparesis)"
+  },
+  {
+    "index": 552,
+    "icd_code": "G82",
+    "description": "Other paralytic syndromes"
+  },
+  {
+    "index": 553,
+    "icd_code": "G83",
+    "description": "Disorders of autonomic nervous system"
+  },
+  {
+    "index": 554,
+    "icd_code": "G90",
+    "description": "Hydrocephalus"
+  },
+  {
+    "index": 555,
+    "icd_code": "G91",
+    "description": "Toxic encephalopathy"
+  },
+  {
+    "index": 556,
+    "icd_code": "G92",
+    "description": "Other disorders of brain"
+  },
+  {
+    "index": 557,
+    "icd_code": "G93",
+    "description": "Other disorders of brain in diseases classified elsewhere"
+  },
+  {
+    "index": 558,
+    "icd_code": "G94",
+    "description": "Other and unspecified diseases of spinal cord"
+  },
+  {
+    "index": 559,
+    "icd_code": "G95",
+    "description": "Other disorders of central nervous system"
+  },
+  {
+    "index": 560,
+    "icd_code": "G96",
+    "description": "Intraop and postproc comp and disorders of nervous sys, NEC"
+  },
+  {
+    "index": 561,
+    "icd_code": "G97",
+    "description": "Other disorders of nervous system not elsewhere classified"
+  },
+  {
+    "index": 562,
+    "icd_code": "G98",
+    "description": "Oth disorders of nervous system in diseases classd elswhr"
+  },
+  {
+    "index": 563,
+    "icd_code": "G99",
+    "description": "Hordeolum and chalazion"
+  },
+  {
+    "index": 564,
+    "icd_code": "H00",
+    "description": "Other inflammation of eyelid"
+  },
+  {
+    "index": 565,
+    "icd_code": "H01",
+    "description": "Other disorders of eyelid"
+  },
+  {
+    "index": 566,
+    "icd_code": "H02",
+    "description": "H02"
+  },
+  {
+    "index": 567,
+    "icd_code": "H03",
+    "description": "Disorders of lacrimal system"
+  },
+  {
+    "index": 568,
+    "icd_code": "H04",
+    "description": "Disorders of orbit"
+  },
+  {
+    "index": 569,
+    "icd_code": "H05",
+    "description": "H05"
+  },
+  {
+    "index": 570,
+    "icd_code": "H06",
+    "description": "Conjunctivitis"
+  },
+  {
+    "index": 571,
+    "icd_code": "H10",
+    "description": "Other disorders of conjunctiva"
+  },
+  {
+    "index": 572,
+    "icd_code": "H11",
+    "description": "H11"
+  },
+  {
+    "index": 573,
+    "icd_code": "H13",
+    "description": "Disorders of sclera"
+  },
+  {
+    "index": 574,
+    "icd_code": "H15",
+    "description": "Keratitis"
+  },
+  {
+    "index": 575,
+    "icd_code": "H16",
+    "description": "Corneal scars and opacities"
+  },
+  {
+    "index": 576,
+    "icd_code": "H17",
+    "description": "Other disorders of cornea"
+  },
+  {
+    "index": 577,
+    "icd_code": "H18",
+    "description": "H18"
+  },
+  {
+    "index": 578,
+    "icd_code": "H19",
+    "description": "Iridocyclitis"
+  },
+  {
+    "index": 579,
+    "icd_code": "H20",
+    "description": "Other disorders of iris and ciliary body"
+  },
+  {
+    "index": 580,
+    "icd_code": "H21",
+    "description": "Disorders of iris and ciliary body in diseases classd elswhr"
+  },
+  {
+    "index": 581,
+    "icd_code": "H22",
+    "description": "Age-related cataract"
+  },
+  {
+    "index": 582,
+    "icd_code": "H25",
+    "description": "Other cataract"
+  },
+  {
+    "index": 583,
+    "icd_code": "H26",
+    "description": "Other disorders of lens"
+  },
+  {
+    "index": 584,
+    "icd_code": "H27",
+    "description": "Cataract in diseases classified elsewhere"
+  },
+  {
+    "index": 585,
+    "icd_code": "H28",
+    "description": "Chorioretinal inflammation"
+  },
+  {
+    "index": 586,
+    "icd_code": "H30",
+    "description": "Other disorders of choroid"
+  },
+  {
+    "index": 587,
+    "icd_code": "H31",
+    "description": "Chorioretinal disorders in diseases classified elsewhere"
+  },
+  {
+    "index": 588,
+    "icd_code": "H32",
+    "description": "Retinal detachments and breaks"
+  },
+  {
+    "index": 589,
+    "icd_code": "H33",
+    "description": "Retinal vascular occlusions"
+  },
+  {
+    "index": 590,
+    "icd_code": "H34",
+    "description": "Other retinal disorders"
+  },
+  {
+    "index": 591,
+    "icd_code": "H35",
+    "description": "Retinal disorders in diseases classified elsewhere"
+  },
+  {
+    "index": 592,
+    "icd_code": "H36",
+    "description": "Glaucoma"
+  },
+  {
+    "index": 593,
+    "icd_code": "H40",
+    "description": "Glaucoma in diseases classified elsewhere"
+  },
+  {
+    "index": 594,
+    "icd_code": "H42",
+    "description": "Disorders of vitreous body"
+  },
+  {
+    "index": 595,
+    "icd_code": "H44",
+    "description": "Disorders of globe"
+  },
+  {
+    "index": 596,
+    "icd_code": "H45",
+    "description": "H45"
+  },
+  {
+    "index": 597,
+    "icd_code": "H46",
+    "description": "Optic neuritis"
+  },
+  {
+    "index": 598,
+    "icd_code": "H47",
+    "description": "Other disorders of optic [2nd] nerve and visual pathways"
+  },
+  {
+    "index": 599,
+    "icd_code": "H48",
+    "description": "H48"
+  },
+  {
+    "index": 600,
+    "icd_code": "H49",
+    "description": "Paralytic strabismus"
+  },
+  {
+    "index": 601,
+    "icd_code": "H50",
+    "description": "Other strabismus"
+  },
+  {
+    "index": 602,
+    "icd_code": "H51",
+    "description": "Other disorders of binocular movement"
+  },
+  {
+    "index": 603,
+    "icd_code": "H52",
+    "description": "Disorders of refraction and accommodation"
+  },
+  {
+    "index": 604,
+    "icd_code": "H53",
+    "description": "Visual disturbances"
+  },
+  {
+    "index": 605,
+    "icd_code": "H54",
+    "description": "Blindness and low vision"
+  },
+  {
+    "index": 606,
+    "icd_code": "H55",
+    "description": "Nystagmus and other irregular eye movements"
+  },
+  {
+    "index": 607,
+    "icd_code": "H57",
+    "description": "Other disorders of eye and adnexa"
+  },
+  {
+    "index": 608,
+    "icd_code": "H58",
+    "description": "H58"
+  },
+  {
+    "index": 609,
+    "icd_code": "H59",
+    "description": "Intraop and postproc comp and disord of eye and adnexa, NEC"
+  },
+  {
+    "index": 610,
+    "icd_code": "H60",
+    "description": "Otitis externa"
+  },
+  {
+    "index": 611,
+    "icd_code": "H61",
+    "description": "Other disorders of external ear"
+  },
+  {
+    "index": 612,
+    "icd_code": "H62",
+    "description": "Disorders of external ear in diseases classified elsewhere"
+  },
+  {
+    "index": 613,
+    "icd_code": "H65",
+    "description": "Nonsuppurative otitis media"
+  },
+  {
+    "index": 614,
+    "icd_code": "H66",
+    "description": "Suppurative and unspecified otitis media"
+  },
+  {
+    "index": 615,
+    "icd_code": "H67",
+    "description": "Otitis media in diseases classified elsewhere"
+  },
+  {
+    "index": 616,
+    "icd_code": "H68",
+    "description": "Eustachian salpingitis and obstruction"
+  },
+  {
+    "index": 617,
+    "icd_code": "H69",
+    "description": "Other and unspecified disorders of Eustachian tube"
+  },
+  {
+    "index": 618,
+    "icd_code": "H70",
+    "description": "Mastoiditis and related conditions"
+  },
+  {
+    "index": 619,
+    "icd_code": "H71",
+    "description": "Cholesteatoma of middle ear"
+  },
+  {
+    "index": 620,
+    "icd_code": "H72",
+    "description": "Perforation of tympanic membrane"
+  },
+  {
+    "index": 621,
+    "icd_code": "H73",
+    "description": "Other disorders of tympanic membrane"
+  },
+  {
+    "index": 622,
+    "icd_code": "H74",
+    "description": "Other disorders of middle ear mastoid"
+  },
+  {
+    "index": 623,
+    "icd_code": "H75",
+    "description": "Oth disord of mid ear and mastoid in diseases classd elswhr"
+  },
+  {
+    "index": 624,
+    "icd_code": "H80",
+    "description": "Otosclerosis"
+  },
+  {
+    "index": 625,
+    "icd_code": "H81",
+    "description": "Disorders of vestibular function"
+  },
+  {
+    "index": 626,
+    "icd_code": "H82",
+    "description": "Vertiginous syndromes in diseases classified elsewhere"
+  },
+  {
+    "index": 627,
+    "icd_code": "H83",
+    "description": "Other diseases of inner ear"
+  },
+  {
+    "index": 628,
+    "icd_code": "H90",
+    "description": "Conductive and sensorineural hearing loss"
+  },
+  {
+    "index": 629,
+    "icd_code": "H91",
+    "description": "Other and unspecified hearing loss"
+  },
+  {
+    "index": 630,
+    "icd_code": "H92",
+    "description": "Otalgia and effusion of ear"
+  },
+  {
+    "index": 631,
+    "icd_code": "H93",
+    "description": "Other disorders of ear, not elsewhere classified"
+  },
+  {
+    "index": 632,
+    "icd_code": "H94",
+    "description": "Other disorders of ear in diseases classified elsewhere"
+  },
+  {
+    "index": 633,
+    "icd_code": "H95",
+    "description": "Intraop and postproc comp and disorders of ear/mastd, NEC"
+  },
+  {
+    "index": 634,
+    "icd_code": "I00",
+    "description": "Rheumatic fever without heart involvement"
+  },
+  {
+    "index": 635,
+    "icd_code": "I01",
+    "description": "Rheumatic fever with heart involvement"
+  },
+  {
+    "index": 636,
+    "icd_code": "I02",
+    "description": "Rheumatic chorea"
+  },
+  {
+    "index": 637,
+    "icd_code": "I05",
+    "description": "Rheumatic mitral valve diseases"
+  },
+  {
+    "index": 638,
+    "icd_code": "I06",
+    "description": "Rheumatic aortic valve diseases"
+  },
+  {
+    "index": 639,
+    "icd_code": "I07",
+    "description": "Rheumatic tricuspid valve diseases"
+  },
+  {
+    "index": 640,
+    "icd_code": "I08",
+    "description": "Multiple valve diseases"
+  },
+  {
+    "index": 641,
+    "icd_code": "I09",
+    "description": "Other rheumatic heart diseases"
+  },
+  {
+    "index": 642,
+    "icd_code": "I10",
+    "description": "Essential (primary) hypertension"
+  },
+  {
+    "index": 643,
+    "icd_code": "I11",
+    "description": "Hypertensive heart disease"
+  },
+  {
+    "index": 644,
+    "icd_code": "I12",
+    "description": "Hypertensive chronic kidney disease"
+  },
+  {
+    "index": 645,
+    "icd_code": "I13",
+    "description": "Hypertensive heart and chronic kidney disease"
+  },
+  {
+    "index": 646,
+    "icd_code": "I15",
+    "description": "Secondary hypertension"
+  },
+  {
+    "index": 647,
+    "icd_code": "I20",
+    "description": "Angina pectoris"
+  },
+  {
+    "index": 648,
+    "icd_code": "I21",
+    "description": "Acute myocardial infarction"
+  },
+  {
+    "index": 649,
+    "icd_code": "I22",
+    "description": "Subsequent STEMI & NSTEMI mocard infrc"
+  },
+  {
+    "index": 650,
+    "icd_code": "I23",
+    "description": "Certain crnt comp fol STEMI & NSTEMI mocard infrc <= 28 day"
+  },
+  {
+    "index": 651,
+    "icd_code": "I24",
+    "description": "Other acute ischemic heart diseases"
+  },
+  {
+    "index": 652,
+    "icd_code": "I25",
+    "description": "Chronic ischemic heart disease"
+  },
+  {
+    "index": 653,
+    "icd_code": "I26",
+    "description": "Pulmonary embolism"
+  },
+  {
+    "index": 654,
+    "icd_code": "I27",
+    "description": "Other pulmonary heart diseases"
+  },
+  {
+    "index": 655,
+    "icd_code": "I28",
+    "description": "Other diseases of pulmonary vessels"
+  },
+  {
+    "index": 656,
+    "icd_code": "I30",
+    "description": "Acute pericarditis"
+  },
+  {
+    "index": 657,
+    "icd_code": "I31",
+    "description": "Other diseases of pericardium"
+  },
+  {
+    "index": 658,
+    "icd_code": "I32",
+    "description": "Pericarditis in diseases classified elsewhere"
+  },
+  {
+    "index": 659,
+    "icd_code": "I33",
+    "description": "Acute and subacute endocarditis"
+  },
+  {
+    "index": 660,
+    "icd_code": "I34",
+    "description": "Nonrheumatic mitral valve disorders"
+  },
+  {
+    "index": 661,
+    "icd_code": "I35",
+    "description": "Nonrheumatic aortic valve disorders"
+  },
+  {
+    "index": 662,
+    "icd_code": "I36",
+    "description": "Nonrheumatic tricuspid valve disorders"
+  },
+  {
+    "index": 663,
+    "icd_code": "I37",
+    "description": "Nonrheumatic pulmonary valve disorders"
+  },
+  {
+    "index": 664,
+    "icd_code": "I38",
+    "description": "Endocarditis, valve unspecified"
+  },
+  {
+    "index": 665,
+    "icd_code": "I39",
+    "description": "Endocarditis and heart valve disord in dis classd elswhr"
+  },
+  {
+    "index": 666,
+    "icd_code": "I40",
+    "description": "Acute myocarditis"
+  },
+  {
+    "index": 667,
+    "icd_code": "I41",
+    "description": "Myocarditis in diseases classified elsewhere"
+  },
+  {
+    "index": 668,
+    "icd_code": "I42",
+    "description": "Cardiomyopathy"
+  },
+  {
+    "index": 669,
+    "icd_code": "I43",
+    "description": "Cardiomyopathy in diseases classified elsewhere"
+  },
+  {
+    "index": 670,
+    "icd_code": "I44",
+    "description": "Atrioventricular and left bundle-branch block"
+  },
+  {
+    "index": 671,
+    "icd_code": "I45",
+    "description": "Other conduction disorders"
+  },
+  {
+    "index": 672,
+    "icd_code": "I46",
+    "description": "Cardiac arrest"
+  },
+  {
+    "index": 673,
+    "icd_code": "I47",
+    "description": "Paroxysmal tachycardia"
+  },
+  {
+    "index": 674,
+    "icd_code": "I48",
+    "description": "Atrial fibrillation and flutter"
+  },
+  {
+    "index": 675,
+    "icd_code": "I49",
+    "description": "Other cardiac arrhythmias"
+  },
+  {
+    "index": 676,
+    "icd_code": "I50",
+    "description": "Heart failure"
+  },
+  {
+    "index": 677,
+    "icd_code": "I51",
+    "description": "Complications and ill-defined descriptions of heart disease"
+  },
+  {
+    "index": 678,
+    "icd_code": "I52",
+    "description": "Other heart disorders in diseases classified elsewhere"
+  },
+  {
+    "index": 679,
+    "icd_code": "I60",
+    "description": "Nontraumatic subarachnoid hemorrhage"
+  },
+  {
+    "index": 680,
+    "icd_code": "I61",
+    "description": "Nontraumatic intracerebral hemorrhage"
+  },
+  {
+    "index": 681,
+    "icd_code": "I62",
+    "description": "Other and unspecified nontraumatic intracranial hemorrhage"
+  },
+  {
+    "index": 682,
+    "icd_code": "I63",
+    "description": "Cerebral infarction"
+  },
+  {
+    "index": 683,
+    "icd_code": "I64",
+    "description": "I64"
+  },
+  {
+    "index": 684,
+    "icd_code": "I65",
+    "description": "Occls and stenosis of precerb art, not rslt in cereb infrc"
+  },
+  {
+    "index": 685,
+    "icd_code": "I66",
+    "description": "Occls and stenosis of cereb art, not rslt in cerebral infrc"
+  },
+  {
+    "index": 686,
+    "icd_code": "I67",
+    "description": "Other cerebrovascular diseases"
+  },
+  {
+    "index": 687,
+    "icd_code": "I68",
+    "description": "Cerebrovascular disorders in diseases classified elsewhere"
+  },
+  {
+    "index": 688,
+    "icd_code": "I69",
+    "description": "Sequelae of cerebrovascular disease"
+  },
+  {
+    "index": 689,
+    "icd_code": "I70",
+    "description": "Atherosclerosis"
+  },
+  {
+    "index": 690,
+    "icd_code": "I71",
+    "description": "Aortic aneurysm and dissection"
+  },
+  {
+    "index": 691,
+    "icd_code": "I72",
+    "description": "Other aneurysm"
+  },
+  {
+    "index": 692,
+    "icd_code": "I73",
+    "description": "Other peripheral vascular diseases"
+  },
+  {
+    "index": 693,
+    "icd_code": "I74",
+    "description": "Arterial embolism and thrombosis"
+  },
+  {
+    "index": 694,
+    "icd_code": "I77",
+    "description": "Other disorders of arteries and arterioles"
+  },
+  {
+    "index": 695,
+    "icd_code": "I78",
+    "description": "Diseases of capillaries"
+  },
+  {
+    "index": 696,
+    "icd_code": "I79",
+    "description": "Disord of art, arterioles and capilare in dis classd elswhr"
+  },
+  {
+    "index": 697,
+    "icd_code": "I80",
+    "description": "Phlebitis and thrombophlebitis"
+  },
+  {
+    "index": 698,
+    "icd_code": "I81",
+    "description": "Portal vein thrombosis"
+  },
+  {
+    "index": 699,
+    "icd_code": "I82",
+    "description": "Other venous embolism and thrombosis"
+  },
+  {
+    "index": 700,
+    "icd_code": "I83",
+    "description": "Varicose veins of lower extremities"
+  },
+  {
+    "index": 701,
+    "icd_code": "I84",
+    "description": "I84"
+  },
+  {
+    "index": 702,
+    "icd_code": "I85",
+    "description": "Esophageal varices"
+  },
+  {
+    "index": 703,
+    "icd_code": "I86",
+    "description": "Varicose veins of other sites"
+  },
+  {
+    "index": 704,
+    "icd_code": "I87",
+    "description": "Other disorders of veins"
+  },
+  {
+    "index": 705,
+    "icd_code": "I88",
+    "description": "Nonspecific lymphadenitis"
+  },
+  {
+    "index": 706,
+    "icd_code": "I89",
+    "description": "Oth noninfective disorders of lymphatic vessels and nodes"
+  },
+  {
+    "index": 707,
+    "icd_code": "I95",
+    "description": "Hypotension"
+  },
+  {
+    "index": 708,
+    "icd_code": "I97",
+    "description": "Intraop and postproc comp and disorders of circ sys, NEC"
+  },
+  {
+    "index": 709,
+    "icd_code": "I98",
+    "description": "I98"
+  },
+  {
+    "index": 710,
+    "icd_code": "I99",
+    "description": "Other and unspecified disorders of circulatory system"
+  },
+  {
+    "index": 711,
+    "icd_code": "J00",
+    "description": "Acute nasopharyngitis [common cold]"
+  },
+  {
+    "index": 712,
+    "icd_code": "J01",
+    "description": "Acute sinusitis"
+  },
+  {
+    "index": 713,
+    "icd_code": "J02",
+    "description": "Acute pharyngitis"
+  },
+  {
+    "index": 714,
+    "icd_code": "J03",
+    "description": "Acute tonsillitis"
+  },
+  {
+    "index": 715,
+    "icd_code": "J04",
+    "description": "Acute laryngitis and tracheitis"
+  },
+  {
+    "index": 716,
+    "icd_code": "J05",
+    "description": "Acute obstructive laryngitis [croup] and epiglottitis"
+  },
+  {
+    "index": 717,
+    "icd_code": "J06",
+    "description": "Acute upper resp infections of multiple and unsp sites"
+  },
+  {
+    "index": 718,
+    "icd_code": "J09",
+    "description": "Influenza due to certain identified influenza viruses"
+  },
+  {
+    "index": 719,
+    "icd_code": "J10",
+    "description": "Influenza due to other identified influenza virus"
+  },
+  {
+    "index": 720,
+    "icd_code": "J11",
+    "description": "Influenza due to unidentified influenza virus"
+  },
+  {
+    "index": 721,
+    "icd_code": "J12",
+    "description": "Viral pneumonia, not elsewhere classified"
+  },
+  {
+    "index": 722,
+    "icd_code": "J13",
+    "description": "Pneumonia due to Streptococcus pneumoniae"
+  },
+  {
+    "index": 723,
+    "icd_code": "J14",
+    "description": "Pneumonia due to Hemophilus influenzae"
+  },
+  {
+    "index": 724,
+    "icd_code": "J15",
+    "description": "Bacterial pneumonia, not elsewhere classified"
+  },
+  {
+    "index": 725,
+    "icd_code": "J16",
+    "description": "Pneumonia due to oth infectious organisms, NEC"
+  },
+  {
+    "index": 726,
+    "icd_code": "J17",
+    "description": "Pneumonia in diseases classified elsewhere"
+  },
+  {
+    "index": 727,
+    "icd_code": "J18",
+    "description": "Pneumonia, unspecified organism"
+  },
+  {
+    "index": 728,
+    "icd_code": "J20",
+    "description": "Acute bronchitis"
+  },
+  {
+    "index": 729,
+    "icd_code": "J21",
+    "description": "Acute bronchiolitis"
+  },
+  {
+    "index": 730,
+    "icd_code": "J22",
+    "description": "Unspecified acute lower respiratory infection"
+  },
+  {
+    "index": 731,
+    "icd_code": "J30",
+    "description": "Vasomotor and allergic rhinitis"
+  },
+  {
+    "index": 732,
+    "icd_code": "J31",
+    "description": "Chronic rhinitis, nasopharyngitis and pharyngitis"
+  },
+  {
+    "index": 733,
+    "icd_code": "J32",
+    "description": "Chronic sinusitis"
+  },
+  {
+    "index": 734,
+    "icd_code": "J33",
+    "description": "Nasal polyp"
+  },
+  {
+    "index": 735,
+    "icd_code": "J34",
+    "description": "Other and unspecified disorders of nose and nasal sinuses"
+  },
+  {
+    "index": 736,
+    "icd_code": "J35",
+    "description": "Chronic diseases of tonsils and adenoids"
+  },
+  {
+    "index": 737,
+    "icd_code": "J36",
+    "description": "Peritonsillar abscess"
+  },
+  {
+    "index": 738,
+    "icd_code": "J37",
+    "description": "Chronic laryngitis and laryngotracheitis"
+  },
+  {
+    "index": 739,
+    "icd_code": "J38",
+    "description": "Diseases of vocal cords and larynx, not elsewhere classified"
+  },
+  {
+    "index": 740,
+    "icd_code": "J39",
+    "description": "Other diseases of upper respiratory tract"
+  },
+  {
+    "index": 741,
+    "icd_code": "J40",
+    "description": "Bronchitis, not specified as acute or chronic"
+  },
+  {
+    "index": 742,
+    "icd_code": "J41",
+    "description": "Simple and mucopurulent chronic bronchitis"
+  },
+  {
+    "index": 743,
+    "icd_code": "J42",
+    "description": "Unspecified chronic bronchitis"
+  },
+  {
+    "index": 744,
+    "icd_code": "J43",
+    "description": "Emphysema"
+  },
+  {
+    "index": 745,
+    "icd_code": "J44",
+    "description": "Other chronic obstructive pulmonary disease"
+  },
+  {
+    "index": 746,
+    "icd_code": "J45",
+    "description": "Asthma"
+  },
+  {
+    "index": 747,
+    "icd_code": "J46",
+    "description": "J46"
+  },
+  {
+    "index": 748,
+    "icd_code": "J47",
+    "description": "Bronchiectasis"
+  },
+  {
+    "index": 749,
+    "icd_code": "J60",
+    "description": "Coalworker's pneumoconiosis"
+  },
+  {
+    "index": 750,
+    "icd_code": "J61",
+    "description": "Pneumoconiosis due to asbestos and other mineral fibers"
+  },
+  {
+    "index": 751,
+    "icd_code": "J62",
+    "description": "Pneumoconiosis due to dust containing silica"
+  },
+  {
+    "index": 752,
+    "icd_code": "J63",
+    "description": "Pneumoconiosis due to other inorganic dusts"
+  },
+  {
+    "index": 753,
+    "icd_code": "J64",
+    "description": "Unspecified pneumoconiosis"
+  },
+  {
+    "index": 754,
+    "icd_code": "J65",
+    "description": "Pneumoconiosis associated with tuberculosis"
+  },
+  {
+    "index": 755,
+    "icd_code": "J66",
+    "description": "Airway disease due to specific organic dust"
+  },
+  {
+    "index": 756,
+    "icd_code": "J67",
+    "description": "Hypersensitivity pneumonitis due to organic dust"
+  },
+  {
+    "index": 757,
+    "icd_code": "J68",
+    "description": "Resp cond d/t inhalation of chemicals, gas, fumes and vapors"
+  },
+  {
+    "index": 758,
+    "icd_code": "J69",
+    "description": "Pneumonitis due to solids and liquids"
+  },
+  {
+    "index": 759,
+    "icd_code": "J70",
+    "description": "Respiratory conditions due to other external agents"
+  },
+  {
+    "index": 760,
+    "icd_code": "J80",
+    "description": "Acute respiratory distress syndrome"
+  },
+  {
+    "index": 761,
+    "icd_code": "J81",
+    "description": "Pulmonary edema"
+  },
+  {
+    "index": 762,
+    "icd_code": "J82",
+    "description": "Pulmonary eosinophilia, not elsewhere classified"
+  },
+  {
+    "index": 763,
+    "icd_code": "J84",
+    "description": "Other interstitial pulmonary diseases"
+  },
+  {
+    "index": 764,
+    "icd_code": "J85",
+    "description": "Abscess of lung and mediastinum"
+  },
+  {
+    "index": 765,
+    "icd_code": "J86",
+    "description": "Pyothorax"
+  },
+  {
+    "index": 766,
+    "icd_code": "J90",
+    "description": "Pleural effusion, not elsewhere classified"
+  },
+  {
+    "index": 767,
+    "icd_code": "J91",
+    "description": "Pleural effusion in conditions classified elsewhere"
+  },
+  {
+    "index": 768,
+    "icd_code": "J92",
+    "description": "Pleural plaque"
+  },
+  {
+    "index": 769,
+    "icd_code": "J93",
+    "description": "Pneumothorax and air leak"
+  },
+  {
+    "index": 770,
+    "icd_code": "J94",
+    "description": "Other pleural conditions"
+  },
+  {
+    "index": 771,
+    "icd_code": "J95",
+    "description": "Intraop and postproc comp and disorders of resp sys, NEC"
+  },
+  {
+    "index": 772,
+    "icd_code": "J96",
+    "description": "Respiratory failure, not elsewhere classified"
+  },
+  {
+    "index": 773,
+    "icd_code": "J98",
+    "description": "Other respiratory disorders"
+  },
+  {
+    "index": 774,
+    "icd_code": "J99",
+    "description": "Respiratory disorders in diseases classified elsewhere"
+  },
+  {
+    "index": 775,
+    "icd_code": "K00",
+    "description": "Disorders of tooth development and eruption"
+  },
+  {
+    "index": 776,
+    "icd_code": "K01",
+    "description": "Embedded and impacted teeth"
+  },
+  {
+    "index": 777,
+    "icd_code": "K02",
+    "description": "Dental caries"
+  },
+  {
+    "index": 778,
+    "icd_code": "K03",
+    "description": "Other diseases of hard tissues of teeth"
+  },
+  {
+    "index": 779,
+    "icd_code": "K04",
+    "description": "Diseases of pulp and periapical tissues"
+  },
+  {
+    "index": 780,
+    "icd_code": "K05",
+    "description": "Gingivitis and periodontal diseases"
+  },
+  {
+    "index": 781,
+    "icd_code": "K06",
+    "description": "Other disorders of gingiva and edentulous alveolar ridge"
+  },
+  {
+    "index": 782,
+    "icd_code": "K07",
+    "description": "K07"
+  },
+  {
+    "index": 783,
+    "icd_code": "K08",
+    "description": "Other disorders of teeth and supporting structures"
+  },
+  {
+    "index": 784,
+    "icd_code": "K09",
+    "description": "Cysts of oral region, not elsewhere classified"
+  },
+  {
+    "index": 785,
+    "icd_code": "K10",
+    "description": "K10"
+  },
+  {
+    "index": 786,
+    "icd_code": "K11",
+    "description": "Diseases of salivary glands"
+  },
+  {
+    "index": 787,
+    "icd_code": "K12",
+    "description": "Stomatitis and related lesions"
+  },
+  {
+    "index": 788,
+    "icd_code": "K13",
+    "description": "Other diseases of lip and oral mucosa"
+  },
+  {
+    "index": 789,
+    "icd_code": "K14",
+    "description": "Diseases of tongue"
+  },
+  {
+    "index": 790,
+    "icd_code": "K20",
+    "description": "Esophagitis"
+  },
+  {
+    "index": 791,
+    "icd_code": "K21",
+    "description": "Gastro-esophageal reflux disease"
+  },
+  {
+    "index": 792,
+    "icd_code": "K22",
+    "description": "Other diseases of esophagus"
+  },
+  {
+    "index": 793,
+    "icd_code": "K23",
+    "description": "Disorders of esophagus in diseases classified elsewhere"
+  },
+  {
+    "index": 794,
+    "icd_code": "K25",
+    "description": "Gastric ulcer"
+  },
+  {
+    "index": 795,
+    "icd_code": "K26",
+    "description": "Duodenal ulcer"
+  },
+  {
+    "index": 796,
+    "icd_code": "K27",
+    "description": "Peptic ulcer, site unspecified"
+  },
+  {
+    "index": 797,
+    "icd_code": "K28",
+    "description": "Gastrojejunal ulcer"
+  },
+  {
+    "index": 798,
+    "icd_code": "K29",
+    "description": "Gastritis and duodenitis"
+  },
+  {
+    "index": 799,
+    "icd_code": "K30",
+    "description": "Functional dyspepsia"
+  },
+  {
+    "index": 800,
+    "icd_code": "K31",
+    "description": "Other diseases of stomach and duodenum"
+  },
+  {
+    "index": 801,
+    "icd_code": "K35",
+    "description": "Acute appendicitis"
+  },
+  {
+    "index": 802,
+    "icd_code": "K36",
+    "description": "Other appendicitis"
+  },
+  {
+    "index": 803,
+    "icd_code": "K37",
+    "description": "Unspecified appendicitis"
+  },
+  {
+    "index": 804,
+    "icd_code": "K38",
+    "description": "Other diseases of appendix"
+  },
+  {
+    "index": 805,
+    "icd_code": "K40",
+    "description": "Inguinal hernia"
+  },
+  {
+    "index": 806,
+    "icd_code": "K41",
+    "description": "Femoral hernia"
+  },
+  {
+    "index": 807,
+    "icd_code": "K42",
+    "description": "Umbilical hernia"
+  },
+  {
+    "index": 808,
+    "icd_code": "K43",
+    "description": "Ventral hernia"
+  },
+  {
+    "index": 809,
+    "icd_code": "K44",
+    "description": "Diaphragmatic hernia"
+  },
+  {
+    "index": 810,
+    "icd_code": "K45",
+    "description": "Other abdominal hernia"
+  },
+  {
+    "index": 811,
+    "icd_code": "K46",
+    "description": "Unspecified abdominal hernia"
+  },
+  {
+    "index": 812,
+    "icd_code": "K50",
+    "description": "Crohn's disease [regional enteritis]"
+  },
+  {
+    "index": 813,
+    "icd_code": "K51",
+    "description": "Ulcerative colitis"
+  },
+  {
+    "index": 814,
+    "icd_code": "K52",
+    "description": "Other and unsp noninfective gastroenteritis and colitis"
+  },
+  {
+    "index": 815,
+    "icd_code": "K55",
+    "description": "Vascular disorders of intestine"
+  },
+  {
+    "index": 816,
+    "icd_code": "K56",
+    "description": "Paralytic ileus and intestinal obstruction without hernia"
+  },
+  {
+    "index": 817,
+    "icd_code": "K57",
+    "description": "Diverticular disease of intestine"
+  },
+  {
+    "index": 818,
+    "icd_code": "K58",
+    "description": "Irritable bowel syndrome"
+  },
+  {
+    "index": 819,
+    "icd_code": "K59",
+    "description": "Other functional intestinal disorders"
+  },
+  {
+    "index": 820,
+    "icd_code": "K60",
+    "description": "Fissure and fistula of anal and rectal regions"
+  },
+  {
+    "index": 821,
+    "icd_code": "K61",
+    "description": "Abscess of anal and rectal regions"
+  },
+  {
+    "index": 822,
+    "icd_code": "K62",
+    "description": "Other diseases of anus and rectum"
+  },
+  {
+    "index": 823,
+    "icd_code": "K63",
+    "description": "Other diseases of intestine"
+  },
+  {
+    "index": 824,
+    "icd_code": "K64",
+    "description": "Hemorrhoids and perianal venous thrombosis"
+  },
+  {
+    "index": 825,
+    "icd_code": "K65",
+    "description": "Peritonitis"
+  },
+  {
+    "index": 826,
+    "icd_code": "K66",
+    "description": "Other disorders of peritoneum"
+  },
+  {
+    "index": 827,
+    "icd_code": "K67",
+    "description": "Disorders of peritoneum in infectious diseases classd elswhr"
+  },
+  {
+    "index": 828,
+    "icd_code": "K70",
+    "description": "Alcoholic liver disease"
+  },
+  {
+    "index": 829,
+    "icd_code": "K71",
+    "description": "Toxic liver disease"
+  },
+  {
+    "index": 830,
+    "icd_code": "K72",
+    "description": "Hepatic failure, not elsewhere classified"
+  },
+  {
+    "index": 831,
+    "icd_code": "K73",
+    "description": "Chronic hepatitis, not elsewhere classified"
+  },
+  {
+    "index": 832,
+    "icd_code": "K74",
+    "description": "Fibrosis and cirrhosis of liver"
+  },
+  {
+    "index": 833,
+    "icd_code": "K75",
+    "description": "Other inflammatory liver diseases"
+  },
+  {
+    "index": 834,
+    "icd_code": "K76",
+    "description": "Other diseases of liver"
+  },
+  {
+    "index": 835,
+    "icd_code": "K77",
+    "description": "Liver disorders in diseases classified elsewhere"
+  },
+  {
+    "index": 836,
+    "icd_code": "K80",
+    "description": "Cholelithiasis"
+  },
+  {
+    "index": 837,
+    "icd_code": "K81",
+    "description": "Cholecystitis"
+  },
+  {
+    "index": 838,
+    "icd_code": "K82",
+    "description": "Other diseases of gallbladder"
+  },
+  {
+    "index": 839,
+    "icd_code": "K83",
+    "description": "Other diseases of biliary tract"
+  },
+  {
+    "index": 840,
+    "icd_code": "K85",
+    "description": "Acute pancreatitis"
+  },
+  {
+    "index": 841,
+    "icd_code": "K86",
+    "description": "Other diseases of pancreas"
+  },
+  {
+    "index": 842,
+    "icd_code": "K87",
+    "description": "Disord of GB, biliary trac and pancreas in dis classd elswhr"
+  },
+  {
+    "index": 843,
+    "icd_code": "K90",
+    "description": "Intestinal malabsorption"
+  },
+  {
+    "index": 844,
+    "icd_code": "K91",
+    "description": "Intraop and postproc comp and disorders of dgstv sys, NEC"
+  },
+  {
+    "index": 845,
+    "icd_code": "K92",
+    "description": "Other diseases of digestive system"
+  },
+  {
+    "index": 846,
+    "icd_code": "K93",
+    "description": "K93"
+  },
+  {
+    "index": 847,
+    "icd_code": "L00",
+    "description": "Staphylococcal scalded skin syndrome"
+  },
+  {
+    "index": 848,
+    "icd_code": "L01",
+    "description": "Impetigo"
+  },
+  {
+    "index": 849,
+    "icd_code": "L02",
+    "description": "Cutaneous abscess, furuncle and carbuncle"
+  },
+  {
+    "index": 850,
+    "icd_code": "L03",
+    "description": "Cellulitis and acute lymphangitis"
+  },
+  {
+    "index": 851,
+    "icd_code": "L04",
+    "description": "Acute lymphadenitis"
+  },
+  {
+    "index": 852,
+    "icd_code": "L05",
+    "description": "Pilonidal cyst and sinus"
+  },
+  {
+    "index": 853,
+    "icd_code": "L08",
+    "description": "Other local infections of skin and subcutaneous tissue"
+  },
+  {
+    "index": 854,
+    "icd_code": "L10",
+    "description": "Pemphigus"
+  },
+  {
+    "index": 855,
+    "icd_code": "L11",
+    "description": "Other acantholytic disorders"
+  },
+  {
+    "index": 856,
+    "icd_code": "L12",
+    "description": "Pemphigoid"
+  },
+  {
+    "index": 857,
+    "icd_code": "L13",
+    "description": "Other bullous disorders"
+  },
+  {
+    "index": 858,
+    "icd_code": "L14",
+    "description": "Bullous disorders in diseases classified elsewhere"
+  },
+  {
+    "index": 859,
+    "icd_code": "L20",
+    "description": "Atopic dermatitis"
+  },
+  {
+    "index": 860,
+    "icd_code": "L21",
+    "description": "Seborrheic dermatitis"
+  },
+  {
+    "index": 861,
+    "icd_code": "L22",
+    "description": "Diaper dermatitis"
+  },
+  {
+    "index": 862,
+    "icd_code": "L23",
+    "description": "Allergic contact dermatitis"
+  },
+  {
+    "index": 863,
+    "icd_code": "L24",
+    "description": "Irritant contact dermatitis"
+  },
+  {
+    "index": 864,
+    "icd_code": "L25",
+    "description": "Unspecified contact dermatitis"
+  },
+  {
+    "index": 865,
+    "icd_code": "L26",
+    "description": "Exfoliative dermatitis"
+  },
+  {
+    "index": 866,
+    "icd_code": "L27",
+    "description": "Dermatitis due to substances taken internally"
+  },
+  {
+    "index": 867,
+    "icd_code": "L28",
+    "description": "Lichen simplex chronicus and prurigo"
+  },
+  {
+    "index": 868,
+    "icd_code": "L29",
+    "description": "Pruritus"
+  },
+  {
+    "index": 869,
+    "icd_code": "L30",
+    "description": "Other and unspecified dermatitis"
+  },
+  {
+    "index": 870,
+    "icd_code": "L40",
+    "description": "Psoriasis"
+  },
+  {
+    "index": 871,
+    "icd_code": "L41",
+    "description": "Parapsoriasis"
+  },
+  {
+    "index": 872,
+    "icd_code": "L42",
+    "description": "Pityriasis rosea"
+  },
+  {
+    "index": 873,
+    "icd_code": "L43",
+    "description": "Lichen planus"
+  },
+  {
+    "index": 874,
+    "icd_code": "L44",
+    "description": "Other papulosquamous disorders"
+  },
+  {
+    "index": 875,
+    "icd_code": "L45",
+    "description": "Papulosquamous disorders in diseases classified elsewhere"
+  },
+  {
+    "index": 876,
+    "icd_code": "L50",
+    "description": "Urticaria"
+  },
+  {
+    "index": 877,
+    "icd_code": "L51",
+    "description": "Erythema multiforme"
+  },
+  {
+    "index": 878,
+    "icd_code": "L52",
+    "description": "Erythema nodosum"
+  },
+  {
+    "index": 879,
+    "icd_code": "L53",
+    "description": "Other erythematous conditions"
+  },
+  {
+    "index": 880,
+    "icd_code": "L54",
+    "description": "Erythema in diseases classified elsewhere"
+  },
+  {
+    "index": 881,
+    "icd_code": "L55",
+    "description": "Sunburn"
+  },
+  {
+    "index": 882,
+    "icd_code": "L56",
+    "description": "Other acute skin changes due to ultraviolet radiation"
+  },
+  {
+    "index": 883,
+    "icd_code": "L57",
+    "description": "Skin changes due to chronic expsr to nonionizing radiation"
+  },
+  {
+    "index": 884,
+    "icd_code": "L58",
+    "description": "Radiodermatitis"
+  },
+  {
+    "index": 885,
+    "icd_code": "L59",
+    "description": "Oth disorders of skin, subcu related to radiation"
+  },
+  {
+    "index": 886,
+    "icd_code": "L60",
+    "description": "Nail disorders"
+  },
+  {
+    "index": 887,
+    "icd_code": "L62",
+    "description": "Nail disorders in diseases classified elsewhere"
+  },
+  {
+    "index": 888,
+    "icd_code": "L63",
+    "description": "Alopecia areata"
+  },
+  {
+    "index": 889,
+    "icd_code": "L64",
+    "description": "Androgenic alopecia"
+  },
+  {
+    "index": 890,
+    "icd_code": "L65",
+    "description": "Other nonscarring hair loss"
+  },
+  {
+    "index": 891,
+    "icd_code": "L66",
+    "description": "Cicatricial alopecia [scarring hair loss]"
+  },
+  {
+    "index": 892,
+    "icd_code": "L67",
+    "description": "Hair color and hair shaft abnormalities"
+  },
+  {
+    "index": 893,
+    "icd_code": "L68",
+    "description": "Hypertrichosis"
+  },
+  {
+    "index": 894,
+    "icd_code": "L70",
+    "description": "Acne"
+  },
+  {
+    "index": 895,
+    "icd_code": "L71",
+    "description": "Rosacea"
+  },
+  {
+    "index": 896,
+    "icd_code": "L72",
+    "description": "Follicular cysts of skin and subcutaneous tissue"
+  },
+  {
+    "index": 897,
+    "icd_code": "L73",
+    "description": "Other follicular disorders"
+  },
+  {
+    "index": 898,
+    "icd_code": "L74",
+    "description": "Eccrine sweat disorders"
+  },
+  {
+    "index": 899,
+    "icd_code": "L75",
+    "description": "Apocrine sweat disorders"
+  },
+  {
+    "index": 900,
+    "icd_code": "L80",
+    "description": "Vitiligo"
+  },
+  {
+    "index": 901,
+    "icd_code": "L81",
+    "description": "Other disorders of pigmentation"
+  },
+  {
+    "index": 902,
+    "icd_code": "L82",
+    "description": "Seborrheic keratosis"
+  },
+  {
+    "index": 903,
+    "icd_code": "L83",
+    "description": "Acanthosis nigricans"
+  },
+  {
+    "index": 904,
+    "icd_code": "L84",
+    "description": "Corns and callosities"
+  },
+  {
+    "index": 905,
+    "icd_code": "L85",
+    "description": "Other epidermal thickening"
+  },
+  {
+    "index": 906,
+    "icd_code": "L86",
+    "description": "Keratoderma in diseases classified elsewhere"
+  },
+  {
+    "index": 907,
+    "icd_code": "L87",
+    "description": "Transepidermal elimination disorders"
+  },
+  {
+    "index": 908,
+    "icd_code": "L88",
+    "description": "Pyoderma gangrenosum"
+  },
+  {
+    "index": 909,
+    "icd_code": "L89",
+    "description": "Pressure ulcer"
+  },
+  {
+    "index": 910,
+    "icd_code": "L90",
+    "description": "Atrophic disorders of skin"
+  },
+  {
+    "index": 911,
+    "icd_code": "L91",
+    "description": "Hypertrophic disorders of skin"
+  },
+  {
+    "index": 912,
+    "icd_code": "L92",
+    "description": "Granulomatous disorders of skin and subcutaneous tissue"
+  },
+  {
+    "index": 913,
+    "icd_code": "L93",
+    "description": "Lupus erythematosus"
+  },
+  {
+    "index": 914,
+    "icd_code": "L94",
+    "description": "Other localized connective tissue disorders"
+  },
+  {
+    "index": 915,
+    "icd_code": "L95",
+    "description": "Vasculitis limited to skin, not elsewhere classified"
+  },
+  {
+    "index": 916,
+    "icd_code": "L97",
+    "description": "Non-pressure chronic ulcer of lower limb, NEC"
+  },
+  {
+    "index": 917,
+    "icd_code": "L98",
+    "description": "Oth disorders of skin, subcu, not elsewhere classified"
+  },
+  {
+    "index": 918,
+    "icd_code": "L99",
+    "description": "Oth disorders of skin, subcu in diseases classd elswhr"
+  },
+  {
+    "index": 919,
+    "icd_code": "M00",
+    "description": "Pyogenic arthritis"
+  },
+  {
+    "index": 920,
+    "icd_code": "M01",
+    "description": "Direct infect of joint in infec/parastc dis classd elswhr"
+  },
+  {
+    "index": 921,
+    "icd_code": "M02",
+    "description": "Postinfective and reactive arthropathies"
+  },
+  {
+    "index": 922,
+    "icd_code": "M03",
+    "description": "M03"
+  },
+  {
+    "index": 923,
+    "icd_code": "M05",
+    "description": "Rheumatoid arthritis with rheumatoid factor"
+  },
+  {
+    "index": 924,
+    "icd_code": "M06",
+    "description": "Other rheumatoid arthritis"
+  },
+  {
+    "index": 925,
+    "icd_code": "M07",
+    "description": "Enteropathic arthropathies"
+  },
+  {
+    "index": 926,
+    "icd_code": "M08",
+    "description": "Juvenile arthritis"
+  },
+  {
+    "index": 927,
+    "icd_code": "M09",
+    "description": "M09"
+  },
+  {
+    "index": 928,
+    "icd_code": "M10",
+    "description": "Gout"
+  },
+  {
+    "index": 929,
+    "icd_code": "M11",
+    "description": "Other crystal arthropathies"
+  },
+  {
+    "index": 930,
+    "icd_code": "M12",
+    "description": "Other and unspecified arthropathy"
+  },
+  {
+    "index": 931,
+    "icd_code": "M13",
+    "description": "Other arthritis"
+  },
+  {
+    "index": 932,
+    "icd_code": "M14",
+    "description": "Arthropathies in other diseases classified elsewhere"
+  },
+  {
+    "index": 933,
+    "icd_code": "M15",
+    "description": "Polyosteoarthritis"
+  },
+  {
+    "index": 934,
+    "icd_code": "M16",
+    "description": "Osteoarthritis of hip"
+  },
+  {
+    "index": 935,
+    "icd_code": "M17",
+    "description": "Osteoarthritis of knee"
+  },
+  {
+    "index": 936,
+    "icd_code": "M18",
+    "description": "Osteoarthritis of first carpometacarpal joint"
+  },
+  {
+    "index": 937,
+    "icd_code": "M19",
+    "description": "Other and unspecified osteoarthritis"
+  },
+  {
+    "index": 938,
+    "icd_code": "M20",
+    "description": "Acquired deformities of fingers and toes"
+  },
+  {
+    "index": 939,
+    "icd_code": "M21",
+    "description": "Other acquired deformities of limbs"
+  },
+  {
+    "index": 940,
+    "icd_code": "M22",
+    "description": "Disorder of patella"
+  },
+  {
+    "index": 941,
+    "icd_code": "M23",
+    "description": "Internal derangement of knee"
+  },
+  {
+    "index": 942,
+    "icd_code": "M24",
+    "description": "Other specific joint derangements"
+  },
+  {
+    "index": 943,
+    "icd_code": "M25",
+    "description": "Other joint disorder, not elsewhere classified"
+  },
+  {
+    "index": 944,
+    "icd_code": "M30",
+    "description": "Polyarteritis nodosa and related conditions"
+  },
+  {
+    "index": 945,
+    "icd_code": "M31",
+    "description": "Other necrotizing vasculopathies"
+  },
+  {
+    "index": 946,
+    "icd_code": "M32",
+    "description": "Systemic lupus erythematosus (SLE)"
+  },
+  {
+    "index": 947,
+    "icd_code": "M33",
+    "description": "Dermatopolymyositis"
+  },
+  {
+    "index": 948,
+    "icd_code": "M34",
+    "description": "Systemic sclerosis [scleroderma]"
+  },
+  {
+    "index": 949,
+    "icd_code": "M35",
+    "description": "Other systemic involvement of connective tissue"
+  },
+  {
+    "index": 950,
+    "icd_code": "M36",
+    "description": "Systemic disorders of conn tiss in diseases classd elswhr"
+  },
+  {
+    "index": 951,
+    "icd_code": "M40",
+    "description": "Kyphosis and lordosis"
+  },
+  {
+    "index": 952,
+    "icd_code": "M41",
+    "description": "Scoliosis"
+  },
+  {
+    "index": 953,
+    "icd_code": "M42",
+    "description": "Spinal osteochondrosis"
+  },
+  {
+    "index": 954,
+    "icd_code": "M43",
+    "description": "Other deforming dorsopathies"
+  },
+  {
+    "index": 955,
+    "icd_code": "M45",
+    "description": "Ankylosing spondylitis"
+  },
+  {
+    "index": 956,
+    "icd_code": "M46",
+    "description": "Other inflammatory spondylopathies"
+  },
+  {
+    "index": 957,
+    "icd_code": "M47",
+    "description": "Spondylosis"
+  },
+  {
+    "index": 958,
+    "icd_code": "M48",
+    "description": "Other spondylopathies"
+  },
+  {
+    "index": 959,
+    "icd_code": "M49",
+    "description": "Spondylopathies in diseases classified elsewhere"
+  },
+  {
+    "index": 960,
+    "icd_code": "M50",
+    "description": "Cervical disc disorders"
+  },
+  {
+    "index": 961,
+    "icd_code": "M51",
+    "description": "Thoracic, thoracolum, and lumbosacral intvrt disc disorders"
+  },
+  {
+    "index": 962,
+    "icd_code": "M53",
+    "description": "Other and unspecified dorsopathies, not elsewhere classified"
+  },
+  {
+    "index": 963,
+    "icd_code": "M54",
+    "description": "Dorsalgia"
+  },
+  {
+    "index": 964,
+    "icd_code": "M60",
+    "description": "Myositis"
+  },
+  {
+    "index": 965,
+    "icd_code": "M61",
+    "description": "Calcification and ossification of muscle"
+  },
+  {
+    "index": 966,
+    "icd_code": "M62",
+    "description": "Other disorders of muscle"
+  },
+  {
+    "index": 967,
+    "icd_code": "M63",
+    "description": "Disorders of muscle in diseases classified elsewhere"
+  },
+  {
+    "index": 968,
+    "icd_code": "M65",
+    "description": "Synovitis and tenosynovitis"
+  },
+  {
+    "index": 969,
+    "icd_code": "M66",
+    "description": "Spontaneous rupture of synovium and tendon"
+  },
+  {
+    "index": 970,
+    "icd_code": "M67",
+    "description": "Other disorders of synovium and tendon"
+  },
+  {
+    "index": 971,
+    "icd_code": "M68",
+    "description": "M68"
+  },
+  {
+    "index": 972,
+    "icd_code": "M70",
+    "description": "Soft tissue disorders related to use, overuse and pressure"
+  },
+  {
+    "index": 973,
+    "icd_code": "M71",
+    "description": "Other bursopathies"
+  },
+  {
+    "index": 974,
+    "icd_code": "M72",
+    "description": "Fibroblastic disorders"
+  },
+  {
+    "index": 975,
+    "icd_code": "M73",
+    "description": "M73"
+  },
+  {
+    "index": 976,
+    "icd_code": "M75",
+    "description": "Shoulder lesions"
+  },
+  {
+    "index": 977,
+    "icd_code": "M76",
+    "description": "Enthesopathies, lower limb, excluding foot"
+  },
+  {
+    "index": 978,
+    "icd_code": "M77",
+    "description": "Other enthesopathies"
+  },
+  {
+    "index": 979,
+    "icd_code": "M79",
+    "description": "Oth and unsp soft tissue disorders, not elsewhere classified"
+  },
+  {
+    "index": 980,
+    "icd_code": "M80",
+    "description": "Osteoporosis with current pathological fracture"
+  },
+  {
+    "index": 981,
+    "icd_code": "M81",
+    "description": "Osteoporosis without current pathological fracture"
+  },
+  {
+    "index": 982,
+    "icd_code": "M82",
+    "description": "M82"
+  },
+  {
+    "index": 983,
+    "icd_code": "M83",
+    "description": "Adult osteomalacia"
+  },
+  {
+    "index": 984,
+    "icd_code": "M84",
+    "description": "Disorder of continuity of bone"
+  },
+  {
+    "index": 985,
+    "icd_code": "M85",
+    "description": "Other disorders of bone density and structure"
+  },
+  {
+    "index": 986,
+    "icd_code": "M86",
+    "description": "Osteomyelitis"
+  },
+  {
+    "index": 987,
+    "icd_code": "M87",
+    "description": "Osteonecrosis"
+  },
+  {
+    "index": 988,
+    "icd_code": "M88",
+    "description": "Osteitis deformans [Paget's disease of bone]"
+  },
+  {
+    "index": 989,
+    "icd_code": "M89",
+    "description": "Other disorders of bone"
+  },
+  {
+    "index": 990,
+    "icd_code": "M90",
+    "description": "Osteopathies in diseases classified elsewhere"
+  },
+  {
+    "index": 991,
+    "icd_code": "M91",
+    "description": "Juvenile osteochondrosis of hip and pelvis"
+  },
+  {
+    "index": 992,
+    "icd_code": "M92",
+    "description": "Other juvenile osteochondrosis"
+  },
+  {
+    "index": 993,
+    "icd_code": "M93",
+    "description": "Other osteochondropathies"
+  },
+  {
+    "index": 994,
+    "icd_code": "M94",
+    "description": "Other disorders of cartilage"
+  },
+  {
+    "index": 995,
+    "icd_code": "M95",
+    "description": "Oth acquired deformities of ms sys and connective tissue"
+  },
+  {
+    "index": 996,
+    "icd_code": "M96",
+    "description": "Intraop and postproc comp and disorders of ms sys, NEC"
+  },
+  {
+    "index": 997,
+    "icd_code": "M99",
+    "description": "Biomechanical lesions, not elsewhere classified"
+  },
+  {
+    "index": 998,
+    "icd_code": "N00",
+    "description": "Acute nephritic syndrome"
+  },
+  {
+    "index": 999,
+    "icd_code": "N01",
+    "description": "Rapidly progressive nephritic syndrome"
+  },
+  {
+    "index": 1000,
+    "icd_code": "N02",
+    "description": "Recurrent and persistent hematuria"
+  },
+  {
+    "index": 1001,
+    "icd_code": "N03",
+    "description": "Chronic nephritic syndrome"
+  },
+  {
+    "index": 1002,
+    "icd_code": "N04",
+    "description": "Nephrotic syndrome"
+  },
+  {
+    "index": 1003,
+    "icd_code": "N05",
+    "description": "Unspecified nephritic syndrome"
+  },
+  {
+    "index": 1004,
+    "icd_code": "N06",
+    "description": "Isolated proteinuria with specified morphological lesion"
+  },
+  {
+    "index": 1005,
+    "icd_code": "N07",
+    "description": "Hereditary nephropathy, not elsewhere classified"
+  },
+  {
+    "index": 1006,
+    "icd_code": "N08",
+    "description": "Glomerular disorders in diseases classified elsewhere"
+  },
+  {
+    "index": 1007,
+    "icd_code": "N10",
+    "description": "Acute pyelonephritis"
+  },
+  {
+    "index": 1008,
+    "icd_code": "N11",
+    "description": "Chronic tubulo-interstitial nephritis"
+  },
+  {
+    "index": 1009,
+    "icd_code": "N12",
+    "description": "Tubulo-interstitial nephritis, not spcf as acute or chronic"
+  },
+  {
+    "index": 1010,
+    "icd_code": "N13",
+    "description": "Obstructive and reflux uropathy"
+  },
+  {
+    "index": 1011,
+    "icd_code": "N14",
+    "description": "Drug- & heavy-metal-induced tubulo-interstitial & tublr cond"
+  },
+  {
+    "index": 1012,
+    "icd_code": "N15",
+    "description": "Other renal tubulo-interstitial diseases"
+  },
+  {
+    "index": 1013,
+    "icd_code": "N16",
+    "description": "Renal tubulo-interstitial disord in diseases classd elswhr"
+  },
+  {
+    "index": 1014,
+    "icd_code": "N17",
+    "description": "Acute kidney failure"
+  },
+  {
+    "index": 1015,
+    "icd_code": "N18",
+    "description": "Chronic kidney disease (CKD)"
+  },
+  {
+    "index": 1016,
+    "icd_code": "N19",
+    "description": "Unspecified kidney failure"
+  },
+  {
+    "index": 1017,
+    "icd_code": "N20",
+    "description": "Calculus of kidney and ureter"
+  },
+  {
+    "index": 1018,
+    "icd_code": "N21",
+    "description": "Calculus of lower urinary tract"
+  },
+  {
+    "index": 1019,
+    "icd_code": "N22",
+    "description": "Calculus of urinary tract in diseases classified elsewhere"
+  },
+  {
+    "index": 1020,
+    "icd_code": "N23",
+    "description": "Unspecified renal colic"
+  },
+  {
+    "index": 1021,
+    "icd_code": "N25",
+    "description": "Disorders resulting from impaired renal tubular function"
+  },
+  {
+    "index": 1022,
+    "icd_code": "N26",
+    "description": "Unspecified contracted kidney"
+  },
+  {
+    "index": 1023,
+    "icd_code": "N27",
+    "description": "Small kidney of unknown cause"
+  },
+  {
+    "index": 1024,
+    "icd_code": "N28",
+    "description": "Oth disorders of kidney and ureter, not elsewhere classified"
+  },
+  {
+    "index": 1025,
+    "icd_code": "N29",
+    "description": "Oth disorders of kidney and ureter in diseases classd elswhr"
+  },
+  {
+    "index": 1026,
+    "icd_code": "N30",
+    "description": "Cystitis"
+  },
+  {
+    "index": 1027,
+    "icd_code": "N31",
+    "description": "Neuromuscular dysfunction of bladder, NEC"
+  },
+  {
+    "index": 1028,
+    "icd_code": "N32",
+    "description": "Other disorders of bladder"
+  },
+  {
+    "index": 1029,
+    "icd_code": "N33",
+    "description": "Bladder disorders in diseases classified elsewhere"
+  },
+  {
+    "index": 1030,
+    "icd_code": "N34",
+    "description": "Urethritis and urethral syndrome"
+  },
+  {
+    "index": 1031,
+    "icd_code": "N35",
+    "description": "Urethral stricture"
+  },
+  {
+    "index": 1032,
+    "icd_code": "N36",
+    "description": "Other disorders of urethra"
+  },
+  {
+    "index": 1033,
+    "icd_code": "N37",
+    "description": "Urethral disorders in diseases classified elsewhere"
+  },
+  {
+    "index": 1034,
+    "icd_code": "N39",
+    "description": "Other disorders of urinary system"
+  },
+  {
+    "index": 1035,
+    "icd_code": "N40",
+    "description": "Benign prostatic hyperplasia"
+  },
+  {
+    "index": 1036,
+    "icd_code": "N41",
+    "description": "Inflammatory diseases of prostate"
+  },
+  {
+    "index": 1037,
+    "icd_code": "N42",
+    "description": "Other and unspecified disorders of prostate"
+  },
+  {
+    "index": 1038,
+    "icd_code": "N43",
+    "description": "Hydrocele and spermatocele"
+  },
+  {
+    "index": 1039,
+    "icd_code": "N44",
+    "description": "Noninflammatory disorders of testis"
+  },
+  {
+    "index": 1040,
+    "icd_code": "N45",
+    "description": "Orchitis and epididymitis"
+  },
+  {
+    "index": 1041,
+    "icd_code": "N46",
+    "description": "Male infertility"
+  },
+  {
+    "index": 1042,
+    "icd_code": "N47",
+    "description": "Disorders of prepuce"
+  },
+  {
+    "index": 1043,
+    "icd_code": "N48",
+    "description": "Other disorders of penis"
+  },
+  {
+    "index": 1044,
+    "icd_code": "N49",
+    "description": "Inflammatory disorders of male genital organs, NEC"
+  },
+  {
+    "index": 1045,
+    "icd_code": "N50",
+    "description": "Other and unspecified disorders of male genital organs"
+  },
+  {
+    "index": 1046,
+    "icd_code": "N51",
+    "description": "Disorders of male genital organs in diseases classd elswhr"
+  },
+  {
+    "index": 1047,
+    "icd_code": "N60",
+    "description": "Benign mammary dysplasia"
+  },
+  {
+    "index": 1048,
+    "icd_code": "N61",
+    "description": "Inflammatory disorders of breast"
+  },
+  {
+    "index": 1049,
+    "icd_code": "N62",
+    "description": "Hypertrophy of breast"
+  },
+  {
+    "index": 1050,
+    "icd_code": "N63",
+    "description": "Unspecified lump in breast"
+  },
+  {
+    "index": 1051,
+    "icd_code": "N64",
+    "description": "Other disorders of breast"
+  },
+  {
+    "index": 1052,
+    "icd_code": "N70",
+    "description": "Salpingitis and oophoritis"
+  },
+  {
+    "index": 1053,
+    "icd_code": "N71",
+    "description": "Inflammatory disease of uterus, except cervix"
+  },
+  {
+    "index": 1054,
+    "icd_code": "N72",
+    "description": "Inflammatory disease of cervix uteri"
+  },
+  {
+    "index": 1055,
+    "icd_code": "N73",
+    "description": "Other female pelvic inflammatory diseases"
+  },
+  {
+    "index": 1056,
+    "icd_code": "N74",
+    "description": "Female pelvic inflam disorders in diseases classd elswhr"
+  },
+  {
+    "index": 1057,
+    "icd_code": "N75",
+    "description": "Diseases of Bartholin's gland"
+  },
+  {
+    "index": 1058,
+    "icd_code": "N76",
+    "description": "Other inflammation of vagina and vulva"
+  },
+  {
+    "index": 1059,
+    "icd_code": "N77",
+    "description": "Vulvovaginal ulceration and inflam in diseases classd elswhr"
+  },
+  {
+    "index": 1060,
+    "icd_code": "N80",
+    "description": "Endometriosis"
+  },
+  {
+    "index": 1061,
+    "icd_code": "N81",
+    "description": "Female genital prolapse"
+  },
+  {
+    "index": 1062,
+    "icd_code": "N82",
+    "description": "Fistulae involving female genital tract"
+  },
+  {
+    "index": 1063,
+    "icd_code": "N83",
+    "description": "Noninflammatory disord of ovary, fallop and broad ligament"
+  },
+  {
+    "index": 1064,
+    "icd_code": "N84",
+    "description": "Polyp of female genital tract"
+  },
+  {
+    "index": 1065,
+    "icd_code": "N85",
+    "description": "Other noninflammatory disorders of uterus, except cervix"
+  },
+  {
+    "index": 1066,
+    "icd_code": "N86",
+    "description": "Erosion and ectropion of cervix uteri"
+  },
+  {
+    "index": 1067,
+    "icd_code": "N87",
+    "description": "Dysplasia of cervix uteri"
+  },
+  {
+    "index": 1068,
+    "icd_code": "N88",
+    "description": "Other noninflammatory disorders of cervix uteri"
+  },
+  {
+    "index": 1069,
+    "icd_code": "N89",
+    "description": "Other noninflammatory disorders of vagina"
+  },
+  {
+    "index": 1070,
+    "icd_code": "N90",
+    "description": "Other noninflammatory disorders of vulva and perineum"
+  },
+  {
+    "index": 1071,
+    "icd_code": "N91",
+    "description": "Absent, scanty and rare menstruation"
+  },
+  {
+    "index": 1072,
+    "icd_code": "N92",
+    "description": "Excessive, frequent and irregular menstruation"
+  },
+  {
+    "index": 1073,
+    "icd_code": "N93",
+    "description": "Other abnormal uterine and vaginal bleeding"
+  },
+  {
+    "index": 1074,
+    "icd_code": "N94",
+    "description": "Pain and oth cond assoc w fem gntl org and menstrual cycle"
+  },
+  {
+    "index": 1075,
+    "icd_code": "N95",
+    "description": "Menopausal and other perimenopausal disorders"
+  },
+  {
+    "index": 1076,
+    "icd_code": "N96",
+    "description": "Recurrent pregnancy loss"
+  },
+  {
+    "index": 1077,
+    "icd_code": "N97",
+    "description": "Female infertility"
+  },
+  {
+    "index": 1078,
+    "icd_code": "N98",
+    "description": "Complications associated with artificial fertilization"
+  },
+  {
+    "index": 1079,
+    "icd_code": "N99",
+    "description": "Intraop and postproc comp and disorders of GU sys, NEC"
+  }
+]

@@ -1,0 +1,110 @@
+{
+  "type_2_diabetes": {
+    "n": 3265,
+    "mean_total_exp": 16758.54,
+    "mean_oop": 1312.13,
+    "median_total_exp": 8244.0,
+    "median_oop": 440.0,
+    "incremental_cost": 10207.3,
+    "incremental_oop": 476.46
+  },
+  "hypertension": {
+    "n": 8538,
+    "mean_total_exp": 13421.86,
+    "mean_oop": 1304.14,
+    "median_total_exp": 4655.5,
+    "median_oop": 412.0,
+    "incremental_cost": 6988.23,
+    "incremental_oop": 425.17
+  },
+  "high_cholesterol": {
+    "n": 7925,
+    "mean_total_exp": 13345.9,
+    "mean_oop": 1332.71,
+    "median_total_exp": 4874.0,
+    "median_oop": 465.0,
+    "incremental_cost": 6604.44,
+    "incremental_oop": 453.98
+  },
+  "coronary_heart_disease": {
+    "n": 1439,
+    "mean_total_exp": 21280.75,
+    "mean_oop": 1626.18,
+    "median_total_exp": 10139.0,
+    "median_oop": 614.0,
+    "incremental_cost": 13036.74,
+    "incremental_oop": 626.84
+  },
+  "angina": {
+    "n": 533,
+    "mean_total_exp": 20495.26,
+    "mean_oop": 1753.88,
+    "median_total_exp": 9765.0,
+    "median_oop": 696.0,
+    "incremental_cost": 11694.57,
+    "incremental_oop": 731.4
+  },
+  "heart_attack": {
+    "n": 1018,
+    "mean_total_exp": 20728.83,
+    "mean_oop": 1596.54,
+    "median_total_exp": 9568.5,
+    "median_oop": 510.5,
+    "incremental_cost": 12203.6,
+    "incremental_oop": 583.34
+  },
+  "other_heart_disease": {
+    "n": 2800,
+    "mean_total_exp": 18799.44,
+    "mean_oop": 1769.41,
+    "median_total_exp": 7911.5,
+    "median_oop": 668.5,
+    "incremental_cost": 11101.55,
+    "incremental_oop": 833.26
+  },
+  "stroke": {
+    "n": 1143,
+    "mean_total_exp": 18681.23,
+    "mean_oop": 1465.1,
+    "median_total_exp": 8612.0,
+    "median_oop": 365.0,
+    "incremental_cost": 10117.14,
+    "incremental_oop": 448.63
+  },
+  "emphysema": {
+    "n": 483,
+    "mean_total_exp": 25298.93,
+    "mean_oop": 1259.28,
+    "median_total_exp": 12269.0,
+    "median_oop": 490.0,
+    "incremental_cost": 16577.73,
+    "incremental_oop": 224.54
+  },
+  "cancer": {
+    "n": 2908,
+    "mean_total_exp": 19695.1,
+    "mean_oop": 1843.29,
+    "median_total_exp": 7128.5,
+    "median_oop": 714.0,
+    "incremental_cost": 12194.75,
+    "incremental_oop": 922.56
+  },
+  "arthritis": {
+    "n": 6666,
+    "mean_total_exp": 15905.44,
+    "mean_oop": 1547.11,
+    "median_total_exp": 6369.0,
+    "median_oop": 540.0,
+    "incremental_cost": 9693.96,
+    "incremental_oop": 720.7
+  },
+  "asthma": {
+    "n": 4022,
+    "mean_total_exp": 11716.39,
+    "mean_oop": 1087.56,
+    "median_total_exp": 3287.0,
+    "median_oop": 207.0,
+    "incremental_cost": 4646.59,
+    "incremental_oop": 229.55
+  }
+}
