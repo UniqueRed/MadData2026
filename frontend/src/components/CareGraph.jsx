@@ -256,7 +256,9 @@ const stylesheet = [
       "text-outline-color": (ele) => NODE_COLORS[ele.data("nodeType")] || "#94a3b8",
       "text-outline-width": 1.5,
       "text-outline-opacity": 0.5,
-      "overlay-padding": "8px",
+      "overlay-padding": "0",
+      "overlay-opacity": 0,
+      "overlay-shape": "ellipse",
       "shadow-blur": "12",
       "shadow-color": "#000000",
       "shadow-offset-x": "0",
@@ -347,6 +349,7 @@ const stylesheet = [
       "text-background-opacity": 0.9,
       "text-background-padding": "4px",
       "text-background-shape": "roundrectangle",
+      "events": "no",
     },
   },
   {
