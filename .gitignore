@@ -43,6 +43,7 @@ data/plan_attributes_PUF.csv
 data/Rate_PUF.csv
 data/h233.csv
 data/h233cb.pdf
+data/drug_costs
 
 # Supabase
 .supabase/

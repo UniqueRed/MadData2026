@@ -3,18 +3,18 @@ import CytoscapeComponent from "react-cytoscapejs";
 
 const NODE_COLORS = {
   root: "#111827",
-  current: "#dc2626",
-  future: "#f59e0b",
-  high_cost: "#7f1d1d",
-  intervention: "#16a34a",
+  current: "#e8548e",
+  future: "#eab308",
+  high_cost: "#9d174d",
+  intervention: "#22c55e",
 };
 
 const EDGE_COLORS = {
   root: "#b0b8c4",
   progression: "#cbd5e1",
-  comorbidity: "#fca5a5",
+  comorbidity: "#f9a8c9",
   intervention: "#86efac",
-  llm_progression: "#c4b5fd",
+  llm_progression: "#fbcfe8",
   cost: "#cbd5e1",
 };
 
@@ -58,52 +58,131 @@ function toElements(graph) {
     }
   }
 
-  // --- Compute dynamic radii based on how many nodes we have ---
-  const totalNodes = graph.nodes.length;
+  // --- Node sizes (must match stylesheet) and spacing ---
+  const SIZE_ROOT = 180;
+  const SIZE_CURRENT = 155;
+  const SIZE_FUTURE = 140;
+  const SIZE_DEPTH2 = 115;
+  const NODE_GAP = 40; // minimum px gap between node edges
+
   const numBranches = currentIds.length || 1;
-  // Scale up when there are many branches / children so nothing overlaps
-  const scale = Math.max(1, Math.sqrt(totalNodes / 6));
-  const R1 = 250 * scale;
-  const R2 = 420 * scale;
-  const R3 = 560 * scale;
+
+  // Minimum radius so N nodes of given size fit around a full 2π circle
+  function minRadiusForCount(count, nodeSize) {
+    if (count <= 1) return 0;
+    return (count * (nodeSize + NODE_GAP)) / (2 * Math.PI);
+  }
+
+  // --- Compute slice angles per branch ---
+  // Every branch gets a MINIMUM slice so its ring-1 node doesn't overlap neighbors,
+  // plus extra space proportional to descendant count.
+  const R1 = Math.max(280, minRadiusForCount(numBranches, SIZE_CURRENT));
+  const minSlice = (SIZE_CURRENT + NODE_GAP) / R1; // minimum radians per branch
+
+  const childCounts = currentIds.map((cid) => {
+    return branchChildren[cid].depth1.length + branchChildren[cid].depth2.length;
+  });
+  const totalChildren = childCounts.reduce((a, b) => a + b, 0);
+  const baseTotal = minSlice * numBranches;
+  const extraPool = Math.max(0, 2 * Math.PI - baseTotal);
+
+  const sliceAngles = currentIds.map((_, i) => {
+    const extra = totalChildren > 0
+      ? (childCounts[i] / totalChildren) * extraPool
+      : (extraPool / numBranches);
+    return minSlice + extra;
+  });
+
+  // --- Compute radii for rings 2 and 3 ---
+  // R2 must fit ALL depth-1 nodes globally AND fit the densest branch's children in its slice.
+  const totalD1 = childCounts.reduce((s, _, i) => s + branchChildren[currentIds[i]].depth1.length, 0);
+  const totalD2 = childCounts.reduce((s, _, i) => s + branchChildren[currentIds[i]].depth2.length, 0);
+
+  let maxR2Needed = 0;
+  let maxR3Needed = 0;
+  currentIds.forEach((cid, i) => {
+    const d1 = branchChildren[cid].depth1.length;
+    const d2 = branchChildren[cid].depth2.length;
+    if (d1 > 1) {
+      const usable = sliceAngles[i] * 0.88;
+      maxR2Needed = Math.max(maxR2Needed, (d1 - 1) * (SIZE_FUTURE + NODE_GAP) / usable);
+    }
+    if (d2 > 1) {
+      const usable = sliceAngles[i] * 0.92;
+      maxR3Needed = Math.max(maxR3Needed, (d2 - 1) * (SIZE_DEPTH2 + NODE_GAP) / usable);
+    }
+  });
+
+  const R2 = Math.max(
+    R1 + SIZE_CURRENT / 2 + SIZE_FUTURE / 2 + NODE_GAP + 80,
+    minRadiusForCount(totalD1, SIZE_FUTURE),
+    maxR2Needed
+  );
+  const R3 = Math.max(
+    R2 + SIZE_FUTURE / 2 + SIZE_DEPTH2 / 2 + NODE_GAP + 60,
+    minRadiusForCount(totalD2, SIZE_DEPTH2),
+    maxR3Needed
+  );
 
   // --- Position every node ---
   const positions = {};
   positions["root"] = { x: 0, y: 0 };
 
-  const sliceAngle = (2 * Math.PI) / numBranches;
+  let angleOffset = -Math.PI / 2;
 
   currentIds.forEach((cid, i) => {
-    const angle = sliceAngle * i - Math.PI / 2;
+    const branchAngle = sliceAngles[i];
+    const branchCenter = angleOffset + branchAngle / 2;
+
+    // Ring 1: current condition node at center of its slice
     positions[cid] = {
-      x: Math.cos(angle) * R1,
-      y: Math.sin(angle) * R1,
+      x: Math.cos(branchCenter) * R1,
+      y: Math.sin(branchCenter) * R1,
     };
 
     const { depth1, depth2 } = branchChildren[cid];
 
-    // Depth-1: fan children within their slice, with min angular gap
-    const minGap1 = 0.18; // ~10 degrees minimum between siblings
-    const need1 = Math.max((depth1.length - 1) * minGap1, 0);
-    const fan1 = Math.min(Math.max(need1, sliceAngle * 0.4), sliceAngle * 0.85);
-    depth1.forEach((childId, j) => {
-      const n = depth1.length;
-      const off = n === 1 ? 0 : (j / (n - 1) - 0.5) * fan1;
-      const a = angle + off;
-      positions[childId] = { x: Math.cos(a) * R2, y: Math.sin(a) * R2 };
-    });
+    // Ring 2: depth-1 children spread across this branch's slice
+    if (depth1.length > 0) {
+      const usable = branchAngle * 0.88;
+      depth1.forEach((childId, j) => {
+        const n = depth1.length;
+        const off = n === 1 ? 0 : (j / (n - 1) - 0.5) * usable;
+        positions[childId] = {
+          x: Math.cos(branchCenter + off) * R2,
+          y: Math.sin(branchCenter + off) * R2,
+        };
+      });
+    }
 
-    // Depth-2: wider fan in outer ring
-    const minGap2 = 0.15;
-    const need2 = Math.max((depth2.length - 1) * minGap2, 0);
-    const fan2 = Math.min(Math.max(need2, sliceAngle * 0.5), sliceAngle * 0.9);
-    depth2.forEach((childId, j) => {
-      const n = depth2.length;
-      const off = n === 1 ? 0 : (j / (n - 1) - 0.5) * fan2;
-      const a = angle + off;
-      positions[childId] = { x: Math.cos(a) * R3, y: Math.sin(a) * R3 };
-    });
+    // Ring 3: depth-2 grandchildren spread across this branch's slice
+    if (depth2.length > 0) {
+      const usable = branchAngle * 0.92;
+      depth2.forEach((childId, j) => {
+        const n = depth2.length;
+        const off = n === 1 ? 0 : (j / (n - 1) - 0.5) * usable;
+        positions[childId] = {
+          x: Math.cos(branchCenter + off) * R3,
+          y: Math.sin(branchCenter + off) * R3,
+        };
+      });
+    }
+
+    angleOffset += branchAngle;
   });
+
+  // --- Position intervention nodes at inner ring (between root and current) ---
+  const interventionIds = graph.nodes
+    .filter((n) => n.node_type === "intervention")
+    .map((n) => n.id);
+  if (interventionIds.length > 0) {
+    const intR = R1 * 0.55;
+    const intSlice = (2 * Math.PI) / interventionIds.length;
+    interventionIds.forEach((id, i) => {
+      const a = intSlice * i - Math.PI / 2 + Math.PI / interventionIds.length;
+      positions[id] = { x: Math.cos(a) * intR, y: Math.sin(a) * intR };
+    });
+  }
 
   // --- Build Cytoscape elements ---
   nodes.push({
@@ -209,7 +288,7 @@ const stylesheet = [
       "font-size": "13px",
       "font-weight": "700",
       "background-opacity": 0.95,
-      "border-color": "#fca5a5",
+      "border-color": "#f9a8c9",
       "border-opacity": 0.35,
     },
   },
@@ -219,7 +298,7 @@ const stylesheet = [
       width: 150,
       height: 150,
       "font-size": "13px",
-      "border-color": "#f87171",
+      "border-color": "#f472b6",
       "border-opacity": 0.35,
     },
   },
@@ -310,7 +389,7 @@ const stylesheet = [
     style: {
       "border-style": "dashed",
       "border-width": 2.5,
-      "border-color": "#a78bfa",
+      "border-color": "#f9a8c9",
       "border-opacity": 0.6,
     },
   },
@@ -378,11 +457,11 @@ const stylesheet = [
 
 const LEGEND = [
   { color: "#111827", label: "Your Profile" },
-  { color: "#dc2626", label: "Current Condition" },
-  { color: "#f59e0b", label: "Possible Future" },
-  { color: "#7f1d1d", label: "High Cost Risk" },
-  { color: "#16a34a", label: "Intervention" },
-  { color: "#a78bfa", label: "AI Estimate", dashed: true },
+  { color: "#e8548e", label: "Current Condition" },
+  { color: "#eab308", label: "Possible Future" },
+  { color: "#9d174d", label: "High Cost Risk" },
+  { color: "#22c55e", label: "Intervention" },
+  { color: "#f9a8c9", label: "AI Estimate", dashed: true },
 ];
 
 export default function CareGraph({ graph, onNodeSelect }) {
@@ -418,22 +497,27 @@ export default function CareGraph({ graph, onNodeSelect }) {
     cy.minZoom(0.15);
     cy.maxZoom(3);
 
-    // Background tap → clear focus
+    // Background tap → clear focus and selection
     cy.on("tap", (e) => {
-      if (e.target === cy) clearFocus(cy);
+      if (e.target === cy) {
+        clearFocus(cy);
+        if (onNodeSelectRef.current) onNodeSelectRef.current(null);
+      }
     });
 
     // Node tap → toggle focus + fire detail panel
     cy.on("tap", "node", (e) => {
       const tapped = e.target;
-      if (onNodeSelectRef.current) onNodeSelectRef.current(tapped.data());
 
       if (focusedRef.current === tapped.id()) {
         clearFocus(cy);
+        if (onNodeSelectRef.current) onNodeSelectRef.current(null);
       } else {
+        if (onNodeSelectRef.current) onNodeSelectRef.current(tapped.data());
         applyFocus(cy, tapped);
       }
     });
+
   }, [clearFocus, applyFocus]);
 
   const elements = useMemo(() => toElements(graph), [graph]);
@@ -469,7 +553,11 @@ export default function CareGraph({ graph, onNodeSelect }) {
   if (elements.length === 0) {
     return (
       <div className="graph-placeholder">
-        <p>Speak or type your health profile to generate your care pathway.</p>
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.3 }}>
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        </svg>
+        <h2 style={{ margin: 0, fontSize: "1.2rem", color: "#6b7280" }}>Describe your health profile</h2>
+        <p>Try something like: &ldquo;I&rsquo;m a 45-year-old male with diabetes and hypertension on a PPO plan.&rdquo;</p>
       </div>
     );
   }

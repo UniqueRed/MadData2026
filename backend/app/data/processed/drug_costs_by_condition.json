@@ -1,0 +1,254 @@
+{
+  "allergy": {
+    "mean_drug_cost": 93.22,
+    "mean_drug_oop": 20.33,
+    "median_drug_cost": 31.98,
+    "median_drug_oop": 5.89,
+    "p25_drug_cost": 13.26,
+    "p75_drug_cost": 86.93,
+    "n_persons": 1188
+  },
+  "anemia": {
+    "mean_drug_cost": 69.95,
+    "mean_drug_oop": 32.66,
+    "median_drug_cost": 16.0,
+    "median_drug_oop": 6.72,
+    "p25_drug_cost": 7.84,
+    "p75_drug_cost": 37.75,
+    "n_persons": 306
+  },
+  "anxiety": {
+    "mean_drug_cost": 414.16,
+    "mean_drug_oop": 25.61,
+    "median_drug_cost": 33.16,
+    "median_drug_oop": 7.14,
+    "p25_drug_cost": 11.31,
+    "p75_drug_cost": 90.81,
+    "n_persons": 968
+  },
+  "arrhythmia": {
+    "mean_drug_cost": 2056.7,
+    "mean_drug_oop": 217.8,
+    "median_drug_cost": 551.88,
+    "median_drug_oop": 44.42,
+    "p25_drug_cost": 92.43,
+    "p75_drug_cost": 3397.04,
+    "n_persons": 1079
+  },
+  "arthritis": {
+    "mean_drug_cost": 200.05,
+    "mean_drug_oop": 17.28,
+    "median_drug_cost": 10.0,
+    "median_drug_oop": 2.63,
+    "p25_drug_cost": 4.14,
+    "p75_drug_cost": 30.57,
+    "n_persons": 1039
+  },
+  "asthma_copd": {
+    "mean_drug_cost": 1058.28,
+    "mean_drug_oop": 92.95,
+    "median_drug_cost": 190.61,
+    "median_drug_oop": 15.0,
+    "p25_drug_cost": 44.28,
+    "p75_drug_cost": 1152.62,
+    "n_persons": 2070
+  },
+  "atherosclerosis": {
+    "mean_drug_cost": 449.77,
+    "mean_drug_oop": 47.5,
+    "median_drug_cost": 63.72,
+    "median_drug_oop": 9.0,
+    "p25_drug_cost": 28.95,
+    "p75_drug_cost": 152.0,
+    "n_persons": 376
+  },
+  "back_pain": {
+    "mean_drug_cost": 145.66,
+    "mean_drug_oop": 28.0,
+    "median_drug_cost": 22.66,
+    "median_drug_oop": 5.66,
+    "p25_drug_cost": 7.63,
+    "p75_drug_cost": 82.58,
+    "n_persons": 3875
+  },
+  "cad": {
+    "mean_drug_cost": 164.75,
+    "mean_drug_oop": 48.79,
+    "median_drug_cost": 37.26,
+    "median_drug_oop": 8.0,
+    "p25_drug_cost": 14.76,
+    "p75_drug_cost": 106.01,
+    "n_persons": 217
+  },
+  "dementia": {
+    "mean_drug_cost": 221.95,
+    "mean_drug_oop": 65.97,
+    "median_drug_cost": 59.67,
+    "median_drug_oop": 17.73,
+    "p25_drug_cost": 24.97,
+    "p75_drug_cost": 142.85,
+    "n_persons": 148
+  },
+  "depression": {
+    "mean_drug_cost": 381.92,
+    "mean_drug_oop": 49.49,
+    "median_drug_cost": 56.79,
+    "median_drug_oop": 14.98,
+    "p25_drug_cost": 23.48,
+    "p75_drug_cost": 134.06,
+    "n_persons": 2911
+  },
+  "diabetes": {
+    "mean_drug_cost": 4267.75,
+    "mean_drug_oop": 222.84,
+    "median_drug_cost": 826.06,
+    "median_drug_oop": 21.0,
+    "p25_drug_cost": 44.26,
+    "p75_drug_cost": 5851.24,
+    "n_persons": 2353
+  },
+  "dizziness": {
+    "mean_drug_cost": 73.94,
+    "mean_drug_oop": 14.31,
+    "median_drug_cost": 20.88,
+    "median_drug_oop": 3.17,
+    "p25_drug_cost": 8.07,
+    "p75_drug_cost": 62.48,
+    "n_persons": 667
+  },
+  "gerd": {
+    "mean_drug_cost": 163.13,
+    "mean_drug_oop": 35.62,
+    "median_drug_cost": 45.08,
+    "median_drug_oop": 10.27,
+    "p25_drug_cost": 19.97,
+    "p75_drug_cost": 108.63,
+    "n_persons": 2132
+  },
+  "gout": {
+    "mean_drug_cost": 97.46,
+    "mean_drug_oop": 30.58,
+    "median_drug_cost": 53.98,
+    "median_drug_oop": 13.88,
+    "p25_drug_cost": 24.0,
+    "p75_drug_cost": 100.5,
+    "n_persons": 357
+  },
+  "heart_failure": {
+    "mean_drug_cost": 250.02,
+    "mean_drug_oop": 32.75,
+    "median_drug_cost": 29.0,
+    "median_drug_oop": 5.4,
+    "p25_drug_cost": 10.95,
+    "p75_drug_cost": 67.8,
+    "n_persons": 1755
+  },
+  "high_cholesterol": {
+    "mean_drug_cost": 162.38,
+    "mean_drug_oop": 35.36,
+    "median_drug_cost": 51.7,
+    "median_drug_oop": 4.05,
+    "p25_drug_cost": 24.0,
+    "p75_drug_cost": 114.0,
+    "n_persons": 4284
+  },
+  "hypertension": {
+    "mean_drug_cost": 134.72,
+    "mean_drug_oop": 40.09,
+    "median_drug_cost": 55.63,
+    "median_drug_oop": 12.79,
+    "p25_drug_cost": 24.64,
+    "p75_drug_cost": 121.12,
+    "n_persons": 5324
+  },
+  "neuropathy": {
+    "mean_drug_cost": 478.05,
+    "mean_drug_oop": 46.25,
+    "median_drug_cost": 63.18,
+    "median_drug_oop": 8.14,
+    "p25_drug_cost": 21.59,
+    "p75_drug_cost": 196.86,
+    "n_persons": 1782
+  },
+  "osteoporosis": {
+    "mean_drug_cost": 150.56,
+    "mean_drug_oop": 31.92,
+    "median_drug_cost": 39.87,
+    "median_drug_oop": 4.96,
+    "p25_drug_cost": 18.71,
+    "p75_drug_cost": 87.53,
+    "n_persons": 210
+  },
+  "parkinsons": {
+    "mean_drug_cost": 1060.38,
+    "mean_drug_oop": 76.02,
+    "median_drug_cost": 72.77,
+    "median_drug_oop": 10.8,
+    "p25_drug_cost": 32.63,
+    "p75_drug_cost": 188.1,
+    "n_persons": 168
+  },
+  "prostatic_hyperplasia": {
+    "mean_drug_cost": 129.04,
+    "mean_drug_oop": 42.17,
+    "median_drug_cost": 60.0,
+    "median_drug_oop": 19.61,
+    "p25_drug_cost": 28.02,
+    "p75_drug_cost": 141.98,
+    "n_persons": 686
+  },
+  "psoriasis": {
+    "mean_drug_cost": 153.73,
+    "mean_drug_oop": 30.82,
+    "median_drug_cost": 40.13,
+    "median_drug_oop": 10.0,
+    "p25_drug_cost": 14.74,
+    "p75_drug_cost": 112.12,
+    "n_persons": 1572
+  },
+  "sexual_dysfunction": {
+    "mean_drug_cost": 78.28,
+    "mean_drug_oop": 56.82,
+    "median_drug_cost": 40.78,
+    "median_drug_oop": 30.82,
+    "p25_drug_cost": 22.02,
+    "p75_drug_cost": 82.27,
+    "n_persons": 151
+  },
+  "thyroid_disease": {
+    "mean_drug_cost": 115.17,
+    "mean_drug_oop": 61.9,
+    "median_drug_cost": 66.17,
+    "median_drug_oop": 21.04,
+    "p25_drug_cost": 34.38,
+    "p75_drug_cost": 121.98,
+    "n_persons": 1497
+  },
+  "tobacco_use": {
+    "mean_drug_cost": 601.54,
+    "mean_drug_oop": 58.86,
+    "median_drug_cost": 88.95,
+    "median_drug_oop": 25.62,
+    "p25_drug_cost": 38.3,
+    "p75_drug_cost": 190.42,
+    "n_persons": 462
+  },
+  "urinary_incontinence": {
+    "mean_drug_cost": 803.31,
+    "mean_drug_oop": 92.66,
+    "median_drug_cost": 203.85,
+    "median_drug_oop": 24.0,
+    "p25_drug_cost": 59.73,
+    "p75_drug_cost": 973.33,
+    "n_persons": 283
+  },
+  "vision_loss": {
+    "mean_drug_cost": 639.73,
+    "mean_drug_oop": 67.45,
+    "median_drug_cost": 73.17,
+    "median_drug_oop": 14.02,
+    "p25_drug_cost": 22.14,
+    "p75_drug_cost": 375.87,
+    "n_persons": 1034
+  }
+}

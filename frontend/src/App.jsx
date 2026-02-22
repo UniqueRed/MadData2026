@@ -158,7 +158,7 @@ function App() {
           className="logo-link"
           onClick={() => setCurrentView("landing")}
         >
-          miff
+          lotus
         </h1>
         <span className="subtitle">Clinical-Financial Digital Twin</span>
         <div className="header-spacer" />
@@ -231,7 +231,7 @@ function App() {
 
               {graph && (
                 <div className="side-section">
-                  <CostSummary graph={graph} comparisonGraph={baselineGraph} />
+                  <CostSummary graph={graph} comparisonGraph={baselineGraph} selectedNode={selectedNode} />
                 </div>
               )}
 

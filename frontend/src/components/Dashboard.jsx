@@ -1,10 +1,10 @@
 import { useMemo } from "react";
 
 const NODE_TYPE_COLORS = {
-  current: "#dc2626",
-  future: "#f59e0b",
-  high_cost: "#7f1d1d",
-  intervention: "#16a34a",
+  current: "#e8548e",
+  future: "#eab308",
+  high_cost: "#9d174d",
+  intervention: "#22c55e",
 };
 
 const NODE_TYPE_LABELS = {
@@ -165,7 +165,7 @@ export default function Dashboard({ graph, comparisonGraph, onNodeSelect }) {
           <div className="dashboard-risks">
             {riskNodes.map((node) => {
               const prob = (node.probability || 0) * 100;
-              const color = NODE_TYPE_COLORS[node.node_type] || "#f59e0b";
+              const color = NODE_TYPE_COLORS[node.node_type] || "#eab308";
               return (
                 <div
                   key={node.id}

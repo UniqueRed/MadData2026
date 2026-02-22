@@ -52,6 +52,9 @@ CONDITION_PATTERNS: dict[str, list[str]] = {
         r"\bhigh\s*a1c\b",
         r"\bdiabetic\b",
         r"\bdiabetes\b",
+        r"\bsugar\b.*\b(high|through the roof|out of control|spiking|elevated|crazy)",
+        r"\b(high|elevated)\s*sugar\b",
+        r"\bon\s*insulin\b",
     ],
     "pre-diabetes": [
         r"\bpre[\s-]*diabet",
@@ -72,6 +75,8 @@ CONDITION_PATTERNS: dict[str, list[str]] = {
         r"\bhigh\s*bp\b",
         r"\bbp\b.*\b(high|elevated)",
         r"\b(systolic|diastolic)\b.*\b(high|elevated)",
+        r"\bblood\s*pressure\b.*\b(high|elevated|through the roof|too high|out of control|spiking)",
+        r"\bpressure\s*is\s*(high|up|elevated|too high)",
     ],
     "high_cholesterol": [
         r"\bhigh\s*cholest",
@@ -90,14 +95,22 @@ CONDITION_PATTERNS: dict[str, list[str]] = {
         r"\bchest\s*pain\b",
         r"\bblocked\s*arter",
         r"\bclogged\s*arter",
+        r"\barter\w*\b.*\b(clogged|blocked|narrow|hardened|stiff|calcif)",
+        r"\b(clogged|blocked|narrow|hardened)\b.*\barter",
+        r"\bheart\b.*\b(block|clog)",
+        r"\bstent\b",
+        r"\bbypass\b.*\b(surgery|heart)",
+        r"\bangioplasty\b",
     ],
     "heart_failure": [
         r"\bheart\s*failure",
         r"\bcongestive\s*heart",
         r"\bchf\b",
         r"\bcardiac\s*insufficiency",
-        r"\bheart\b.*\b(weak|enlarged|pumping)",
+        r"\bheart\b.*\b(weak|enlarged|pumping|giving out|failing)",
         r"\bfluid\s*retention\b",
+        r"\bheart\b.*\b(not\s*pumping|can'?t\s*pump)",
+        r"\bweak\s*heart\b",
     ],
     "arrhythmia": [
         r"\barrhythmi",
@@ -143,11 +156,14 @@ CONDITION_PATTERNS: dict[str, list[str]] = {
     "ckd": [
         r"\bckd\b",
         r"\bchronic\s*kidney",
-        r"\bkidney\s*(disease|damage|issues|problems|failure)",
+        r"\bkidney\s*(disease|damage|issues|problems|failure|failing|not\s*working|bad|going)",
         r"\brenal\s*(insufficien|failure|disease)",
         r"\bprotein\s*in\s*(urine|pee)",
         r"\breduced\s*kidney",
         r"\bkidney\s*function\b.*\b(low|reduced|declining)",
+        r"\bkidneys?\b.*\b(bad|failing|going|shutting|shot|damaged|weak)",
+        r"\b(bad|failing|weak|damaged)\s*kidney",
+        r"\bon\s*dialysis\b",
     ],
     "kidney_stones": [
         r"\bkidney\s*stone",
@@ -161,6 +177,8 @@ CONDITION_PATTERNS: dict[str, list[str]] = {
         r"\bbmi\b.*\b(high|over|above|30|35|40)",
         r"\bmorbidly\s*overweight",
         r"\boverweight\b",
+        r"\b(really|very|extremely|super|too)\s*(heavy|fat|big)\b",
+        r"\bweight\b.*\b(problem|issue|too much|out of control|can'?t\s*lose)",
     ],
     "thyroid_disease": [
         r"\bthyroid",
@@ -184,6 +202,12 @@ CONDITION_PATTERNS: dict[str, list[str]] = {
         r"\bchronic\s*bronchit",
         r"\bwheezing\b",
         r"\bshortness\s*of\s*breath",
+        r"\b(can\s*not|can'?t|cannot|hard\s*to|trouble|difficulty|struggle\s*to)\s*breathe?\b",
+        r"\bbreathing\b.*\b(problem|issue|trouble|hard|difficult)\w*",
+        r"\bout\s*of\s*breath\b",
+        r"\binhaler\b",
+        r"\blungs?\b.*\b(bad|weak|damaged|scarred|not\s*working)",
+        r"\bbad\s*lungs?\b",
     ],
     # ── GI ──
     "gerd": [
@@ -195,12 +219,14 @@ CONDITION_PATTERNS: dict[str, list[str]] = {
         r"\breflux\b",
     ],
     "liver_disease": [
-        r"\bliver\s*(disease|cirrho|damage|failure|fibrosis)",
+        r"\bliver\s*(disease|cirrho|damage|failure|fibrosis|problem|issue|bad|failing|inflam|scarr)",
         r"\bhepatitis\b",
         r"\bfatty\s*liver",
         r"\bnafld\b",
         r"\bnash\b",
         r"\bcirrhosis",
+        r"\bliver\b.*\b(bad|damaged|failing|scarred|inflamed|enlarged|not\s*working|shot)",
+        r"\b(bad|damaged|scarred)\s*liver\b",
     ],
     "gallstones": [
         r"\bgallstone",
@@ -222,20 +248,26 @@ CONDITION_PATTERNS: dict[str, list[str]] = {
         r"\bsciatica\b",
         r"\bspinal\s*stenos",
         r"\bdisc\s*(herniat|bulg|degenerat)",
+        r"\bback\b.*\b(hurts|killing|aching|sore|bad|messed up|out|thrown out|stiff)",
+        r"\b(bad|messed up|thrown out|busted)\s*back\b",
+        r"\bslipped\s*dis[ck]\b",
     ],
     "arthritis": [
         r"\brheumatoid\s*arthrit",
         r"\bra\b.*\barthrit",
         r"\bpolyarthrit",
         r"\brheumatoid\b",
-        r"\bjoint\b.*\b(inflam|swollen|stiff|pain)",
+        r"\bjoint\w*\b.*\b(inflam|swollen|stiff|pain|hurt|ache|sore|bad)",
+        r"\barthrit",
+        r"\b(stiff|swollen|painful)\s*joint",
     ],
     "arthrosis": [
         r"\barthrosis",
         r"\bosteoarthrit",
-        r"\bjoint\s*(degenerat|wear)",
-        r"\bknee\s*(pain|replac|arthr)",
-        r"\bhip\s*(pain|replac|arthr)",
+        r"\bjoint\s*(degenerat|wear|grind|worn)",
+        r"\bknee\w*\b.*\b(pain|replac|arthr|bad|shot|gone|hurts|killing|sore|swollen|stiff)",
+        r"\bhip\w*\b.*\b(pain|replac|arthr|bad|shot|gone|hurts|killing|sore|stiff)",
+        r"\b(bad|shot|busted|messed up)\s*(knee|hip|knees|hips)\b",
     ],
     "osteoporosis": [
         r"\bosteoporo",
@@ -277,7 +309,10 @@ CONDITION_PATTERNS: dict[str, list[str]] = {
         r"\bdepressed\b",
         r"\bmajor\s*depressive",
         r"\bmdd\b",
-        r"\b(feeling|been)\s*(sad|hopeless|down)\b",
+        r"\b(feeling|been|always|constantly)\s*(sad|hopeless|down|empty|worthless|numb)\b",
+        r"\b(lost|no)\s*(interest|motivation|energy|will)\b",
+        r"\bmental\s*health\b",
+        r"\bantidepressant",
     ],
     "anxiety": [
         r"\banxiety\b",
@@ -286,6 +321,9 @@ CONDITION_PATTERNS: dict[str, list[str]] = {
         r"\bgad\b",
         r"\bpanic\s*(attack|disorder)",
         r"\bsocial\s*anxiety",
+        r"\b(constant|always|chronic)\s*(worry|worrying|worried|nervous|stressed|on\s*edge)\b",
+        r"\bworr(y|ied|ying)\b.*\b(all\s*the\s*time|constantly|always|too\s*much|everything)\b",
+        r"\b(always|constantly)\b.*\bworr(y|ied|ying)\b",
     ],
     "somatoform": [
         r"\bsomatoform",
@@ -297,10 +335,13 @@ CONDITION_PATTERNS: dict[str, list[str]] = {
         r"\bsleep\s*(disorder|problem|trouble|issue|apnea)",
         r"\bcan'?t\s*sleep\b",
         r"\bdifficulty\s*sleep",
+        r"\bnever\s*sleep\b",
+        r"\b(don'?t|doesn'?t|barely|hardly)\s*sleep\b",
+        r"\bup\s*all\s*night\b",
     ],
     # ── Eyes / Ears ──
     "vision_loss": [
-        r"\bvision\s*(loss|reduc|impair|problem)",
+        r"\bvision\s*(loss|reduc|impair|problem|getting\s*worse|going|blurr|failing)",
         r"\bretinopathy",
         r"\bdiabetic\s*eye",
         r"\beye\s*damage\b.*\bdiabet",
@@ -308,11 +349,17 @@ CONDITION_PATTERNS: dict[str, list[str]] = {
         r"\bglaucoma\b",
         r"\bcataract",
         r"\bblind",
+        r"\b(can'?t|cannot|hard\s*to|trouble|losing)\s*(see|seeing|read)\b",
+        r"\beye\w*\b.*\b(bad|going|failing|getting\s*worse|blurr|problem|issue)",
+        r"\blosing\s*(my\s*)?(sight|vision|eyesight)\b",
     ],
     "hearing_loss": [
-        r"\bhearing\s*(loss|impair|problem|aid)",
+        r"\bhearing\s*(loss|impair|problem|aid|getting\s*worse|going)",
         r"\bdeaf",
         r"\btinnitus\b",
+        r"\b(can'?t|cannot|hard\s*to)\s*hear\b",
+        r"\bears?\b.*\b(ringing|bad|going|problem)",
+        r"\blosing\s*(my\s*)?hearing\b",
     ],
     # ── Hematologic ──
     "anemia": [
@@ -394,24 +441,66 @@ def detect_conditions(text: str) -> list[str]:
 
 
 def _is_health_related(text: str) -> bool:
-    """Quick check if the text mentions anything health-related."""
-    # Catch-all patterns: if the user says "I have X", "diagnosed with X", etc.
-    # treat it as health-related even if we don't recognize the specific term.
+    """
+    Quick check if the text mentions anything health-related.
+
+    This gate should be PERMISSIVE — it's better to let an ambiguous input
+    through (the LLM will handle it) than to reject a valid health description.
+    People describe health in wildly different ways: "my arteries are clogged",
+    "sugar's through the roof", "can't breathe", "knees are shot", etc.
+    """
+    # Phrasing patterns: common ways people describe health issues
     health_phrasing = [
-        r"\bi\s+(have|had|got|suffer|experience|was diagnosed|am diagnosed|'ve been diagnosed|live with)\b",
+        r"\bi\s+(have|had|got|suffer|experience|was diagnosed|am diagnosed|'ve been diagnosed|live with|deal with|struggle with|developed|caught)\b",
         r"\bdiagnosed\s+with\b",
         r"\bsuffering\s+from\b",
-        r"\bmy\s+(doctor|physician|specialist)\b",
-        r"\btaking\s+(medication|medicine|pills|drugs)\b",
-        r"\bdisease\b",
-        r"\bdisorder\b",
-        r"\bsyndrome\b",
-        r"\bchronic\b",
+        r"\bmy\s+(doctor|physician|specialist|cardiologist|surgeon|nurse|therapist|psychiatrist)\b",
+        r"\btaking\s+(medication|medicine|pills|drugs|meds)\b",
+        r"\b(disease|disorder|syndrome|chronic|condition|diagnosis|infection)\b",
+        # "my [body part]" — people describe issues by referencing their body
+        r"\bmy\s+(heart|lung|kidney|liver|stomach|back|knee|hip|joint|bone|arteri|vein|blood|sugar|thyroid|prostate|bladder|brain|eye|ear|skin|chest|head|leg|arm|foot|feet|hand|neck|spine|pancrea|colon|intestin|gallbladder|throat)",
+        # "I feel" / "I'm" + symptom
+        r"\bi\s+(feel|am|'m)\s+(sick|ill|dizzy|nauseous|weak|tired|exhausted|depressed|anxious|bloated|short of breath|light\s*headed)",
+        r"\b(can\s*not|can'?t|cannot|couldn'?t|have\s+trouble|unable\s+to)\s+(breathe|sleep|walk|see|hear|move|swallow|eat|focus|remember)",
+        # "something hurts/aches/is wrong"
+        r"\b(hurts|aching|aches|swollen|sore|painful|stiff|numb|bleeding|burning|itching|cramping)\b",
     ]
+
+    # Body parts — if ANY body part is mentioned, this is likely health-related
+    body_parts = [
+        r"\b(heart|lungs?|kidneys?|liver|stomach|intestin|colon|pancrea|spleen|gallbladder)\b",
+        r"\b(arteri|arter\w+|vein|blood\s*vessel|capillar|aorta|vascular)\b",
+        r"\b(brain|spine|spinal|nerv|neural)\b",
+        r"\b(bone|joint|cartilage|tendon|ligament|muscle|skeletal)\b",
+        r"\b(knee|hip|shoulder|ankle|wrist|elbow|finger|toe)\b",
+        r"\b(eye|retina|cornea|ear|eardrum|sinus)\b",
+        r"\b(skin|scalp|nail|rash)\b",
+        r"\b(throat|esophag|trachea|larynx|vocal)\b",
+        r"\b(bladder|urethr|ureter|uterus|ovary|prostate|rectum)\b",
+        r"\b(thyroid|adrenal|pituitary|gland)\b",
+        r"\b(chest|abdomen|pelvis|groin)\b",
+    ]
+
+    # Symptom descriptors — colloquial ways of describing health problems
+    symptom_words = [
+        r"\b(clogged|blocked|narrow|hardened|inflamed|infected|damaged|failing|swollen|enlarged|bleeding|leaking)\b",
+        r"\b(pain|ache|sore|tender|stiff|numb|tingle|tingling|throb|cramp|spasm|burning|itchy|itching)\b",
+        r"\b(dizzy|faint|nausea|vomit|wheez|cough|sneez|fever|chills|sweat)\b",
+        r"\b(fatigue|tired|exhausted|weak|letharg|drowsy|groggy)\b",
+        r"\b(worried|worrying|anxious|stressed|nervous|restless|panick|overwhelmed|scared)\b",
+        r"\b(depressed|hopeless|sad|empty|miserable|suicidal|worthless)\b",
+        r"\b(pee|urinat|peeing|urinating)\b",
+        r"\b(short\s*of\s*breath|breathless|can'?t\s*breathe|difficulty\s*breath|breathing\s*(problem|issue|trouble|difficult)\w*)\b",
+        r"\b(blurry|blind|deaf|ringing|hearing\s*loss)\b",
+        r"\b(overweight|obese|underweight|gained\s*weight|lost\s*weight)\b",
+        r"\b(diagnosed|surgery|operation|hospital|emergency|er\b|icu\b|urgent\s*care)\b",
+    ]
+
+    # Medical/clinical keywords
     health_keywords = [
-        r"\b(diabet|blood\s*sugar|a1c|insulin|glucose)\b",
+        r"\b(diabet|blood\s*sugar|a1c|insulin|glucose|sugar\s*level|sugar\s*is)\b",
         r"\b(blood\s*pressure|hypertens|bp)\b",
-        r"\b(cholest|ldl|triglycer|lipid)\b",
+        r"\b(cholesterol|cholest|ldl|hdl|triglycerides?|triglycer|lipids?)\b",
         r"\b(kidney|ckd|renal)\b",
         r"\b(heart|cardiac|coronary|angina|arrhythmi|afib|valve)\b",
         r"\b(neuropath|tingling|numbness|nerve)\b",
@@ -419,15 +508,15 @@ def _is_health_related(text: str) -> bool:
         r"\b(pee|urinat|bathroom)\b.*\b(frequent|often|lot|every|always)\b",
         r"\b(frequent|often|always)\b.*\b(pee|urinat|bathroom)\b",
         r"\b(thirst|fatigue|tired|exhausted)\b",
-        r"\b(insurance|ppo|hmo|hdhp|deductible|copay|premium)\b",
-        r"\b(condition|diagnosis|symptom|doctor|medication|prescription)\b",
-        r"\b(health|medical|clinical|hospital)\b",
+        r"\b(insurance|ppo|hmo|hdhp|deductible|copay|premium|medicare|medicaid|uninsured)\b",
+        r"\b(condition|diagnosis|symptom|doctor|medication|prescription|treatment|therapy|meds)\b",
+        r"\b(health|medical|clinical|hospital|clinic|pharmacy|ambulance)\b",
         r"\b\d{1,3}\s*(year|yr)s?\s*old\b",
         r"\b(male|female|man|woman)\b",
         r"\b(obes|bmi|overweight)\b",
         r"\b(depress|anxiety|anxious|panic|insomnia|sleep)\b",
         r"\b(asthma|copd|emphysema|bronchit|wheezing)\b",
-        r"\b(arthrit|arthrosis|osteoarthrit|joint)\b.*\b(pain|stiff|swell)\b",
+        r"\b(arthrit|arthrosis|osteoarthrit)\b",
         r"\b(gerd|reflux|heartburn|gastritis)\b",
         r"\b(liver|hepat|cirrho|fatty\s*liver)\b",
         r"\b(thyroid|hypothyroid|hyperthyroid)\b",
@@ -435,7 +524,7 @@ def _is_health_related(text: str) -> bool:
         r"\b(osteoporo|bone\s*loss)\b",
         r"\b(back\s*pain|lumbar|sciatica)\b",
         r"\b(anemia|iron\s*deficien)\b",
-        r"\b(migraine|headache)\b",
+        r"\b(migraine|headache)s?\b",
         r"\b(cancer|tumor|malignant|oncol|leukemia|lymphoma)\b",
         r"\b(dementia|alzheimer|memory\s*loss)\b",
         r"\b(parkinson|tremor)\b",
@@ -448,6 +537,8 @@ def _is_health_related(text: str) -> bool:
     ]
     lower = text.lower()
     return (any(re.search(p, lower) for p in health_phrasing)
+            or any(re.search(p, lower) for p in body_parts)
+            or any(re.search(p, lower) for p in symptom_words)
             or any(re.search(p, lower) for p in health_keywords))
 
 
@@ -483,12 +574,13 @@ Already detected conditions (do NOT repeat these): {', '.join(already_detected) 
 
 CRITICAL: distinguish between symptoms and diseases.
 - If the user names an ACTUAL DISEASE or DIAGNOSIS (e.g. "lupus", "celiac disease", "fibromyalgia"), put the mapped key in "disease_matches"
-- If the user describes SYMPTOMS (e.g. "cough", "runny nose", "chest pain", "fatigue"), put the mapped key in "symptom_matches" — symptoms are NOT confirmed diagnoses
+- If the user describes SYMPTOMS (e.g. "cough", "runny nose", "chest pain", "fatigue"), think about the top differential diagnoses for those symptoms and put the matching keys in "symptom_matches" — symptoms are NOT confirmed diagnoses
+- For vague symptoms, return up to 3 of the MOST LIKELY causes from the 46 keys (ranked by clinical likelihood). Do not return more than 3 symptom matches.
 - If it truly cannot map to ANY of the 46, put the original term in "unmapped"
 - Be generous with mapping — most conditions relate to at least one of the 46
 - Return ONLY valid JSON, no other text
 
-Return JSON: {{"disease_matches": ["key1"], "symptom_matches": ["key2"], "unmapped": ["term1"]}}"""},
+Return JSON: {{"disease_matches": ["key1"], "symptom_matches": ["key2", "key3"], "unmapped": ["term1"]}}"""},
                 {"role": "user", "content": text},
             ],
             temperature=0,
@@ -498,8 +590,14 @@ Return JSON: {{"disease_matches": ["key1"], "symptom_matches": ["key2"], "unmapp
         disease = [c for c in result.get("disease_matches", [])
                    if c in CONDITION_TO_ICD and c not in already_detected]
         symptom = [c for c in result.get("symptom_matches", [])
-                   if c in CONDITION_TO_ICD and c not in already_detected]
+                   if c in CONDITION_TO_ICD and c not in already_detected][:3]
         unmapped = result.get("unmapped", [])
+        # Filter out insurance terms from unmapped
+        insurance_terms = {"ppo", "hmo", "hdhp", "medicare", "medicaid", "cobra", "tricare"}
+        unmapped = [u for u in unmapped if u.lower().strip() not in insurance_terms]
+        # If LLM returned nothing at all, treat the input as unmapped
+        if not disease and not symptom and not unmapped:
+            unmapped = [text]
         return {"disease_matches": disease, "symptom_matches": symptom, "unmapped": unmapped}
     except Exception:
         return {"disease_matches": [], "symptom_matches": [], "unmapped": []}
@@ -521,14 +619,28 @@ async def parse_patient_input(text: str) -> dict:
     age = None
     sex = None
     insurance_type = "unknown"
+    lower = text.lower()
 
     # Try to extract age from text directly
-    age_match = re.search(r"\b(\d{1,3})\s*(?:year|yr|y/?o|years?\s*old)\b", text.lower())
+    age_match = re.search(r"\b(\d{1,3})\s*(?:year|yr|y/?o|years?\s*old)\b", lower)
     if age_match:
         age = int(age_match.group(1))
 
+    # Keyword-to-approximate-age mapping (only if no numeric age found)
+    if age is None:
+        age_words = {
+            "elderly": 75, "senior": 72, "old": 70,
+            "middle-aged": 50, "middle aged": 50,
+            "young adult": 25, "teenager": 16, "teen": 16,
+            "child": 8, "infant": 1, "baby": 1,
+            "young": 28,
+        }
+        for word, approx_age in age_words.items():
+            if re.search(r"\b" + re.escape(word) + r"\b", lower):
+                age = approx_age
+                break
+
     # Try to extract sex from text directly
-    lower = text.lower()
     if re.search(r"\b(male|man|boy|he|his)\b", lower) and not re.search(r"\bfe?male\b", lower):
         sex = "M"
     elif re.search(r"\b(female|woman|girl|she|her)\b", lower):
@@ -572,10 +684,11 @@ Do NOT extract or infer any medical conditions. Return ONLY valid JSON."""},
         except Exception:
             pass
 
-    # LLM fallback: if regex missed conditions, try to map via LLM
+    # LLM fallback: always try to resolve additional conditions the regex missed.
+    # People describe health in many ways that regex can't fully capture.
     symptom_conditions = []
     unmapped_conditions = []
-    if not conditions and client is not None:
+    if client is not None:
         resolved = await resolve_conditions(text, conditions)
         conditions.extend(resolved["disease_matches"])
         symptom_conditions = resolved["symptom_matches"]

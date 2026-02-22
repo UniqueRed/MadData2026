@@ -15,7 +15,7 @@ from groq import AsyncGroq
 from app.config import GROQ_API_KEY
 from app.models.patient import PatientProfile
 from app.models.graph import GraphNode, GraphEdge, CarePathwayGraph
-from app.data.meps_loader import query_cost, get_condition_summary
+from app.data.meps_loader import query_cost, get_condition_summary, query_drug_cost, query_intervention_cost
 from app.data.comorbidity_loader import get_comorbid_conditions, get_condition_label
 
 _groq_client = AsyncGroq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
@@ -201,10 +201,22 @@ CONDITION_LABELS = {
 }
 
 
+# Drug-to-total cost multiplier: drug costs alone underestimate total care
+# (doesn't include visits, labs, imaging, procedures). This ratio is derived
+# from conditions with both HC-233 total expenditure and H239 drug cost data.
+# Typical ratio for chronic conditions is ~2.0-2.5x (drugs are ~40-50% of total).
+_DRUG_TO_TOTAL_RATIO = 2.1
+
+
 def _get_condition_cost(condition: str, profile: PatientProfile) -> float:
     """
-    Get the annual cost for a condition using MEPS data.
-    Falls back to hardcoded estimates for conditions MEPS doesn't track.
+    Get the annual cost for a condition using a 4-tier lookup:
+
+    1. MEPS HC-233 stratified by age/sex/insurance (12 conditions)
+    2. MEPS HC-233 unstratified summary (same 12 conditions)
+    3. H239 drug cost × multiplier (~25 more conditions from prescription data)
+    4. Hardcoded FALLBACK_ANNUAL_COSTS (remaining conditions)
+
     Uses incremental cost (cost above baseline for that demographic).
 
     When a stratified cell returns a negative or zero incremental cost
@@ -213,6 +225,7 @@ def _get_condition_cost(condition: str, profile: PatientProfile) -> float:
     """
     meps_name = ENGINE_TO_MEPS_CONDITION.get(condition, condition)
 
+    # Tier 1: MEPS HC-233 stratified
     result = query_cost(
         condition=meps_name,
         age=profile.age,
@@ -223,11 +236,17 @@ def _get_condition_cost(condition: str, profile: PatientProfile) -> float:
     if result is not None and result["incremental_cost"] > 0:
         return result["incremental_cost"]
 
-    # Stratified result was missing, negative, or zero — try unstratified summary
+    # Tier 2: MEPS HC-233 unstratified summary
     summary = get_condition_summary(meps_name)
     if summary is not None and summary["incremental_cost"] > 0:
         return summary["incremental_cost"]
 
+    # Tier 3: H239 drug cost × multiplier
+    drug_data = query_drug_cost(condition)
+    if drug_data is not None and drug_data["mean_drug_cost"] > 0:
+        return round(drug_data["mean_drug_cost"] * _DRUG_TO_TOTAL_RATIO, 2)
+
+    # Tier 4: Hardcoded fallback
     return FALLBACK_ANNUAL_COSTS.get(condition, 2000.0)
 
 
@@ -393,16 +412,22 @@ async def simulate_pathway(
         ))
         seen_nodes.add(node_id)
 
-    # Add intervention nodes
+    # Add intervention nodes with real drug pricing from H239
     for intervention in interventions:
         node_id = f"intervention_{intervention}"
-        rx_cost = 600.0
+        intervention_data = query_intervention_cost(intervention)
+        if intervention_data is not None:
+            rx_cost = intervention_data["mean_annual_cost"]
+            rx_oop = intervention_data["mean_annual_oop"]
+        else:
+            rx_cost = 600.0
+            rx_oop = _estimate_oop(rx_cost, profile)
         nodes.append(GraphNode(
             id=node_id,
             label=intervention.replace("_", " ").title(),
             node_type="intervention",
             annual_cost=rx_cost,
-            oop_estimate=_estimate_oop(rx_cost, profile),
+            oop_estimate=rx_oop,
             year=0,
         ))
         seen_nodes.add(node_id)

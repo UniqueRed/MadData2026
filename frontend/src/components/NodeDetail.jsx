@@ -1,8 +1,8 @@
 const NODE_TYPE_INFO = {
-  current: { label: "Current Condition", color: "#dc2626" },
-  future: { label: "Possible Future", color: "#f59e0b" },
-  high_cost: { label: "High Cost Risk", color: "#7f1d1d" },
-  intervention: { label: "Intervention", color: "#16a34a" },
+  current: { label: "Current Condition", color: "#e8548e" },
+  future: { label: "Possible Future", color: "#eab308" },
+  high_cost: { label: "High Cost Risk", color: "#9d174d" },
+  intervention: { label: "Intervention", color: "#22c55e" },
 };
 
 const CONDITION_DESCRIPTIONS = {

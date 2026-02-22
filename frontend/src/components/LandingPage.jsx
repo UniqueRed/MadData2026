@@ -11,7 +11,7 @@ export default function LandingPage({ onGetStarted }) {
           See Your Health Costs <span className="text-purple">Before They Happen</span>
         </h1>
         <p className="landing-subtitle">
-          miff simulates your personal care pathway — mapping conditions,
+          lotus simulates your personal care pathway — mapping conditions,
           treatments, and out-of-pocket costs over the next 5 years so you can
           make smarter insurance and health decisions.
         </p>

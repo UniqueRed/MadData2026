@@ -1,0 +1,32 @@
+{
+  "metformin": {
+    "mean_annual_cost": 409.25,
+    "mean_annual_oop": 27.42,
+    "median_annual_cost": 35.76,
+    "n_persons": 1639
+  },
+  "statin": {
+    "mean_annual_cost": 91.59,
+    "mean_annual_oop": 24.69,
+    "median_annual_cost": 47.2,
+    "n_persons": 4075
+  },
+  "ace_inhibitor": {
+    "mean_annual_cost": 53.02,
+    "mean_annual_oop": 19.55,
+    "median_annual_cost": 30.0,
+    "n_persons": 2117
+  },
+  "sglt2_inhibitor": {
+    "mean_annual_cost": 4220.58,
+    "mean_annual_oop": 157.27,
+    "median_annual_cost": 3623.06,
+    "n_persons": 359
+  },
+  "lifestyle_change": {
+    "mean_annual_cost": 0.0,
+    "mean_annual_oop": 0.0,
+    "median_annual_cost": 0.0,
+    "n_persons": 0
+  }
+}
