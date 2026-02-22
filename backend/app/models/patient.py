@@ -17,3 +17,4 @@ class ScenarioRequest(BaseModel):
     time_horizon_years: int = 5
     symptom_conditions: list[str] = []  # symptom-derived conditions (possible, not confirmed)
     unmapped_conditions: list[str] = []  # conditions outside the 46, for LLM fallback
+    symptom_scores: dict[str, float] = {}  # condition → LLM relevance score (0.0-1.0)

@@ -4,13 +4,14 @@ const api = axios.create({
   baseURL: "http://localhost:8000/api",
 });
 
-export async function generatePathway(profile, interventions = [], timeHorizon = 5, symptomConditions = [], unmappedConditions = []) {
+export async function generatePathway(profile, interventions = [], timeHorizon = 5, symptomConditions = [], unmappedConditions = [], symptomScores = {}) {
   const { data } = await api.post("/simulation/pathway", {
     profile,
     interventions,
     time_horizon_years: timeHorizon,
     symptom_conditions: symptomConditions,
     unmapped_conditions: unmappedConditions,
+    symptom_scores: symptomScores,
   });
   return data;
 }

@@ -102,7 +102,7 @@ export default function NodeDetail({ node, onClose }) {
           </div>
           <div className="likelihood-text">
             <span className="likelihood-value">{likelihood.toFixed(1)}%</span>
-            <span className="likelihood-label">likelihood</span>
+            <span className="likelihood-label">associated risk probability</span>
           </div>
         </div>
       )}

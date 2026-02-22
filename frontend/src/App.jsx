@@ -44,6 +44,7 @@ function App() {
     async (parsed) => {
       const symptom = parsed.symptom_conditions || [];
       const unmapped = parsed.unmapped_conditions || [];
+      const scores = parsed.symptom_scores || {};
       const newProfile = {
         age: parsed.age || 45,
         sex: parsed.sex || "M",
@@ -57,7 +58,7 @@ function App() {
       setProfile(newProfile);
       setInterventions([]);
       setSelectedNode(null);
-      const pathway = await generatePathway(newProfile, [], 5, symptom, unmapped);
+      const pathway = await generatePathway(newProfile, [], 5, symptom, unmapped, scores);
       setGraph(pathway);
       setBaselineGraph(pathway);
       addMessage(
@@ -159,8 +160,20 @@ function App() {
           onClick={() => setCurrentView("landing")}
         >
           lotus
+          <svg className="logo-icon" width="36" height="36" viewBox="0 0 100 100" fill="none">
+            {/* center petal */}
+            <ellipse cx="50" cy="38" rx="10" ry="28" fill="#e8548e"/>
+            {/* inner left/right petals */}
+            <ellipse cx="50" cy="38" rx="10" ry="26" fill="#f472b6" transform="rotate(-25 50 55)"/>
+            <ellipse cx="50" cy="38" rx="10" ry="26" fill="#f472b6" transform="rotate(25 50 55)"/>
+            {/* outer left/right petals */}
+            <ellipse cx="50" cy="40" rx="9" ry="24" fill="#f9a8c9" transform="rotate(-50 50 58)"/>
+            <ellipse cx="50" cy="40" rx="9" ry="24" fill="#f9a8c9" transform="rotate(50 50 58)"/>
+            {/* yellow center */}
+            <circle cx="50" cy="52" r="6" fill="#eab308"/>
+            <circle cx="50" cy="52" r="3.5" fill="#fde68a"/>
+          </svg>
         </h1>
-        <span className="subtitle">Clinical-Financial Digital Twin</span>
         <div className="header-spacer" />
         {currentView !== "landing" && (
           <TabBar

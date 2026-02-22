@@ -460,7 +460,6 @@ const LEGEND = [
   { color: "#e8548e", label: "Current Condition" },
   { color: "#eab308", label: "Possible Future" },
   { color: "#9d174d", label: "High Cost Risk" },
-  { color: "#22c55e", label: "Intervention" },
   { color: "#f9a8c9", label: "AI Estimate", dashed: true },
 ];
 

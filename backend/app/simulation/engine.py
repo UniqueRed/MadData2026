@@ -26,10 +26,65 @@ _MIN_WEIGHT = 1.5
 # Weight threshold for depth-2 expansion (strong associations)
 _STRONG_WEIGHT = 3.0
 
-# Baseline annual prevalence assumed for OR → probability conversion.
-# Most chronic conditions have ~2-5% population prevalence; we use 2%
-# so the conversion stays conservative.
-_BASE_PREVALENCE = 0.02
+# US adult prevalence by condition for OR → probability conversion.
+# Sources: MEPS HC-233 (28,336 persons) for 12 flagship conditions,
+# CDC/NIDDK/AHA/NIMH published prevalence for the remaining 34.
+# Used as p0 in the epidemiological formula:
+#   P(cond | exposure) = (OR * p0) / (1 - p0 + OR * p0)
+CONDITION_PREVALENCE: dict[str, float] = {
+    # ── From MEPS HC-233 (directly computed from diagnosis flags) ──
+    "hypertension":       0.30,
+    "high_cholesterol":   0.28,
+    "arthritis":          0.24,
+    "asthma_copd":        0.14,
+    "diabetes":           0.12,
+    "cancer":             0.10,
+    "heart_failure":      0.10,
+    "cad":                0.05,
+    "stroke":             0.04,
+    # ── From CDC / national registries / clinical literature ──
+    "obesity":            0.42,
+    "pre-diabetes":       0.38,
+    "allergy":            0.30,
+    "back_pain":          0.25,
+    "gerd":               0.20,
+    "anxiety":            0.19,
+    "arthrosis":          0.15,
+    "ckd":                0.15,
+    "varicosis":          0.15,
+    "hearing_loss":       0.15,
+    "dizziness":          0.15,
+    "vision_loss":        0.12,
+    "thyroid_disease":    0.12,
+    "migraine":           0.12,
+    "tobacco_use":        0.12,
+    "kidney_stones":      0.11,
+    "insomnia":           0.10,
+    "osteoporosis":       0.10,
+    "diverticulosis":     0.10,
+    "gallstones":         0.10,
+    "urinary_incontinence": 0.10,
+    "sexual_dysfunction": 0.10,
+    "depression":         0.08,
+    "neuropathy":         0.08,
+    "gynecological":      0.08,
+    "prostatic_hyperplasia": 0.08,
+    "anemia":             0.06,
+    "hypotension":        0.05,
+    "hemorrhoids":        0.05,
+    "liver_disease":      0.04,
+    "gout":               0.04,
+    "atherosclerosis":    0.03,
+    "arrhythmia":         0.03,
+    "psoriasis":          0.03,
+    "dementia":           0.07,
+    "valve_disorder":     0.025,
+    "somatoform":         0.02,
+    "parkinsons":         0.01,
+}
+
+# Fallback prevalence for conditions not in the table above
+_DEFAULT_PREVALENCE = 0.05
 
 # Maximum annual transition probability cap (no edge can exceed 15%)
 _MAX_PROB = 0.15
@@ -250,20 +305,18 @@ def _get_condition_cost(condition: str, profile: PatientProfile) -> float:
     return FALLBACK_ANNUAL_COSTS.get(condition, 2000.0)
 
 
-def _weight_to_prob(weight: float) -> float:
+def _weight_to_prob(weight: float, target_condition: str = "") -> float:
     """
     Convert an odds-ratio weight to an annual transition probability.
 
     Uses the epidemiological formula:
         P(condition | exposure) = (OR * p0) / (1 - p0 + OR * p0)
-    where p0 is the baseline annual incidence.
+    where p0 is the condition-specific population prevalence from MEPS/CDC data.
 
-    Example: OR=15, p0=0.02 → P = 0.30 / (0.98 + 0.30) = 0.234 (lifetime)
-    But that's co-occurrence, not annual incidence — so we divide by a
-    typical disease development window (~10 years) to get an annual rate.
-    OR=15 → ~2.3% per year, which is realistic.
+    The co-occurrence probability spans years, so we divide by a typical
+    disease development window (~10 years) to get an annual rate.
     """
-    p0 = _BASE_PREVALENCE
+    p0 = CONDITION_PREVALENCE.get(target_condition, _DEFAULT_PREVALENCE)
     conditional = (weight * p0) / (1.0 - p0 + weight * p0)
     # Co-occurrence probability spans years; convert to annual incidence
     annual = conditional / 10.0
@@ -368,12 +421,55 @@ Return JSON: {"progressions": [{"name": "...", "probability": 0.05, "annual_cost
         return [], []
 
 
+def _compute_symptom_probability(
+    condition: str,
+    llm_score: float,
+    confirmed_conditions: list[str],
+    age: int,
+    sex: str,
+) -> float:
+    """
+    Two-signal probability for symptom-derived conditions.
+
+    Signal 1 — LLM relevance score (capped at 0.85).
+    Signal 2 — Comorbidity prior: for each confirmed condition, check how
+    strongly it predicts the suspected condition via the adjacency matrix.
+    Uses condition-specific prevalence from MEPS/CDC as p0 in:
+        P(cond | exposure) = (OR * p0) / (1 - p0 + OR * p0)
+    Capped at 0.50.
+
+    Returns max(signal_1, signal_2), floored at 0.05.
+    """
+    # Signal 1: LLM relevance
+    sig1 = min(llm_score, 0.85)
+
+    # Signal 2: best comorbidity prior from any confirmed condition
+    p0 = CONDITION_PREVALENCE.get(condition, _DEFAULT_PREVALENCE)
+    sig2 = 0.0
+    for confirmed in confirmed_conditions:
+        neighbors = get_comorbid_conditions(
+            condition=confirmed,
+            age=age,
+            sex=sex,
+        )
+        for neighbor in neighbors:
+            if neighbor["condition"] == condition:
+                odds_ratio = neighbor["weight"]
+                prob = (odds_ratio * p0) / (1.0 - p0 + odds_ratio * p0)
+                sig2 = max(sig2, min(prob, 0.50))
+                break
+
+    final = max(sig1, sig2)
+    return max(final, 0.05)
+
+
 async def simulate_pathway(
     profile: PatientProfile,
     interventions: list[str] | None = None,
     time_horizon_years: int = 5,
     symptom_conditions: list[str] | None = None,
     unmapped_conditions: list[str] | None = None,
+    symptom_scores: dict[str, float] | None = None,
 ) -> CarePathwayGraph:
     """
     Generate a care pathway graph for the given patient profile.
@@ -392,6 +488,8 @@ async def simulate_pathway(
         symptom_conditions = []
     if unmapped_conditions is None:
         unmapped_conditions = []
+    if symptom_scores is None:
+        symptom_scores = {}
 
     nodes: list[GraphNode] = []
     edges: list[GraphEdge] = []
@@ -433,15 +531,30 @@ async def simulate_pathway(
         seen_nodes.add(node_id)
 
     # Add symptom-derived conditions as "suspected" (possible future, not confirmed)
-    _SYMPTOM_BASE_PROB = 0.4  # 40% — symptoms suggest but don't confirm
+    # Per-condition probability via two-signal approach (LLM relevance + comorbidity prior)
+    # Skip any that duplicate a confirmed condition
+    _confirmed_set = set(profile.conditions)
+    _symptom_probs: dict[str, float] = {}
     for condition in symptom_conditions:
+        if condition in _confirmed_set:
+            continue
+        llm_score = symptom_scores.get(condition, 0.4)  # fallback to 0.4 if no score
+        prob = _compute_symptom_probability(
+            condition=condition,
+            llm_score=llm_score,
+            confirmed_conditions=profile.conditions,
+            age=profile.age,
+            sex=profile.sex,
+        )
+        _symptom_probs[condition] = prob
+
         node_id = f"suspected_{condition}"
         cost = _get_condition_cost(condition, profile)
         nodes.append(GraphNode(
             id=node_id,
             label=CONDITION_LABELS.get(condition, condition),
             node_type="future",
-            probability=_SYMPTOM_BASE_PROB,
+            probability=round(prob, 4),
             annual_cost=cost,
             oop_estimate=_estimate_oop(cost, profile),
             year=0,
@@ -472,7 +585,7 @@ async def simulate_pathway(
             if f"current_{tgt}" in seen_nodes:
                 continue
 
-            base_prob = _weight_to_prob(weight)
+            base_prob = _weight_to_prob(weight, tgt)
             prob = _get_effective_prob(source_condition, tgt, base_prob, interventions)
             joint_prob = cum_prob * prob
 
@@ -513,13 +626,19 @@ async def simulate_pathway(
     for condition in profile.conditions:
         _expand(condition, f"current_{condition}", 1, 1.0, 1)
 
-    # Expand symptom-derived conditions (scaled by their base probability)
+    # Expand symptom-derived conditions (scaled by their per-condition probability)
     for condition in symptom_conditions:
-        _expand(condition, f"suspected_{condition}", 1, _SYMPTOM_BASE_PROB, 1)
+        if condition in _confirmed_set:
+            continue
+        _expand(condition, f"suspected_{condition}", 1, _symptom_probs.get(condition, 0.4), 1)
 
     # Process unmapped conditions (LLM last resort)
+    # Skip any that overlap with confirmed conditions (e.g. "asthma" when "asthma_copd" is confirmed)
     for cond_text in unmapped_conditions:
         cond_key = cond_text.lower().replace(" ", "_")
+        # Check if this unmapped term overlaps with any confirmed condition
+        if any(cond_key in c or c in cond_key for c in _confirmed_set):
+            continue
         node_id = f"current_{cond_key}"
         if node_id not in seen_nodes:
             fallback_cost = 2500.0  # generic fallback

@@ -557,7 +557,7 @@ async def resolve_conditions(text: str, already_detected: list[str]) -> dict:
     Returns {"disease_matches": [...], "symptom_matches": [...], "unmapped": [...]}
     """
     if client is None:
-        return {"disease_matches": [], "symptom_matches": [], "unmapped": []}
+        return {"disease_matches": [], "symptom_matches": [], "symptom_scores": {}, "unmapped": []}
 
     keys_str = ", ".join(_CONDITION_KEY_LIST)
 
@@ -574,13 +574,18 @@ Already detected conditions (do NOT repeat these): {', '.join(already_detected) 
 
 CRITICAL: distinguish between symptoms and diseases.
 - If the user names an ACTUAL DISEASE or DIAGNOSIS (e.g. "lupus", "celiac disease", "fibromyalgia"), put the mapped key in "disease_matches"
-- If the user describes SYMPTOMS (e.g. "cough", "runny nose", "chest pain", "fatigue"), think about the top differential diagnoses for those symptoms and put the matching keys in "symptom_matches" — symptoms are NOT confirmed diagnoses
+- If the user describes SYMPTOMS (e.g. "cough", "runny nose", "chest pain", "fatigue"), think about the top differential diagnoses for those symptoms and return them in "symptom_matches" with a relevance score — symptoms are NOT confirmed diagnoses
 - For vague symptoms, return up to 3 of the MOST LIKELY causes from the 46 keys (ranked by clinical likelihood). Do not return more than 3 symptom matches.
 - If it truly cannot map to ANY of the 46, put the original term in "unmapped"
 - Be generous with mapping — most conditions relate to at least one of the 46
 - Return ONLY valid JSON, no other text
 
-Return JSON: {{"disease_matches": ["key1"], "symptom_matches": ["key2", "key3"], "unmapped": ["term1"]}}"""},
+Each symptom_match must include a "relevance" score (0.0 to 1.0):
+  0.8-1.0 = strong/direct match (e.g. "clogged arteries" → cad)
+  0.4-0.7 = moderate match (e.g. "clogged arteries" → heart_failure)
+  0.1-0.3 = weak/indirect match (e.g. "clogged arteries" → stroke)
+
+Return JSON: {{"disease_matches": ["key1"], "symptom_matches": [{{"condition": "key2", "relevance": 0.85}}, {{"condition": "key3", "relevance": 0.4}}], "unmapped": ["term1"]}}"""},
                 {"role": "user", "content": text},
             ],
             temperature=0,
@@ -589,18 +594,48 @@ Return JSON: {{"disease_matches": ["key1"], "symptom_matches": ["key2", "key3"],
         result = json.loads(response.choices[0].message.content)
         disease = [c for c in result.get("disease_matches", [])
                    if c in CONDITION_TO_ICD and c not in already_detected]
-        symptom = [c for c in result.get("symptom_matches", [])
-                   if c in CONDITION_TO_ICD and c not in already_detected][:3]
+
+        # Parse symptom_matches: handle both new dict format and legacy string format
+        raw_symptoms = result.get("symptom_matches", [])
+        symptom = []
+        symptom_scores = {}
+        for item in raw_symptoms:
+            if isinstance(item, dict):
+                cond = item.get("condition", "")
+                relevance = float(item.get("relevance", 0.4))
+            else:
+                cond = str(item)
+                relevance = 0.4  # fallback for old string format
+            if cond in CONDITION_TO_ICD and cond not in already_detected:
+                symptom.append(cond)
+                symptom_scores[cond] = max(0.0, min(1.0, relevance))
+        symptom = symptom[:3]
+        symptom_scores = {k: symptom_scores[k] for k in symptom}
+
         unmapped = result.get("unmapped", [])
         # Filter out insurance terms from unmapped
         insurance_terms = {"ppo", "hmo", "hdhp", "medicare", "medicaid", "cobra", "tricare"}
         unmapped = [u for u in unmapped if u.lower().strip() not in insurance_terms]
+
+        # Filter unmapped terms that overlap with already-detected conditions.
+        # e.g. "asthma" should be dropped if "asthma_copd" is already detected.
+        all_detected = set(already_detected) | set(disease) | set(symptom)
+        detected_labels = {CONDITION_TO_ICD.get(c, c) for c in all_detected}  # not useful, use keys
+        def _overlaps_detected(term: str) -> bool:
+            t = term.lower().strip().replace(" ", "_")
+            for det in all_detected:
+                # "asthma" in "asthma_copd" or "asthma_copd" in "asthma"
+                if t in det or det in t:
+                    return True
+            return False
+        unmapped = [u for u in unmapped if not _overlaps_detected(u)]
+
         # If LLM returned nothing at all, treat the input as unmapped
         if not disease and not symptom and not unmapped:
             unmapped = [text]
-        return {"disease_matches": disease, "symptom_matches": symptom, "unmapped": unmapped}
+        return {"disease_matches": disease, "symptom_matches": symptom, "symptom_scores": symptom_scores, "unmapped": unmapped}
     except Exception:
-        return {"disease_matches": [], "symptom_matches": [], "unmapped": []}
+        return {"disease_matches": [], "symptom_matches": [], "symptom_scores": {}, "unmapped": []}
 
 
 async def parse_patient_input(text: str) -> dict:
@@ -687,11 +722,13 @@ Do NOT extract or infer any medical conditions. Return ONLY valid JSON."""},
     # LLM fallback: always try to resolve additional conditions the regex missed.
     # People describe health in many ways that regex can't fully capture.
     symptom_conditions = []
+    symptom_scores = {}
     unmapped_conditions = []
     if client is not None:
         resolved = await resolve_conditions(text, conditions)
         conditions.extend(resolved["disease_matches"])
         symptom_conditions = resolved["symptom_matches"]
+        symptom_scores = resolved.get("symptom_scores", {})
         unmapped_conditions = resolved["unmapped"]
 
     return {
@@ -700,6 +737,7 @@ Do NOT extract or infer any medical conditions. Return ONLY valid JSON."""},
         "sex": sex,
         "conditions": conditions,
         "symptom_conditions": symptom_conditions,
+        "symptom_scores": symptom_scores,
         "unmapped_conditions": unmapped_conditions,
         "insurance_type": insurance_type,
     }

@@ -21,11 +21,14 @@
   font-size: 1.5rem;
   margin: 0;
   color: #111827;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.subtitle {
-  font-size: 0.85rem;
-  color: #9ca3af;
+.logo-icon {
+  flex-shrink: 0;
+  transform: translateY(3px);
 }
 
 .header-spacer {
@@ -879,12 +882,17 @@
   background: #ffffff;
   border-radius: 14px;
   border: 1px solid #e5e7eb;
+  border-top: 3px solid #e5e7eb;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 
+.feature-card:nth-child(1) { border-top-color: #e8548e; }
+.feature-card:nth-child(2) { border-top-color: #22c55e; }
+.feature-card:nth-child(3) { border-top-color: #ea8c00; }
+
 .feature-icon {
-  font-size: 2rem;
   margin-bottom: 12px;
+  line-height: 1;
 }
 
 .feature-card h3 {

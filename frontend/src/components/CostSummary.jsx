@@ -86,10 +86,10 @@ export default function CostSummary({ graph, comparisonGraph, selectedNode }) {
             <span className="cost-value">{(selectedNode.probability * 100).toFixed(1)}%</span>
           </div>
         )}
-        <div className="cost-row cost-row-muted">
+        {/* <div className="cost-row cost-row-muted">
           <span>Full 5-Year Projection</span>
           <span className="cost-value">${Math.round(graph.total_5yr_oop).toLocaleString()}</span>
-        </div>
+        </div> */}
       </div>
     );
   }

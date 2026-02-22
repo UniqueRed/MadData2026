@@ -8,12 +8,13 @@ export default function LandingPage({ onGetStarted }) {
       <div className="landing-hero">
         <span className="landing-badge">Clinical-Financial Digital Twin</span>
         <h1 className="landing-headline">
-          See Your Health Costs <span className="text-purple">Before They Happen</span>
+          Know What Your Health <span className="text-purple">Will Cost</span>
         </h1>
         <p className="landing-subtitle">
-          lotus simulates your personal care pathway — mapping conditions,
-          treatments, and out-of-pocket costs over the next 5 years so you can
-          make smarter insurance and health decisions.
+          Describe your conditions in plain language. lotus builds a
+          probabilistic care pathway across 46 chronic diseases, projects your
+          out-of-pocket costs over 5 years, and lets you compare real
+          marketplace insurance plans — all backed by federal MEPS and CMS data.
         </p>
 
         {loading ? (
@@ -39,10 +40,10 @@ export default function LandingPage({ onGetStarted }) {
 
       <div className="landing-stats">
         {[
+          { value: "45+", label: "Conditions" },
+          { value: "1,080", label: "ICD-10 Codes" },
+          { value: "28K+", label: "MEPS Records" },
           { value: "5-Year", label: "Projections" },
-          { value: "14+", label: "Conditions" },
-          { value: "Voice", label: "Powered" },
-          { value: "Federal", label: "Data" },
         ].map((s) => (
           <div key={s.label} className="stat-card">
             <span className="stat-value">{s.value}</span>
@@ -53,33 +54,48 @@ export default function LandingPage({ onGetStarted }) {
 
       <div className="landing-features">
         <div className="feature-card">
-          <div className="feature-icon">&#x1f9ec;</div>
-          <h3>Care Pathway Simulation</h3>
+          <div className="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#e8548e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="5" r="3" /><line x1="12" y1="8" x2="12" y2="14" /><line x1="12" y1="14" x2="7" y2="20" /><line x1="12" y1="14" x2="17" y2="20" /><circle cx="7" cy="20" r="2" /><circle cx="17" cy="20" r="2" />
+            </svg>
+          </div>
+          <h3>Comorbidity Network</h3>
           <p>
-            Describe your health profile and get a personalized graph of
-            conditions, treatments, and projected costs.
+            Your conditions connect to future risks through a real
+            epidemiological odds-ratio matrix — stratified by age, sex, and
+            insurance type.
           </p>
         </div>
         <div className="feature-card">
-          <div className="feature-icon">&#x1f4ca;</div>
-          <h3>Insurance Plan Comparison</h3>
+          <div className="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="2" y="3" width="20" height="18" rx="2" /><path d="M2 9h20" /><path d="M10 3v18" />
+            </svg>
+          </div>
+          <h3>Marketplace Plan Comparison</h3>
           <p>
-            Compare PPO, HMO, and HDHP plans side-by-side to find the cheapest
-            option for your specific situation.
+            Search real CMS marketplace plans by state and metal level, then
+            simulate your exact pathway against each plan's deductible,
+            coinsurance, and OOP max.
           </p>
         </div>
         <div className="feature-card">
-          <div className="feature-icon">&#x1f52e;</div>
-          <h3>What-If Scenarios</h3>
+          <div className="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ea8c00" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" y1="19" x2="12" y2="23" /><line x1="8" y1="23" x2="16" y2="23" />
+            </svg>
+          </div>
+          <h3>Voice-Powered Input</h3>
           <p>
-            Ask &ldquo;What if I start Metformin?&rdquo; or &ldquo;What if I
-            switch to an HMO?&rdquo; and see the financial impact instantly.
+            Speak or type naturally — &ldquo;I&rsquo;m a 52-year-old with
+            diabetes and high blood pressure on a PPO.&rdquo; NLP parses your
+            profile and builds the pathway instantly.
           </p>
         </div>
       </div>
 
       <p className="landing-attribution">
-        Powered by MEPS (Medical Expenditure Panel Survey) &amp; CMS public data
+        Built on MEPS HC-233, ICD-10 comorbidity matrices, and CMS Plan &amp; Rate Public Use Files
       </p>
     </div>
   );

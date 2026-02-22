@@ -16,6 +16,7 @@ async def generate_pathway(request: ScenarioRequest):
         time_horizon_years=request.time_horizon_years,
         symptom_conditions=request.symptom_conditions,
         unmapped_conditions=request.unmapped_conditions,
+        symptom_scores=request.symptom_scores,
     )
     return graph
 
