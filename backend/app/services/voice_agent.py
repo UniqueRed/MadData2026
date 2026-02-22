@@ -1,18 +1,27 @@
 """
 Voice Agent Service
 
-Uses Groq (Llama 3) for intent parsing and natural language generation.
-All numerical outputs come from the simulation engine — the LLM is only
-used for the conversational interface, never for generating cost numbers.
+Uses Groq (Llama 3) for demographic extraction and scenario interpretation.
+Condition detection is primarily deterministic via keyword matching against
+the MEPS-backed condition list. When regex fails, an LLM fallback maps
+unrecognized terms to the closest condition key(s) from the 46.
 """
 
+import json
+import re
 from groq import AsyncGroq
 from app.config import GROQ_API_KEY
+from app.data.comorbidity_loader import CONDITION_TO_ICD
 
 client = AsyncGroq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
 
-SYSTEM_PROMPT = """You are CareGraph's voice assistant. You help patients understand
+# Build condition key → label mapping for the LLM prompt
+_CONDITION_KEY_LIST = sorted(CONDITION_TO_ICD.keys())
+
+SYSTEM_PROMPT = """You are a medical voice assistant. You help patients understand
 their health care costs through a clinical-financial digital twin.
+
+Prompts may come in the form of a patient describing their symptoms, conditions, OR diseases they already have.
 
 Your role:
 - Parse patient descriptions into structured profiles (age, sex, conditions, insurance)
@@ -26,37 +35,561 @@ CRITICAL RULES:
 - Keep responses concise — this is a voice interface."""
 
 
-async def parse_patient_input(text: str) -> dict:
-    """Parse natural language patient description into a structured profile."""
-    if client is None:
-        return {"error": "GROQ_API_KEY not configured"}
+# ── Deterministic condition detection ──
+# Each condition maps to a list of keyword patterns (regex).
+# Matched against lowercased user text. Order matters: first match wins
+# for overlapping symptoms (e.g. "diabetes" matches type_2 before pre-diabetes
+# only if "pre" is absent).
 
-    response = await client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT + """
-
-Extract the patient profile from the user's description. Return JSON with:
-{
-  "age": int,
-  "sex": "M" or "F",
-  "conditions": ["condition_1", "condition_2"],
-  "insurance_type": "PPO" | "HMO" | "HDHP" | "unknown"
+CONDITION_PATTERNS: dict[str, list[str]] = {
+    # ── Diabetes spectrum ──
+    "diabetes": [
+        r"\btype\s*2\s*diabet",
+        r"\bt2d\b",
+        r"\btype\s*ii\s*diabet",
+        r"\binsulin\s*resistan",
+        r"\ba1c\b.*\b(high|elevated|above)",
+        r"\bhigh\s*a1c\b",
+        r"\bdiabetic\b",
+        r"\bdiabetes\b",
+    ],
+    "pre-diabetes": [
+        r"\bpre[\s-]*diabet",
+        r"\bprediabet",
+        r"\bborderline\s*diabet",
+        r"\bblood\s*sugar\b.*\b(high|elevated)",
+        r"\bhigh\s*blood\s*sugar",
+        r"\bfrequent\s*(urinat|pee|bathroom)",
+        r"\b(pee|urinat|bathroom)\b.*\b(frequent|often|lot|constantly|every)",
+        r"\balways\s*(pee|urinat|thirsty)",
+        r"\bincreased\s*thirst",
+        r"\bexcessive\s*thirst",
+    ],
+    # ── Cardiovascular ──
+    "hypertension": [
+        r"\bhypertens",
+        r"\bhigh\s*blood\s*pressure",
+        r"\bhigh\s*bp\b",
+        r"\bbp\b.*\b(high|elevated)",
+        r"\b(systolic|diastolic)\b.*\b(high|elevated)",
+    ],
+    "high_cholesterol": [
+        r"\bhigh\s*cholest",
+        r"\bhyperlipid",
+        r"\bhypercholest",
+        r"\bhigh\s*ldl\b",
+        r"\belevated\s*(cholest|ldl|triglycer)",
+        r"\bhigh\s*triglycer",
+        r"\blipid\s*(disorder|metabolism)",
+    ],
+    "cad": [
+        r"\bcoronary\s*artery",
+        r"\bcad\b",
+        r"\bischemic\s*heart",
+        r"\bangina",
+        r"\bchest\s*pain\b",
+        r"\bblocked\s*arter",
+        r"\bclogged\s*arter",
+    ],
+    "heart_failure": [
+        r"\bheart\s*failure",
+        r"\bcongestive\s*heart",
+        r"\bchf\b",
+        r"\bcardiac\s*insufficiency",
+        r"\bheart\b.*\b(weak|enlarged|pumping)",
+        r"\bfluid\s*retention\b",
+    ],
+    "arrhythmia": [
+        r"\barrhythmi",
+        r"\batrial\s*fib",
+        r"\bafib\b",
+        r"\ba[\s-]?fib\b",
+        r"\birregular\s*heart",
+        r"\bheart\b.*\b(irregular|racing|palpitat)",
+        r"\bpalpitat",
+        r"\btachycardi",
+        r"\bbradycardi",
+    ],
+    "valve_disorder": [
+        r"\bvalve\s*(disorder|disease|problem|regurg|stenos)",
+        r"\bheart\s*valve",
+        r"\bmitral\b",
+        r"\baortic\s*(stenos|regurg|valve)",
+    ],
+    "atherosclerosis": [
+        r"\batheros",
+        r"\bperipheral\s*arter",
+        r"\bpaod\b",
+        r"\bpad\b.*\b(arter|vascular)",
+        r"\bperipheral\s*vascular",
+    ],
+    "hypotension": [
+        r"\bhypotens",
+        r"\blow\s*blood\s*pressure",
+    ],
+    "varicosis": [
+        r"\bvaricos",
+        r"\bvaricose\s*vein",
+        r"\bvein\b.*\b(swollen|bulging)",
+    ],
+    "stroke": [
+        r"\bstroke\b",
+        r"\bcerebral\s*ischem",
+        r"\bcerebrovascular",
+        r"\btia\b",
+        r"\btransient\s*ischemic",
+    ],
+    # ── Kidney ──
+    "ckd": [
+        r"\bckd\b",
+        r"\bchronic\s*kidney",
+        r"\bkidney\s*(disease|damage|issues|problems|failure)",
+        r"\brenal\s*(insufficien|failure|disease)",
+        r"\bprotein\s*in\s*(urine|pee)",
+        r"\breduced\s*kidney",
+        r"\bkidney\s*function\b.*\b(low|reduced|declining)",
+    ],
+    "kidney_stones": [
+        r"\bkidney\s*stone",
+        r"\brenal\s*(calcul|stone|lithiasis)",
+        r"\burinary\s*(tract\s*)?calcul",
+        r"\bnephrolithiasis",
+    ],
+    # ── Metabolic / Endocrine ──
+    "obesity": [
+        r"\bobes",
+        r"\bbmi\b.*\b(high|over|above|30|35|40)",
+        r"\bmorbidly\s*overweight",
+        r"\boverweight\b",
+    ],
+    "thyroid_disease": [
+        r"\bthyroid",
+        r"\bhypothyroid",
+        r"\bhyperthyroid",
+        r"\bhashimoto",
+        r"\bgraves\b.*\bdisease",
+        r"\bgoiter\b",
+    ],
+    "gout": [
+        r"\bgout\b",
+        r"\bhyperuricemi",
+        r"\buric\s*acid\b.*\b(high|elevated)",
+    ],
+    # ── Respiratory ──
+    "asthma_copd": [
+        r"\basthma\b",
+        r"\bcopd\b",
+        r"\bchronic\s*obstruct",
+        r"\bemphysema",
+        r"\bchronic\s*bronchit",
+        r"\bwheezing\b",
+        r"\bshortness\s*of\s*breath",
+    ],
+    # ── GI ──
+    "gerd": [
+        r"\bgerd\b",
+        r"\bacid\s*reflux",
+        r"\bgastritis",
+        r"\bheartburn\b",
+        r"\bgastroesophageal",
+        r"\breflux\b",
+    ],
+    "liver_disease": [
+        r"\bliver\s*(disease|cirrho|damage|failure|fibrosis)",
+        r"\bhepatitis\b",
+        r"\bfatty\s*liver",
+        r"\bnafld\b",
+        r"\bnash\b",
+        r"\bcirrhosis",
+    ],
+    "gallstones": [
+        r"\bgallstone",
+        r"\bcholecystitis",
+        r"\bgallbladder\b.*\b(stone|inflam|problem)",
+    ],
+    "diverticulosis": [
+        r"\bdiverticul",
+    ],
+    "hemorrhoids": [
+        r"\bhemorrhoid",
+        r"\bpiles\b",
+    ],
+    # ── Musculoskeletal ──
+    "back_pain": [
+        r"\b(low|lower|chronic)\s*back\s*pain",
+        r"\bback\s*pain\b",
+        r"\blumbar\b",
+        r"\bsciatica\b",
+        r"\bspinal\s*stenos",
+        r"\bdisc\s*(herniat|bulg|degenerat)",
+    ],
+    "arthritis": [
+        r"\brheumatoid\s*arthrit",
+        r"\bra\b.*\barthrit",
+        r"\bpolyarthrit",
+        r"\brheumatoid\b",
+        r"\bjoint\b.*\b(inflam|swollen|stiff|pain)",
+    ],
+    "arthrosis": [
+        r"\barthrosis",
+        r"\bosteoarthrit",
+        r"\bjoint\s*(degenerat|wear)",
+        r"\bknee\s*(pain|replac|arthr)",
+        r"\bhip\s*(pain|replac|arthr)",
+    ],
+    "osteoporosis": [
+        r"\bosteoporo",
+        r"\bbone\s*(loss|density|thin)",
+        r"\bfracture\b.*\b(osteo|fragil|compress)",
+    ],
+    # ── Neurological ──
+    "neuropathy": [
+        r"\bneuropath",
+        r"\btingling\b.*\b(hands|feet|fingers|toes)",
+        r"\bnumbness\b.*\b(hands|feet|fingers|toes)",
+        r"\bnerve\s*(damage|pain)\b",
+    ],
+    "dementia": [
+        r"\bdementia\b",
+        r"\balzheimer",
+        r"\bcognitive\s*(decline|impair)",
+        r"\bmemory\s*(loss|problem|impair)",
+    ],
+    "parkinsons": [
+        r"\bparkinson",
+        r"\btremor\b",
+        r"\bshaking\b.*\b(hands|rest)",
+    ],
+    "migraine": [
+        r"\bmigraine",
+        r"\bchronic\s*headache",
+        r"\bcluster\s*headache",
+        r"\bsevere\s*headache",
+    ],
+    "dizziness": [
+        r"\bdizziness\b",
+        r"\bvertigo\b",
+        r"\bbalance\s*(problem|disorder|issue)",
+    ],
+    # ── Mental health ──
+    "depression": [
+        r"\bdepression\b",
+        r"\bdepressed\b",
+        r"\bmajor\s*depressive",
+        r"\bmdd\b",
+        r"\b(feeling|been)\s*(sad|hopeless|down)\b",
+    ],
+    "anxiety": [
+        r"\banxiety\b",
+        r"\banxious\b",
+        r"\bgeneralized\s*anxiety",
+        r"\bgad\b",
+        r"\bpanic\s*(attack|disorder)",
+        r"\bsocial\s*anxiety",
+    ],
+    "somatoform": [
+        r"\bsomatoform",
+        r"\bsomatic\s*symptom",
+        r"\bpsychosomatic",
+    ],
+    "insomnia": [
+        r"\binsomnia\b",
+        r"\bsleep\s*(disorder|problem|trouble|issue|apnea)",
+        r"\bcan'?t\s*sleep\b",
+        r"\bdifficulty\s*sleep",
+    ],
+    # ── Eyes / Ears ──
+    "vision_loss": [
+        r"\bvision\s*(loss|reduc|impair|problem)",
+        r"\bretinopathy",
+        r"\bdiabetic\s*eye",
+        r"\beye\s*damage\b.*\bdiabet",
+        r"\bmacular\b.*\b(edema|degenerat)",
+        r"\bglaucoma\b",
+        r"\bcataract",
+        r"\bblind",
+    ],
+    "hearing_loss": [
+        r"\bhearing\s*(loss|impair|problem|aid)",
+        r"\bdeaf",
+        r"\btinnitus\b",
+    ],
+    # ── Hematologic ──
+    "anemia": [
+        r"\banemia\b",
+        r"\banemic\b",
+        r"\b(low|reduced)\s*(iron|hemoglobin|hgb|hb)\b",
+        r"\biron\s*deficien",
+    ],
+    "cancer": [
+        r"\bcancer\b",
+        r"\btumor\b",
+        r"\bmalignant\b",
+        r"\boncolog",
+        r"\bleukemia\b",
+        r"\blymphoma\b",
+        r"\bcarcinoma\b",
+        r"\bchemotherap",
+        r"\bradiation\s*therap",
+    ],
+    # ── Skin / Immune ──
+    "psoriasis": [
+        r"\bpsoriasis",
+        r"\bpsoriatic",
+    ],
+    "allergy": [
+        r"\ballerg",
+        r"\bhay\s*fever",
+        r"\brhinitis",
+        r"\banaphylax",
+        r"\beczema\b",
+        r"\batopic\s*dermatit",
+    ],
+    # ── Urological / Gynecological ──
+    "urinary_incontinence": [
+        r"\burinary\s*incontinence",
+        r"\bbladder\s*(control|leak|problem)",
+        r"\boveractive\s*bladder",
+        r"\bincontinence\b",
+    ],
+    "prostatic_hyperplasia": [
+        r"\bprostatic\s*hyperplasia",
+        r"\bbph\b",
+        r"\benlarged\s*prostate",
+        r"\bprostate\b.*\b(enlarged|problem|issue)",
+    ],
+    "gynecological": [
+        r"\bmenopaus",
+        r"\bendometrios",
+        r"\buterine\s*(fibroid|prolaps)",
+        r"\bgynecolog",
+    ],
+    # ── Other ──
+    "tobacco_use": [
+        r"\bsmok(e|er|ing)\b",
+        r"\btobacco\b",
+        r"\bnicotine\b",
+    ],
+    "sexual_dysfunction": [
+        r"\bsexual\s*dysfunct",
+        r"\berectile\s*dysfunct",
+        r"\bed\b.*\b(problem|issue|dysfunct)",
+    ],
 }
 
-Use these condition keys: pre-diabetes, type_2_diabetes, hypertension,
-high_cholesterol, ckd_stage_2, ckd_stage_3, retinopathy, neuropathy,
-cad, heart_failure.
 
-Return ONLY valid JSON, no other text."""},
-            {"role": "user", "content": text},
-        ],
-        temperature=0.1,
-        response_format={"type": "json_object"},
-    )
+def detect_conditions(text: str) -> list[str]:
+    """
+    Deterministic condition detection from user text.
+    Uses regex keyword matching — same input always gives same output.
+    """
+    lower = text.lower()
+    matched = []
+    for condition, patterns in CONDITION_PATTERNS.items():
+        for pattern in patterns:
+            if re.search(pattern, lower):
+                matched.append(condition)
+                break
+    return matched
 
-    import json
-    return json.loads(response.choices[0].message.content)
+
+def _is_health_related(text: str) -> bool:
+    """Quick check if the text mentions anything health-related."""
+    # Catch-all patterns: if the user says "I have X", "diagnosed with X", etc.
+    # treat it as health-related even if we don't recognize the specific term.
+    health_phrasing = [
+        r"\bi\s+(have|had|got|suffer|experience|was diagnosed|am diagnosed|'ve been diagnosed|live with)\b",
+        r"\bdiagnosed\s+with\b",
+        r"\bsuffering\s+from\b",
+        r"\bmy\s+(doctor|physician|specialist)\b",
+        r"\btaking\s+(medication|medicine|pills|drugs)\b",
+        r"\bdisease\b",
+        r"\bdisorder\b",
+        r"\bsyndrome\b",
+        r"\bchronic\b",
+    ]
+    health_keywords = [
+        r"\b(diabet|blood\s*sugar|a1c|insulin|glucose)\b",
+        r"\b(blood\s*pressure|hypertens|bp)\b",
+        r"\b(cholest|ldl|triglycer|lipid)\b",
+        r"\b(kidney|ckd|renal)\b",
+        r"\b(heart|cardiac|coronary|angina|arrhythmi|afib|valve)\b",
+        r"\b(neuropath|tingling|numbness|nerve)\b",
+        r"\b(retinopathy|eye\s*damage|vision|glaucoma|cataract)\b",
+        r"\b(pee|urinat|bathroom)\b.*\b(frequent|often|lot|every|always)\b",
+        r"\b(frequent|often|always)\b.*\b(pee|urinat|bathroom)\b",
+        r"\b(thirst|fatigue|tired|exhausted)\b",
+        r"\b(insurance|ppo|hmo|hdhp|deductible|copay|premium)\b",
+        r"\b(condition|diagnosis|symptom|doctor|medication|prescription)\b",
+        r"\b(health|medical|clinical|hospital)\b",
+        r"\b\d{1,3}\s*(year|yr)s?\s*old\b",
+        r"\b(male|female|man|woman)\b",
+        r"\b(obes|bmi|overweight)\b",
+        r"\b(depress|anxiety|anxious|panic|insomnia|sleep)\b",
+        r"\b(asthma|copd|emphysema|bronchit|wheezing)\b",
+        r"\b(arthrit|arthrosis|osteoarthrit|joint)\b.*\b(pain|stiff|swell)\b",
+        r"\b(gerd|reflux|heartburn|gastritis)\b",
+        r"\b(liver|hepat|cirrho|fatty\s*liver)\b",
+        r"\b(thyroid|hypothyroid|hyperthyroid)\b",
+        r"\b(gout|uric\s*acid)\b",
+        r"\b(osteoporo|bone\s*loss)\b",
+        r"\b(back\s*pain|lumbar|sciatica)\b",
+        r"\b(anemia|iron\s*deficien)\b",
+        r"\b(migraine|headache)\b",
+        r"\b(cancer|tumor|malignant|oncol|leukemia|lymphoma)\b",
+        r"\b(dementia|alzheimer|memory\s*loss)\b",
+        r"\b(parkinson|tremor)\b",
+        r"\b(allerg|hay\s*fever|eczema)\b",
+        r"\b(psoriasis|psoriatic)\b",
+        r"\b(stroke|tia|cerebrovascular)\b",
+        r"\b(prostate|bph)\b",
+        r"\b(incontinence|bladder)\b",
+        r"\b(smok|tobacco|nicotine)\b",
+    ]
+    lower = text.lower()
+    return (any(re.search(p, lower) for p in health_phrasing)
+            or any(re.search(p, lower) for p in health_keywords))
+
+
+async def resolve_conditions(text: str, already_detected: list[str]) -> dict:
+    """
+    LLM fallback: map unrecognized symptoms/diseases to the closest
+    condition key(s) from the 46 CONDITION_TO_ICD keys.
+
+    Distinguishes between:
+    - "disease_matches": user named a disease that maps to one of the 46
+      → treated as confirmed current conditions
+    - "symptom_matches": user described symptoms that COULD indicate a condition
+      → treated as possible/suspected conditions (not 100%)
+    - "unmapped": truly doesn't fit any of the 46
+
+    Returns {"disease_matches": [...], "symptom_matches": [...], "unmapped": [...]}
+    """
+    if client is None:
+        return {"disease_matches": [], "symptom_matches": [], "unmapped": []}
+
+    keys_str = ", ".join(_CONDITION_KEY_LIST)
+
+    try:
+        response = await client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {"role": "system", "content": f"""You are a medical condition mapper. The user will describe symptoms or diseases.
+Your job: map each mentioned condition/symptom to the CLOSEST matching key(s) from this list of 46 condition keys:
+
+{keys_str}
+
+Already detected conditions (do NOT repeat these): {', '.join(already_detected) if already_detected else 'none'}
+
+CRITICAL: distinguish between symptoms and diseases.
+- If the user names an ACTUAL DISEASE or DIAGNOSIS (e.g. "lupus", "celiac disease", "fibromyalgia"), put the mapped key in "disease_matches"
+- If the user describes SYMPTOMS (e.g. "cough", "runny nose", "chest pain", "fatigue"), put the mapped key in "symptom_matches" — symptoms are NOT confirmed diagnoses
+- If it truly cannot map to ANY of the 46, put the original term in "unmapped"
+- Be generous with mapping — most conditions relate to at least one of the 46
+- Return ONLY valid JSON, no other text
+
+Return JSON: {{"disease_matches": ["key1"], "symptom_matches": ["key2"], "unmapped": ["term1"]}}"""},
+                {"role": "user", "content": text},
+            ],
+            temperature=0,
+            response_format={"type": "json_object"},
+        )
+        result = json.loads(response.choices[0].message.content)
+        disease = [c for c in result.get("disease_matches", [])
+                   if c in CONDITION_TO_ICD and c not in already_detected]
+        symptom = [c for c in result.get("symptom_matches", [])
+                   if c in CONDITION_TO_ICD and c not in already_detected]
+        unmapped = result.get("unmapped", [])
+        return {"disease_matches": disease, "symptom_matches": symptom, "unmapped": unmapped}
+    except Exception:
+        return {"disease_matches": [], "symptom_matches": [], "unmapped": []}
+
+
+async def parse_patient_input(text: str) -> dict:
+    """
+    Parse natural language patient description into a structured profile.
+    Conditions are detected deterministically via keyword matching.
+    The LLM only extracts age, sex, and insurance type.
+    """
+    if not _is_health_related(text):
+        return {"off_topic": True}
+
+    # Detect conditions deterministically
+    conditions = detect_conditions(text)
+
+    # Use LLM only for demographics (age, sex, insurance)
+    age = None
+    sex = None
+    insurance_type = "unknown"
+
+    # Try to extract age from text directly
+    age_match = re.search(r"\b(\d{1,3})\s*(?:year|yr|y/?o|years?\s*old)\b", text.lower())
+    if age_match:
+        age = int(age_match.group(1))
+
+    # Try to extract sex from text directly
+    lower = text.lower()
+    if re.search(r"\b(male|man|boy|he|his)\b", lower) and not re.search(r"\bfe?male\b", lower):
+        sex = "M"
+    elif re.search(r"\b(female|woman|girl|she|her)\b", lower):
+        sex = "F"
+
+    # Try to extract insurance from text directly
+    if re.search(r"\bppo\b", lower):
+        insurance_type = "PPO"
+    elif re.search(r"\bhmo\b", lower):
+        insurance_type = "HMO"
+    elif re.search(r"\bhdhp\b", lower):
+        insurance_type = "HDHP"
+    elif re.search(r"\bmedicare\b", lower):
+        insurance_type = "MEDICARE"
+    elif re.search(r"\bmedicaid\b", lower):
+        insurance_type = "MEDICAID"
+    elif re.search(r"\buninsured\b", lower):
+        insurance_type = "NONE"
+
+    # Fall back to LLM only if we couldn't extract age
+    if age is None and client is not None:
+        try:
+            response = await client.chat.completions.create(
+                model="llama-3.3-70b-versatile",
+                messages=[
+                    {"role": "system", "content": """Extract ONLY the age, sex, and insurance type from the user's message.
+Return JSON: {"age": int or null, "sex": "M" or "F" or null, "insurance_type": "PPO"|"HMO"|"HDHP"|"unknown"}
+Do NOT extract or infer any medical conditions. Return ONLY valid JSON."""},
+                    {"role": "user", "content": text},
+                ],
+                temperature=0,
+                response_format={"type": "json_object"},
+            )
+            demographics = json.loads(response.choices[0].message.content)
+            if age is None and demographics.get("age"):
+                age = demographics["age"]
+            if sex is None and demographics.get("sex"):
+                sex = demographics["sex"]
+            if insurance_type == "unknown" and demographics.get("insurance_type", "unknown") != "unknown":
+                insurance_type = demographics["insurance_type"]
+        except Exception:
+            pass
+
+    # LLM fallback: if regex missed conditions, try to map via LLM
+    symptom_conditions = []
+    unmapped_conditions = []
+    if not conditions and client is not None:
+        resolved = await resolve_conditions(text, conditions)
+        conditions.extend(resolved["disease_matches"])
+        symptom_conditions = resolved["symptom_matches"]
+        unmapped_conditions = resolved["unmapped"]
+
+    return {
+        "off_topic": False,
+        "age": age,
+        "sex": sex,
+        "conditions": conditions,
+        "symptom_conditions": symptom_conditions,
+        "unmapped_conditions": unmapped_conditions,
+        "insurance_type": insurance_type,
+    }
 
 
 async def interpret_scenario(text: str, current_conditions: list[str]) -> dict:
@@ -71,8 +604,13 @@ async def interpret_scenario(text: str, current_conditions: list[str]) -> dict:
 
 The patient currently has: {', '.join(current_conditions)}
 
-Parse the user's what-if question. Return JSON with:
+First, determine if the user's message is related to health, medical conditions, diseases they already have, insurance, or care costs.
+If the message is NOT related to health/medical topics, return:
+{{"off_topic": true}}
+
+If it IS health-related, parse the user's what-if question. Return JSON with:
 {{
+  "off_topic": false,
   "intent": "add_intervention" | "remove_intervention" | "compare_plans" | "explain_risk" | "general_question",
   "interventions": ["intervention_1"],
   "plan_comparison": {{"plan_a": "...", "plan_b": "..."}} // only if intent is compare_plans
@@ -83,11 +621,10 @@ Available interventions: metformin, sglt2_inhibitor, statin, ace_inhibitor, life
 Return ONLY valid JSON, no other text."""},
             {"role": "user", "content": text},
         ],
-        temperature=0.1,
+        temperature=0,
         response_format={"type": "json_object"},
     )
 
-    import json
     return json.loads(response.choices[0].message.content)
 
 

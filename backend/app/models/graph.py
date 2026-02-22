@@ -9,6 +9,7 @@ class GraphNode(BaseModel):
     annual_cost: float = 0.0
     oop_estimate: float = 0.0
     year: int = 0
+    is_llm_generated: bool = False
 
 
 class GraphEdge(BaseModel):

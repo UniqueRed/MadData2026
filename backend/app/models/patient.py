@@ -15,3 +15,5 @@ class ScenarioRequest(BaseModel):
     profile: PatientProfile
     interventions: list[str] = []  # e.g. ["metformin", "lifestyle_change"]
     time_horizon_years: int = 5
+    symptom_conditions: list[str] = []  # symptom-derived conditions (possible, not confirmed)
+    unmapped_conditions: list[str] = []  # conditions outside the 46, for LLM fallback

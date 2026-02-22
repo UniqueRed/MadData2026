@@ -38,6 +38,7 @@ data/raw/
 *.parquet
 *.sas7bdat
 *.dat
+data
 
 # Supabase
 .supabase/

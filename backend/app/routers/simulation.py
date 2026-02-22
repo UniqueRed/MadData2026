@@ -10,10 +10,12 @@ router = APIRouter()
 @router.post("/pathway", response_model=CarePathwayGraph)
 async def generate_pathway(request: ScenarioRequest):
     """Generate a care pathway graph for the given patient profile and interventions."""
-    graph = simulate_pathway(
+    graph = await simulate_pathway(
         profile=request.profile,
         interventions=request.interventions,
         time_horizon_years=request.time_horizon_years,
+        symptom_conditions=request.symptom_conditions,
+        unmapped_conditions=request.unmapped_conditions,
     )
     return graph
 
@@ -27,7 +29,7 @@ async def compare_scenarios(
     """Compare multiple intervention scenarios side by side."""
     results = []
     for interventions in scenarios:
-        graph = simulate_pathway(
+        graph = await simulate_pathway(
             profile=profile,
             interventions=interventions,
             time_horizon_years=time_horizon_years,
