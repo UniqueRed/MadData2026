@@ -6,7 +6,7 @@ export default function LandingPage({ onGetStarted }) {
   return (
     <div className="landing">
       <div className="landing-hero">
-        <span className="landing-badge">Clinical-Financial Digital Twin</span>
+        <span className="landing-badge">Interactive Disease Progression & Insurance Cost Map</span>
         <h1 className="landing-headline">
           Know What Your Health <span className="text-purple">Will Cost</span>
         </h1>
