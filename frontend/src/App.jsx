@@ -8,9 +8,32 @@ import CostSummary from "./components/CostSummary";
 import LandingPage from "./components/LandingPage";
 import TabBar from "./components/TabBar";
 import ComparePlans from "./components/ComparePlans";
-import { generatePathway, parseProfile, parseScenario } from "./services/api";
+import { generatePathway, parseProfile, parseScenario, chatAboutHealth } from "./services/api";
 import { useAuth } from "./contexts/AuthContext";
 import "./App.css";
+
+function buildGraphSummary(graph) {
+  if (!graph) return {};
+  return {
+    total_5yr_cost: graph.total_5yr_cost,
+    total_5yr_oop: graph.total_5yr_oop,
+    conditions: graph.nodes
+      .filter((n) => n.node_type === "current")
+      .map((n) => n.label),
+    top_risks: graph.nodes
+      .filter((n) => n.node_type === "future" || n.node_type === "high_cost")
+      .sort((a, b) => b.probability - a.probability)
+      .slice(0, 5)
+      .map((n) => ({
+        label: n.label,
+        probability: n.probability,
+        annual_cost: n.annual_cost,
+      })),
+    interventions: graph.nodes
+      .filter((n) => n.node_type === "intervention")
+      .map((n) => n.label),
+  };
+}
 
 function App() {
   const { user, loading, signOut } = useAuth();
@@ -40,6 +63,17 @@ function App() {
     setMessages((prev) => [...prev, { role, text }]);
   };
 
+  const resetChat = useCallback(() => {
+    setGraph(null);
+    setBaselineGraph(null);
+    setSelectedNode(null);
+    setProfile(null);
+    setInterventions([]);
+    setMessages([]);
+    setPendingProfile(null);
+    setIsProcessing(false);
+  }, []);
+
   const startNewProfile = useCallback(
     async (parsed) => {
       const symptom = parsed.symptom_conditions || [];
@@ -61,10 +95,17 @@ function App() {
       const pathway = await generatePathway(newProfile, [], 5, symptom, unmapped, scores);
       setGraph(pathway);
       setBaselineGraph(pathway);
-      addMessage(
-        "system",
-        `Built your care pathway. ${pathway.nodes.length} health states mapped. 5-year projected out-of-pocket: $${Math.round(pathway.total_5yr_oop).toLocaleString()}.`
-      );
+      if (pathway.nodes.length === 0) {
+        addMessage(
+          "system",
+          "I wasn't able to map specific health states from that description. Could you try naming your conditions more directly? For example: \"I have diabetes and high blood pressure\" or \"I'm a 50-year-old woman with asthma.\""
+        );
+      } else {
+        addMessage(
+          "system",
+          `Built your care pathway. ${pathway.nodes.length} health states mapped. 5-year projected out-of-pocket: $${Math.round(pathway.total_5yr_oop).toLocaleString()}.`
+        );
+      }
     },
     []
   );
@@ -128,7 +169,7 @@ function App() {
               `Updated pathway with ${scenario.interventions.join(", ")}. ${savings > 0 ? `Estimated 5-year savings: $${savings.toLocaleString()}.` : ""}`
             );
           } else {
-            // Not an intervention — check if it's a new profile
+            // Check if it looks like a new profile
             const parsed = await parseProfile(text);
             if (!parsed.off_topic && !parsed.error && parsed.conditions?.length) {
               setPendingProfile(parsed);
@@ -136,10 +177,11 @@ function App() {
                 "system",
                 `It looks like you're describing a new patient (${parsed.age || "unknown age"}, ${parsed.conditions.join(", ")}). Would you like to start a new chat?`
               );
-            } else if (scenario.off_topic) {
-              addMessage("system", "Sorry, I can only help with health and cost-related questions. Try asking something like \"What if I start Metformin?\" or \"What's my biggest financial risk?\"");
             } else {
-              addMessage("system", "I understood your question. The graph shows the current projection based on your profile.");
+              // Conversational catch-all — send to LLM with full context
+              const graphSummary = buildGraphSummary(graph);
+              const response = await chatAboutHealth(text, profile, graphSummary, messages);
+              addMessage("system", response);
             }
           }
         }
@@ -254,6 +296,14 @@ function App() {
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                   </svg>
                   <span>Conversation</span>
+                  {(profile || messages.length > 0) && (
+                    <button className="new-chat-btn" onClick={resetChat} title="New Chat">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
+                      </svg>
+                      New Chat
+                    </button>
+                  )}
                 </div>
                 <div className="messages">
                   {messages.length === 0 && !isProcessing && (

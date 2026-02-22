@@ -5,6 +5,7 @@ from app.services.voice_agent import (
     parse_patient_input,
     interpret_scenario,
     generate_explanation,
+    chat_about_health,
 )
 
 router = APIRouter()
@@ -18,6 +19,13 @@ class TextInput(BaseModel):
 class ExplanationRequest(BaseModel):
     graph_data: dict
     question: str
+
+
+class ChatRequest(BaseModel):
+    text: str
+    profile: dict = {}
+    graph_summary: dict = {}
+    messages: list[dict] = []
 
 
 @router.post("/parse-profile")
@@ -39,3 +47,15 @@ async def explain(request: ExplanationRequest):
     """Generate natural language explanation of simulation results."""
     explanation = await generate_explanation(request.graph_data, request.question)
     return {"explanation": explanation}
+
+
+@router.post("/chat")
+async def chat(request: ChatRequest):
+    """Conversational endpoint — answer any health/cost question with full patient context."""
+    response = await chat_about_health(
+        question=request.text,
+        profile=request.profile,
+        graph_summary=request.graph_summary,
+        conversation=request.messages,
+    )
+    return {"response": response}

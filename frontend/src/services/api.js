@@ -67,4 +67,14 @@ export async function getExplanation(graphData, question) {
   return data.explanation;
 }
 
+export async function chatAboutHealth(text, profile, graphSummary, messages) {
+  const { data } = await api.post("/voice/chat", {
+    text,
+    profile,
+    graph_summary: graphSummary,
+    messages,
+  });
+  return data.response;
+}
+
 export default api;

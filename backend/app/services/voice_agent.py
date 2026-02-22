@@ -257,9 +257,10 @@ CONDITION_PATTERNS: dict[str, list[str]] = {
         r"\bra\b.*\barthrit",
         r"\bpolyarthrit",
         r"\brheumatoid\b",
-        r"\bjoint\w*\b.*\b(inflam|swollen|stiff|pain|hurt|ache|sore|bad)",
+        r"\bjoint\w*\b.*\b(inflam|swoll|swell|stiff|pain|hurt|ache|sore|bad)",
+        r"\b(swell|swoll|inflam)\w*\b.*\bjoint",
         r"\barthrit",
-        r"\b(stiff|swollen|painful)\s*joint",
+        r"\b(stiff|swollen|swelling|painful)\s*joint",
     ],
     "arthrosis": [
         r"\barthrosis",
@@ -463,7 +464,7 @@ def _is_health_related(text: str) -> bool:
         r"\bi\s+(feel|am|'m)\s+(sick|ill|dizzy|nauseous|weak|tired|exhausted|depressed|anxious|bloated|short of breath|light\s*headed)",
         r"\b(can\s*not|can'?t|cannot|couldn'?t|have\s+trouble|unable\s+to)\s+(breathe|sleep|walk|see|hear|move|swallow|eat|focus|remember)",
         # "something hurts/aches/is wrong"
-        r"\b(hurts|aching|aches|swollen|sore|painful|stiff|numb|bleeding|burning|itching|cramping)\b",
+        r"\b(hurts|aching|aches|swollen|swelling|sore|painful|stiff|numb|bleeding|burning|itching|cramping)\b",
     ]
 
     # Body parts — if ANY body part is mentioned, this is likely health-related
@@ -694,6 +695,8 @@ async def parse_patient_input(text: str) -> dict:
         insurance_type = "MEDICAID"
     elif re.search(r"\buninsured\b", lower):
         insurance_type = "NONE"
+    elif re.search(r"\b(poverty|poor|low[\s-]*income|can'?t\s*afford|no\s*(health\s*)?insurance|broke)\b", lower):
+        insurance_type = "MEDICAID"
 
     # Fall back to LLM only if we couldn't extract age
     if age is None and client is not None:
@@ -777,6 +780,82 @@ Return ONLY valid JSON, no other text."""},
     )
 
     return json.loads(response.choices[0].message.content)
+
+
+async def chat_about_health(
+    question: str,
+    profile: dict,
+    graph_summary: dict,
+    conversation: list[dict],
+) -> str:
+    """
+    Conversational catch-all: answer any health/cost question using
+    the patient's profile and graph data as context.
+    """
+    if client is None:
+        return "Voice agent not configured. Set GROQ_API_KEY."
+
+    # Build context block the LLM can reference
+    context_parts = []
+    if profile:
+        context_parts.append(f"Patient profile: age {profile.get('age', 'unknown')}, "
+                             f"sex {profile.get('sex', 'unknown')}, "
+                             f"conditions: {', '.join(profile.get('conditions', []))}, "
+                             f"insurance: {profile.get('insurance_type', 'unknown')}")
+    if graph_summary:
+        if graph_summary.get("total_5yr_cost"):
+            context_parts.append(f"Projected 5-year total cost: ${graph_summary['total_5yr_cost']:,.0f}")
+        if graph_summary.get("total_5yr_oop"):
+            context_parts.append(f"Projected 5-year out-of-pocket: ${graph_summary['total_5yr_oop']:,.0f}")
+        if graph_summary.get("conditions"):
+            context_parts.append(f"Current conditions on graph: {', '.join(graph_summary['conditions'])}")
+        if graph_summary.get("top_risks"):
+            risks_str = "; ".join(
+                f"{r['label']} ({r['probability']:.0%} likelihood, ~${r['annual_cost']:,.0f}/yr)"
+                for r in graph_summary["top_risks"]
+            )
+            context_parts.append(f"Top projected risks: {risks_str}")
+        if graph_summary.get("interventions"):
+            context_parts.append(f"Active interventions: {', '.join(graph_summary['interventions'])}")
+
+    context_block = "\n".join(context_parts) if context_parts else "No patient data available."
+
+    system_msg = SYSTEM_PROMPT + f"""
+
+You have the following data about this patient's projected care pathway:
+{context_block}
+
+RULES:
+- Use ONLY the numbers above — NEVER invent costs or probabilities.
+- If the patient asks about a risk, reference the top risks and their likelihood.
+- If the patient asks what to do, suggest interventions they can add. The available
+  interventions in the system are: Metformin, SGLT2 inhibitors, statins, ACE inhibitors,
+  and lifestyle changes (diet, exercise, weight management, smoking cessation, etc.).
+  ALWAYS describe interventions in plain, patient-friendly language — NEVER output
+  raw system keys like "lifestyle_change" or "sglt2_inhibitor". Say "lifestyle changes"
+  or "an SGLT2 inhibitor" instead.
+- Keep responses concise (2-4 sentences) — this is a voice interface.
+- Be warm, direct, and actionable.
+- NEVER expose internal system keys or code-style names to the patient."""
+
+    llm_messages = [{"role": "system", "content": system_msg}]
+
+    # Add recent conversation history (last 10 exchanges) for follow-up context
+    for msg in conversation[-10:]:
+        role = "assistant" if msg.get("role") == "system" else "user"
+        llm_messages.append({"role": role, "content": msg.get("text", "")})
+
+    # Add current question if not already the last message
+    if not conversation or conversation[-1].get("text") != question:
+        llm_messages.append({"role": "user", "content": question})
+
+    response = await client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=llm_messages,
+        temperature=0.3,
+    )
+
+    return response.choices[0].message.content
 
 
 async def generate_explanation(graph_data: dict, question: str) -> str:

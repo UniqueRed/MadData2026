@@ -1,11 +1,32 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
+
+const MAX_LISTEN_MS = 60000; // 1 minute max
 
 export default function VoiceOrb({ onTranscript, isProcessing }) {
   const [isListening, setIsListening] = useState(false);
   const recognitionRef = useRef(null);
+  const timerRef = useRef(null);
+
+  const stopListening = useCallback(() => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+    if (recognitionRef.current) {
+      recognitionRef.current.stop();
+    }
+    setIsListening(false);
+  }, []);
+
+  // Clean up on unmount
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+      if (recognitionRef.current) recognitionRef.current.stop();
+    };
+  }, []);
 
   const startListening = useCallback(() => {
-    // Use browser SpeechRecognition as fallback; Deepgram WebSocket can replace this
     const SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -15,42 +36,48 @@ export default function VoiceOrb({ onTranscript, isProcessing }) {
     }
 
     const recognition = new SpeechRecognition();
-    recognition.continuous = false;
+    recognition.continuous = true;
     recognition.interimResults = false;
     recognition.lang = "en-US";
 
     recognition.onresult = (event) => {
-      const text = event.results[0][0].transcript;
-      setIsListening(false);
-      if (onTranscript) onTranscript(text);
+      // Grab the latest final result
+      const last = event.results[event.results.length - 1];
+      if (last.isFinal) {
+        const text = last[0].transcript;
+        stopListening();
+        if (onTranscript) onTranscript(text);
+      }
     };
 
     recognition.onerror = () => {
-      setIsListening(false);
+      stopListening();
     };
 
     recognition.onend = () => {
       setIsListening(false);
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
     };
 
     recognitionRef.current = recognition;
     recognition.start();
     setIsListening(true);
-  }, [onTranscript]);
 
-  const stopListening = useCallback(() => {
-    if (recognitionRef.current) {
-      recognitionRef.current.stop();
-    }
-    setIsListening(false);
-  }, []);
+    // Auto-stop after 1 minute
+    timerRef.current = setTimeout(() => {
+      stopListening();
+    }, MAX_LISTEN_MS);
+  }, [onTranscript, stopListening]);
 
   return (
     <button
       className={`voice-orb ${isListening ? "listening" : ""} ${isProcessing ? "processing" : ""}`}
       onClick={isListening ? stopListening : startListening}
       disabled={isProcessing}
-      title={isListening ? "Stop listening" : "Start speaking"}
+      title={isListening ? "Click to stop" : "Click to speak"}
     >
       <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
         <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" />
