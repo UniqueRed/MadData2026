@@ -82,7 +82,7 @@ export default function CostSummary({ graph, comparisonGraph, selectedNode }) {
         </div>
         {selectedNode.probability != null && selectedNode.probability < 1 && (
           <div className="cost-row">
-            <span>Likelihood</span>
+            <span>Associated Risk Probability</span>
             <span className="cost-value">{(selectedNode.probability * 100).toFixed(1)}%</span>
           </div>
         )}
