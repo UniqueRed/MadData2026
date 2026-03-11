@@ -11,6 +11,7 @@ standalone progression nodes (last resort only).
 """
 
 import json
+import re
 from groq import AsyncGroq
 from app.config import GROQ_API_KEY
 from app.models.patient import PatientProfile
@@ -808,8 +809,20 @@ async def simulate_pathway(
 
     # Process unmapped conditions (LLM last resort)
     # Skip any that overlap with confirmed conditions (e.g. "asthma" when "asthma_copd" is confirmed)
+    # Also filter out demographics that may have leaked through
+    _demographic_re = re.compile(
+        r"^(\d{1,3}\s*(?:yo|y/?o|years?\s*old|yr|yrs)?|"
+        r"age\s*\d{1,3}|"
+        r"male|female|man|woman|boy|girl|m|f|"
+        r"(?:ppo|hmo|hdhp|medicare|medicaid|cobra|tricare)(?:\s*plan)?|"
+        r"insurance|plan|uninsured|insured)$",
+        re.IGNORECASE,
+    )
     for cond_text in unmapped_conditions:
         cond_key = cond_text.lower().replace(" ", "_")
+        # Skip demographics / insurance terms
+        if _demographic_re.match(cond_text.strip()):
+            continue
         # Check if this unmapped term overlaps with any confirmed condition
         if any(cond_key in c or c in cond_key for c in _confirmed_set):
             continue

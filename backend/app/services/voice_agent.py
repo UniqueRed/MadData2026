@@ -613,6 +613,7 @@ CRITICAL: distinguish between symptoms and diseases.
 - IMPORTANT: use ONLY exact keys from the list above. Do NOT invent keys or combine them (e.g. use "gerd" not "gerd_gastritis", use "cad" not "coronary_artery_disease").
 - For vague symptoms, return up to 3 of the MOST LIKELY causes from the 46 keys (ranked by clinical likelihood). Do not return more than 3 symptom matches.
 - Only put something in "unmapped" if it is truly NOT a health symptom or condition (e.g. a name, a place). If the user describes ANY bodily symptom, you MUST map it to at least one condition key.
+- NEVER return demographics as conditions or unmapped terms. Age (e.g. "55yo", "55 years old"), sex (e.g. "female", "male"), and insurance type (e.g. "PPO plan", "HMO") are NOT conditions — ignore them completely.
 - Be generous with mapping — most conditions relate to at least one of the 46
 - Return ONLY valid JSON, no other text
 
@@ -651,9 +652,30 @@ Return JSON: {{"disease_matches": ["key1"], "symptom_matches": [{{"condition": "
         symptom_scores = {k: symptom_scores[k] for k in symptom}
 
         unmapped = result.get("unmapped", [])
-        # Filter out insurance terms from unmapped
-        insurance_terms = {"ppo", "hmo", "hdhp", "medicare", "medicaid", "cobra", "tricare"}
-        unmapped = [u for u in unmapped if u.lower().strip() not in insurance_terms]
+        # Filter out demographic / insurance / non-condition terms from unmapped
+        _non_condition_terms = {
+            "ppo", "hmo", "hdhp", "medicare", "medicaid", "cobra", "tricare",
+            "ppo plan", "hmo plan", "hdhp plan", "insurance", "plan",
+            "male", "female", "man", "woman", "boy", "girl",
+            "uninsured", "insured", "no insurance",
+        }
+        def _is_non_condition(term: str) -> bool:
+            t = term.lower().strip()
+            if t in _non_condition_terms:
+                return True
+            # Filter age-like terms: "55yo", "55 years old", "age 55", etc.
+            if re.match(r"^\d{1,3}\s*(?:yo|y/?o|years?\s*old|yr|yrs)?$", t):
+                return True
+            if re.match(r"^age\s*\d{1,3}$", t):
+                return True
+            # Filter sex/gender terms
+            if re.match(r"^(?:male|female|man|woman|m|f)$", t):
+                return True
+            # Filter insurance plan references
+            if re.search(r"\b(?:ppo|hmo|hdhp|medicare|medicaid|cobra|tricare|insurance|plan)\b", t):
+                return True
+            return False
+        unmapped = [u for u in unmapped if not _is_non_condition(u)]
 
         # Filter unmapped terms that overlap with already-detected conditions.
         # e.g. "asthma" should be dropped if "asthma_copd" is already detected.
