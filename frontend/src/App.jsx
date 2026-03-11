@@ -64,6 +64,9 @@ function App() {
   }, [messages, isProcessing]);
 
   useEffect(() => {
+    if (!loading && user && currentView === "landing") {
+      setCurrentView("simulate");
+    }
     if (!loading && !user && currentView !== "landing") {
       setCurrentView("landing");
     }
@@ -437,47 +440,43 @@ function App() {
 
   return (
     <div className="app">
-      <header className="app-header">
-        <h1
-          className="logo-link"
-          onClick={handleLogoClick}
-        >
-          lotus
-          <svg className="logo-icon" width="36" height="36" viewBox="0 0 100 100" fill="none">
-            {/* center petal */}
-            <ellipse cx="50" cy="38" rx="10" ry="28" fill="#e8548e"/>
-            {/* inner left/right petals */}
-            <ellipse cx="50" cy="38" rx="10" ry="26" fill="#f472b6" transform="rotate(-25 50 55)"/>
-            <ellipse cx="50" cy="38" rx="10" ry="26" fill="#f472b6" transform="rotate(25 50 55)"/>
-            {/* outer left/right petals */}
-            <ellipse cx="50" cy="40" rx="9" ry="24" fill="#f9a8c9" transform="rotate(-50 50 58)"/>
-            <ellipse cx="50" cy="40" rx="9" ry="24" fill="#f9a8c9" transform="rotate(50 50 58)"/>
-            {/* yellow center */}
-            <circle cx="50" cy="52" r="6" fill="#eab308"/>
-            <circle cx="50" cy="52" r="3.5" fill="#fde68a"/>
-          </svg>
-        </h1>
-        <div className="header-spacer" />
-        {currentView !== "landing" && (
+      {currentView !== "landing" && (
+        <header className="app-header">
+          <h1
+            className="logo-link"
+            onClick={handleLogoClick}
+          >
+            lotus
+            <svg className="logo-icon" width="36" height="36" viewBox="0 0 100 100" fill="none">
+              <ellipse cx="50" cy="38" rx="10" ry="28" fill="#e8548e"/>
+              <ellipse cx="50" cy="38" rx="10" ry="26" fill="#f472b6" transform="rotate(-25 50 55)"/>
+              <ellipse cx="50" cy="38" rx="10" ry="26" fill="#f472b6" transform="rotate(25 50 55)"/>
+              <ellipse cx="50" cy="40" rx="9" ry="24" fill="#f9a8c9" transform="rotate(-50 50 58)"/>
+              <ellipse cx="50" cy="40" rx="9" ry="24" fill="#f9a8c9" transform="rotate(50 50 58)"/>
+              <circle cx="50" cy="52" r="6" fill="#eab308"/>
+              <circle cx="50" cy="52" r="3.5" fill="#fde68a"/>
+            </svg>
+          </h1>
+          <div className="header-spacer" />
           <TabBar
             activeTab={currentView}
             onTabChange={setCurrentView}
           />
-        )}
-        {user && (
-          <div className="user-menu">
-            <img
-              className="user-avatar"
-              src={user.user_metadata?.avatar_url}
-              alt=""
-              referrerPolicy="no-referrer"
-            />
-            <button className="sign-out-btn" onClick={signOut}>
-              Sign Out
-            </button>
-          </div>
-        )}
-      </header>
+          {user && (
+            <div className="user-menu">
+              <img
+                className="user-avatar"
+                src={user.user_metadata?.avatar_url}
+                alt=""
+                referrerPolicy="no-referrer"
+              />
+              <button className="sign-out-btn" onClick={signOut}>
+                Sign Out
+              </button>
+            </div>
+          )}
+        </header>
+      )}
 
       {currentView === "landing" && (
         <LandingPage onGetStarted={() => setCurrentView("simulate")} />
