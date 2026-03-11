@@ -79,6 +79,7 @@ export default function Dashboard({ graph, comparisonGraph, onNodeSelect }) {
   const {
     totalCost,
     totalOop,
+    totalDrugCost,
     currentNodes,
     futureNodes,
     highCostNodes,
@@ -92,6 +93,7 @@ export default function Dashboard({ graph, comparisonGraph, onNodeSelect }) {
       return {
         totalCost: 0,
         totalOop: 0,
+        totalDrugCost: 0,
         currentNodes: [],
         futureNodes: [],
         highCostNodes: [],
@@ -146,6 +148,7 @@ export default function Dashboard({ graph, comparisonGraph, onNodeSelect }) {
     return {
       totalCost: graph.total_5yr_cost || 0,
       totalOop: graph.total_5yr_oop || 0,
+      totalDrugCost: graph.total_5yr_drug_cost || 0,
       currentNodes: current,
       futureNodes: future,
       highCostNodes: highCost,
@@ -181,6 +184,8 @@ export default function Dashboard({ graph, comparisonGraph, onNodeSelect }) {
         probability: node.probability,
         annualCost: node.annual_cost,
         oopEstimate: node.oop_estimate,
+        drugCost: node.drug_cost || 0,
+        drugOop: node.drug_oop || 0,
         year: node.year,
       });
     }
@@ -202,6 +207,14 @@ export default function Dashboard({ graph, comparisonGraph, onNodeSelect }) {
           </span>
           <span className="dashboard-card-label">5-Year Out-of-Pocket</span>
         </div>
+        {totalDrugCost > 0 && (
+          <div className="dashboard-card">
+            <span className="dashboard-card-value drug">
+              ${Math.round(totalDrugCost).toLocaleString()}
+            </span>
+            <span className="dashboard-card-label">5-Year Rx Drug Costs</span>
+          </div>
+        )}
         <div className="dashboard-card">
           <span className="dashboard-card-value">
             {futureNodes.length + highCostNodes.length}
@@ -212,7 +225,7 @@ export default function Dashboard({ graph, comparisonGraph, onNodeSelect }) {
           {highestRisk ? (
             <>
               <span className="dashboard-card-value risk">
-                {(highestRisk.probability * 100).toFixed(0)}%
+                {(highestRisk.probability * 100).toFixed(1)}%
               </span>
               <span className="dashboard-card-label">
                 {highestRisk.label?.split("\n")[0]}
@@ -272,7 +285,7 @@ export default function Dashboard({ graph, comparisonGraph, onNodeSelect }) {
                     </div>
                   </div>
                   <div className="dashboard-risk-meta">
-                    <span className="dashboard-risk-prob">{prob.toFixed(0)}%</span>
+                    <span className="dashboard-risk-prob">{prob.toFixed(1)}%</span>
                     <span className="dashboard-risk-cost">
                       ${Math.round(node.annual_cost || 0).toLocaleString()}/yr
                     </span>
@@ -375,7 +388,7 @@ export default function Dashboard({ graph, comparisonGraph, onNodeSelect }) {
                         </span>
                         {node.node_type !== "current" && (
                           <span className="dashboard-chip-prob">
-                            {prob.toFixed(0)}%
+                            {prob.toFixed(1)}%
                           </span>
                         )}
                       </div>

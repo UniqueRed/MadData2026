@@ -77,4 +77,11 @@ export async function chatAboutHealth(text, profile, graphSummary, messages) {
   return data.response;
 }
 
+export async function getDrugsForCondition(condition, limit = 3) {
+  const { data } = await api.get("/drugs/by-condition", {
+    params: { condition, limit },
+  });
+  return data.drugs;
+}
+
 export default api;

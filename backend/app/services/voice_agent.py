@@ -560,9 +560,10 @@ async def _llm_is_health_related(text: str) -> bool:
             messages=[
                 {"role": "system", "content": """Determine if the user's message describes a health symptom, medical condition, disease, physical complaint, or anything related to their body/health.
 Return JSON: {"health_related": true} or {"health_related": false}
-Be GENEROUS — if there's any chance the user is describing a health issue, return true.
-Examples that ARE health-related: "I've been throwing up", "my feet are weird", "I can't stop scratching", "something is wrong with my stomach", "I feel off", "I have a rash"
-Examples that are NOT health-related: "hello", "what's the weather", "tell me a joke", random names, gibberish"""},
+Be reasonable — the message should clearly relate to health, symptoms, or medical conditions.
+Do NOT return true for random words, objects, jokes, gibberish, or things that aren't medical.
+Examples that ARE health-related: "I've been throwing up", "my feet are weird", "I can't stop scratching", "something is wrong with my stomach", "I feel off", "I have a rash", "diagnosed with cancer"
+Examples that are NOT health-related: "hello", "what's the weather", "tell me a joke", "I have a black truck", "can dancer", random words, names of objects/animals, gibberish"""},
                 {"role": "user", "content": text},
             ],
             temperature=0,
@@ -811,6 +812,13 @@ If it IS health-related, parse the user's what-if question. Return JSON with:
 
 Available interventions: metformin, sglt2_inhibitor, statin, ace_inhibitor, lifestyle_change
 
+IMPORTANT: Only suggest interventions that directly treat the patient's CURRENT conditions.
+Do NOT suggest statins unless the patient has high_cholesterol or cad.
+Do NOT suggest metformin unless the patient has diabetes or pre-diabetes.
+Do NOT suggest ace_inhibitor unless the patient has hypertension, ckd, or heart_failure.
+Do NOT suggest sglt2_inhibitor unless the patient has diabetes, ckd, or heart_failure.
+lifestyle_change is appropriate for any condition.
+
 Return ONLY valid JSON, no other text."""},
             {"role": "user", "content": text},
         ],
@@ -849,11 +857,14 @@ async def chat_about_health(
         if graph_summary.get("conditions"):
             context_parts.append(f"Current conditions on graph: {', '.join(graph_summary['conditions'])}")
         if graph_summary.get("top_risks"):
-            risks_str = "; ".join(
-                f"{r['label']} ({r['probability']:.0%} likelihood, ~${r['annual_cost']:,.0f}/yr)"
-                for r in graph_summary["top_risks"]
-            )
-            context_parts.append(f"Top projected risks: {risks_str}")
+            # Only include risks above 5% to avoid weak associations triggering bad recommendations
+            relevant_risks = [r for r in graph_summary["top_risks"] if r.get("probability", 0) >= 0.05]
+            if relevant_risks:
+                risks_str = "; ".join(
+                    f"{r['label']} ({r['probability']:.0%} likelihood, ~${r['annual_cost']:,.0f}/yr)"
+                    for r in relevant_risks
+                )
+                context_parts.append(f"Top projected risks: {risks_str}")
         if graph_summary.get("interventions"):
             context_parts.append(f"Active interventions: {', '.join(graph_summary['interventions'])}")
 
@@ -873,6 +884,15 @@ RULES:
   ALWAYS describe interventions in plain, patient-friendly language — NEVER output
   raw system keys like "lifestyle_change" or "sglt2_inhibitor". Say "lifestyle changes"
   or "an SGLT2 inhibitor" instead.
+- CRITICAL: Only recommend interventions that DIRECTLY treat or prevent complications of
+  the patient's CURRENT diagnosed conditions. Do NOT recommend medications based on
+  low-probability future risks or weak statistical associations. For example:
+  * Do NOT suggest statins for a patient whose only condition is back pain, even if
+    high cholesterol appears as a future risk in the projection.
+  * DO suggest statins for a patient who actually HAS high cholesterol or coronary artery disease.
+  * For prevention advice ("how can I prevent X?"), give the kind of advice a primary care
+    doctor would give for that SPECIFIC complaint — not generic suggestions based on
+    unrelated comorbidity projections.
 - Keep responses concise (2-4 sentences) — this is a voice interface.
 - Be warm, direct, and actionable.
 - NEVER expose internal system keys or code-style names to the patient."""

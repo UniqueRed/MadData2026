@@ -112,6 +112,12 @@ export default function CostSummary({ graph, comparisonGraph, selectedNode }) {
         <span>Out-of-Pocket</span>
         <span className="cost-value oop">${Math.round(graph.total_5yr_oop).toLocaleString()}</span>
       </div>
+      {graph.total_5yr_drug_cost > 0 && (
+        <div className="cost-row">
+          <span>Rx Drug Costs</span>
+          <span className="cost-value drug">${Math.round(graph.total_5yr_drug_cost).toLocaleString()}</span>
+        </div>
+      )}
       {savings !== null && savings > 0 && (
         <div className="cost-row savings">
           <span>Estimated Savings</span>

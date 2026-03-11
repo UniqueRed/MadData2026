@@ -1,3 +1,6 @@
+import { useState, useEffect } from "react";
+import { getDrugsForCondition } from "../services/api";
+
 const NODE_TYPE_INFO = {
   current: { label: "Current Condition", color: "#e8548e" },
   future: { label: "Possible Future", color: "#eab308" },
@@ -65,13 +68,263 @@ const CONDITION_DESCRIPTIONS = {
   "Hypotension": "Abnormally low blood pressure that can cause dizziness, fainting, and fatigue.",
 };
 
-export default function NodeDetail({ node, onClose }) {
+// Map drug generic names to simulation intervention keys
+const DRUG_TO_INTERVENTION = {
+  // Metformin
+  metformin: "metformin",
+  // SGLT2 inhibitors
+  "empagliflozin": "sglt2_inhibitor",
+  "dapagliflozin": "sglt2_inhibitor",
+  "canagliflozin": "sglt2_inhibitor",
+  "ertugliflozin": "sglt2_inhibitor",
+  // Statins
+  "atorvastatin": "statin",
+  "rosuvastatin": "statin",
+  "simvastatin": "statin",
+  "pravastatin": "statin",
+  "lovastatin": "statin",
+  "pitavastatin": "statin",
+  "fluvastatin": "statin",
+  // ACE inhibitors
+  "lisinopril": "ace_inhibitor",
+  "enalapril": "ace_inhibitor",
+  "ramipril": "ace_inhibitor",
+  "benazepril": "ace_inhibitor",
+  "captopril": "ace_inhibitor",
+  "fosinopril": "ace_inhibitor",
+  "quinapril": "ace_inhibitor",
+  "perindopril": "ace_inhibitor",
+  // ARBs (similar mechanism to ACE inhibitors)
+  "losartan": "arb",
+  "valsartan": "arb",
+  "irbesartan": "arb",
+  "candesartan": "arb",
+  "olmesartan": "arb",
+  "telmisartan": "arb",
+  // Calcium channel blockers
+  "amlodipine": "ccb",
+  "nifedipine": "ccb",
+  "diltiazem": "ccb",
+  "verapamil": "ccb",
+  "felodipine": "ccb",
+  // Beta blockers
+  "metoprolol": "beta_blocker",
+  "atenolol": "beta_blocker",
+  "propranolol": "beta_blocker",
+  "carvedilol": "beta_blocker",
+  "bisoprolol": "beta_blocker",
+  "nebivolol": "beta_blocker",
+  // Alpha blockers (for prostatic hyperplasia / hypertension)
+  "tamsulosin": "alpha_blocker",
+  "doxazosin": "alpha_blocker",
+  "terazosin": "alpha_blocker",
+  "alfuzosin": "alpha_blocker",
+  // Diuretics
+  "hydrochlorothiazide": "diuretic",
+  "furosemide": "diuretic",
+  "chlorthalidone": "diuretic",
+  "spironolactone": "diuretic",
+  // GLP-1 receptor agonists
+  "semaglutide": "glp1_agonist",
+  "liraglutide": "glp1_agonist",
+  "dulaglutide": "glp1_agonist",
+  "exenatide": "glp1_agonist",
+  // SSRIs / antidepressants
+  "sertraline": "ssri",
+  "fluoxetine": "ssri",
+  "escitalopram": "ssri",
+  "citalopram": "ssri",
+  "paroxetine": "ssri",
+  // Anticoagulants
+  "warfarin": "anticoagulant",
+  "apixaban": "anticoagulant",
+  "rivaroxaban": "anticoagulant",
+  "dabigatran": "anticoagulant",
+  // Proton pump inhibitors
+  "omeprazole": "ppi",
+  "pantoprazole": "ppi",
+  "esomeprazole": "ppi",
+  "lansoprazole": "ppi",
+  // Bronchodilators / inhalers
+  "albuterol": "bronchodilator",
+  "tiotropium": "bronchodilator",
+  "fluticasone": "bronchodilator",
+  "budesonide": "bronchodilator",
+  "montelukast": "bronchodilator",
+};
+
+const INTERVENTION_LABELS = {
+  metformin: "Metformin",
+  sglt2_inhibitor: "SGLT2 inhibitor",
+  statin: "Statin therapy",
+  ace_inhibitor: "ACE inhibitor",
+  arb: "ARB therapy",
+  ccb: "Calcium channel blocker",
+  beta_blocker: "Beta blocker",
+  alpha_blocker: "Alpha blocker",
+  diuretic: "Diuretic therapy",
+  glp1_agonist: "GLP-1 agonist",
+  ssri: "Antidepressant (SSRI)",
+  anticoagulant: "Anticoagulant therapy",
+  ppi: "Proton pump inhibitor",
+  bronchodilator: "Bronchodilator therapy",
+  lifestyle_change: "Lifestyle changes",
+};
+
+function matchDrugToIntervention(genericName) {
+  if (!genericName) return null;
+  const lower = genericName.toLowerCase();
+  for (const [drug, key] of Object.entries(DRUG_TO_INTERVENTION)) {
+    if (lower.includes(drug)) return key;
+  }
+  return null;
+}
+
+/**
+ * Extract the condition key from a node ID.
+ * e.g. "current_diabetes" → "diabetes", "future_ckd_y1" → "ckd"
+ */
+function conditionKeyFromId(id) {
+  if (!id) return null;
+  // Remove prefix: current_, future_, suspected_, llm_
+  let key = id.replace(/^(current_|future_|suspected_|llm_)/, "");
+  // Remove year suffix: _y1, _y2, etc.
+  key = key.replace(/_y\d+$/, "");
+  return key || null;
+}
+
+function FdaDrugInfo({ conditionKey, onAddIntervention, activeInterventions }) {
+  const [drugs, setDrugs] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [expanded, setExpanded] = useState(null); // which drug index is expanded
+
+  useEffect(() => {
+    if (!conditionKey) return;
+    let cancelled = false;
+    setLoading(true);
+    setDrugs(null);
+    setExpanded(null);
+    getDrugsForCondition(conditionKey, 3)
+      .then((d) => { if (!cancelled) setDrugs(d); })
+      .catch(() => { if (!cancelled) setDrugs([]); })
+      .finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
+  }, [conditionKey]);
+
+  if (loading) {
+    return (
+      <div className="fda-drugs-section">
+        <div className="fda-drugs-header">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>
+          <span>FDA-Approved Treatments</span>
+        </div>
+        <div className="fda-drugs-loading">
+          <span className="typing-indicator"><span></span><span></span><span></span></span>
+        </div>
+      </div>
+    );
+  }
+
+  if (!drugs || drugs.length === 0) return null;
+
+  return (
+    <div className="fda-drugs-section">
+      <div className="fda-drugs-header">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>
+        <span>FDA-Approved Treatments</span>
+      </div>
+      <div className="fda-drugs-list">
+        {drugs.map((drug, i) => {
+          const interventionKey = matchDrugToIntervention(drug.generic_name);
+          const alreadyActive = interventionKey && activeInterventions?.includes(interventionKey);
+          return (
+            <div key={i} className="fda-drug-card">
+              <div
+                className="fda-drug-card-header"
+                onClick={() => setExpanded(expanded === i ? null : i)}
+              >
+                <div className="fda-drug-names">
+                  <span className="fda-drug-brand">{drug.brand_name || drug.generic_name}</span>
+                  {drug.generic_name && drug.brand_name && (
+                    <span className="fda-drug-generic">{drug.generic_name}</span>
+                  )}
+                </div>
+                <div className="fda-drug-meta">
+                  {drug.route && <span className="fda-drug-route">{drug.route}</span>}
+                  <svg
+                    width="10" height="10" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+                    className={`fda-drug-chevron${expanded === i ? " open" : ""}`}
+                  >
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </div>
+              </div>
+              {expanded === i && (
+                <div className="fda-drug-details">
+                  {drug.warnings && (
+                    <div className="fda-drug-detail-block">
+                      <span className="fda-detail-label warning">Warnings</span>
+                      <p>{drug.warnings}</p>
+                    </div>
+                  )}
+                  {drug.adverse_reactions && (
+                    <div className="fda-drug-detail-block">
+                      <span className="fda-detail-label">Side Effects</span>
+                      <p>{drug.adverse_reactions}</p>
+                    </div>
+                  )}
+                  {drug.drug_interactions && (
+                    <div className="fda-drug-detail-block">
+                      <span className="fda-detail-label">Interactions</span>
+                      <p>{drug.drug_interactions}</p>
+                    </div>
+                  )}
+                  <div className="fda-drug-source">Source: openFDA Drug Labels</div>
+                </div>
+              )}
+              {interventionKey && onAddIntervention && (
+                <button
+                  className={`fda-drug-simulate${alreadyActive ? " active" : ""}`}
+                  disabled={alreadyActive}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onAddIntervention(interventionKey, INTERVENTION_LABELS[interventionKey] || interventionKey);
+                  }}
+                >
+                  {alreadyActive ? (
+                    <>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                      Active on pathway
+                    </>
+                  ) : (
+                    <>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="16" /><line x1="8" y1="12" x2="16" y2="12" /></svg>
+                      Simulate this treatment
+                    </>
+                  )}
+                </button>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+export default function NodeDetail({ node, onClose, onAddIntervention, activeInterventions }) {
   if (!node) return null;
 
   const name = node.label?.split("\n")[0] || node.id;
   const typeInfo = NODE_TYPE_INFO[node.nodeType] || { label: "Unknown", color: "#94a3b8" };
   const description = CONDITION_DESCRIPTIONS[name];
   const likelihood = node.probability != null ? node.probability * 100 : null;
+  const conditionKey = node.nodeType !== "intervention" ? conditionKeyFromId(node.id) : null;
 
   return (
     <div className="node-overlay">
@@ -116,6 +369,12 @@ export default function NodeDetail({ node, onClose }) {
           <span className="node-stat-value oop">${Math.round(node.oopEstimate).toLocaleString()}</span>
           <span className="node-stat-label">Out-of-Pocket</span>
         </div>
+        {(node.drugCost > 0) && (
+          <div className="node-stat">
+            <span className="node-stat-value drug">${Math.round(node.drugCost).toLocaleString()}</span>
+            <span className="node-stat-label">Rx Drug Cost</span>
+          </div>
+        )}
         {node.year > 0 && (
           <div className="node-stat">
             <span className="node-stat-value">Year {node.year}</span>
@@ -123,6 +382,8 @@ export default function NodeDetail({ node, onClose }) {
           </div>
         )}
       </div>
+
+      {conditionKey && <FdaDrugInfo conditionKey={conditionKey} onAddIntervention={onAddIntervention} activeInterventions={activeInterventions} />}
     </div>
   );
 }

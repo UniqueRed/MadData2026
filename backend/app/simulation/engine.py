@@ -164,29 +164,181 @@ INTERVENTION_EFFECTS = {
         ("pre-diabetes", "diabetes"): 0.42,
         ("diabetes", "ckd"): 0.60,
         ("diabetes", "neuropathy"): 0.70,
+        ("diabetes", "cad"): 0.75,
+        ("diabetes", "heart_failure"): 0.80,
+        ("diabetes", "stroke"): 0.80,
+        ("diabetes", "vision_loss"): 0.75,
+        ("diabetes", "atherosclerosis"): 0.80,
+        ("obesity", "diabetes"): 0.70,
     },
     "sglt2_inhibitor": {
         ("diabetes", "ckd"): 0.52,
         ("diabetes", "heart_failure"): 0.65,
+        ("diabetes", "stroke"): 0.75,
+        ("diabetes", "cad"): 0.70,
+        ("diabetes", "neuropathy"): 0.75,
+        ("diabetes", "vision_loss"): 0.70,
+        ("diabetes", "atherosclerosis"): 0.75,
         ("type_2_diabetes", "ckd_stage_2"): 0.52,
         ("type_2_diabetes", "heart_failure"): 0.65,
+        ("ckd", "heart_failure"): 0.70,
+        ("heart_failure", "ckd"): 0.70,
     },
     "statin": {
         ("high_cholesterol", "cad"): 0.50,
         ("high_cholesterol", "atherosclerosis"): 0.50,
+        ("high_cholesterol", "stroke"): 0.55,
+        ("high_cholesterol", "heart_failure"): 0.65,
+        ("high_cholesterol", "hypertension"): 0.80,
         ("cad", "heart_failure"): 0.70,
+        ("cad", "stroke"): 0.70,
+        ("cad", "arrhythmia"): 0.80,
+        ("diabetes", "cad"): 0.65,
+        ("diabetes", "atherosclerosis"): 0.65,
+        ("diabetes", "stroke"): 0.75,
+        ("hypertension", "cad"): 0.70,
+        ("hypertension", "atherosclerosis"): 0.70,
+        ("atherosclerosis", "stroke"): 0.60,
+        ("atherosclerosis", "cad"): 0.60,
     },
     "ace_inhibitor": {
         ("hypertension", "ckd"): 0.55,
         ("hypertension", "stroke"): 0.60,
         ("hypertension", "heart_failure"): 0.65,
+        ("hypertension", "cad"): 0.70,
+        ("hypertension", "atherosclerosis"): 0.75,
+        ("hypertension", "arrhythmia"): 0.80,
+        ("hypertension", "vision_loss"): 0.80,
+        ("hypertension", "dementia"): 0.80,
+        ("ckd", "heart_failure"): 0.70,
+        ("ckd", "stroke"): 0.75,
+        ("diabetes", "ckd"): 0.65,
+        ("diabetes", "heart_failure"): 0.75,
+        ("heart_failure", "ckd"): 0.70,
     },
     "lifestyle_change": {
         ("pre-diabetes", "diabetes"): 0.42,
         ("pre-diabetes", "type_2_diabetes"): 0.42,
         ("hypertension", "stroke"): 0.75,
+        ("hypertension", "cad"): 0.75,
+        ("hypertension", "heart_failure"): 0.80,
         ("obesity", "diabetes"): 0.50,
         ("obesity", "hypertension"): 0.65,
+        ("obesity", "cad"): 0.70,
+        ("obesity", "heart_failure"): 0.75,
+        ("obesity", "arthrosis"): 0.70,
+        ("obesity", "back_pain"): 0.75,
+        ("obesity", "gout"): 0.70,
+        ("diabetes", "ckd"): 0.80,
+        ("diabetes", "neuropathy"): 0.80,
+        ("diabetes", "cad"): 0.80,
+        ("high_cholesterol", "cad"): 0.75,
+        ("high_cholesterol", "atherosclerosis"): 0.75,
+    },
+    "arb": {
+        ("hypertension", "ckd"): 0.55,
+        ("hypertension", "stroke"): 0.60,
+        ("hypertension", "heart_failure"): 0.65,
+        ("hypertension", "cad"): 0.70,
+        ("hypertension", "atherosclerosis"): 0.75,
+        ("hypertension", "arrhythmia"): 0.80,
+        ("hypertension", "vision_loss"): 0.80,
+        ("hypertension", "dementia"): 0.80,
+        ("ckd", "heart_failure"): 0.70,
+        ("diabetes", "ckd"): 0.65,
+        ("heart_failure", "ckd"): 0.70,
+    },
+    "ccb": {
+        ("hypertension", "stroke"): 0.60,
+        ("hypertension", "cad"): 0.70,
+        ("hypertension", "heart_failure"): 0.70,
+        ("hypertension", "ckd"): 0.65,
+        ("hypertension", "atherosclerosis"): 0.75,
+        ("hypertension", "arrhythmia"): 0.75,
+        ("hypertension", "vision_loss"): 0.80,
+        ("hypertension", "dementia"): 0.80,
+        ("cad", "heart_failure"): 0.80,
+        ("arrhythmia", "stroke"): 0.70,
+        ("arrhythmia", "heart_failure"): 0.75,
+    },
+    "beta_blocker": {
+        ("hypertension", "stroke"): 0.65,
+        ("hypertension", "cad"): 0.70,
+        ("hypertension", "heart_failure"): 0.65,
+        ("hypertension", "arrhythmia"): 0.65,
+        ("hypertension", "ckd"): 0.75,
+        ("cad", "heart_failure"): 0.70,
+        ("cad", "arrhythmia"): 0.75,
+        ("arrhythmia", "stroke"): 0.65,
+        ("arrhythmia", "heart_failure"): 0.70,
+        ("heart_failure", "arrhythmia"): 0.70,
+        ("heart_failure", "ckd"): 0.80,
+    },
+    "alpha_blocker": {
+        ("hypertension", "stroke"): 0.80,
+        ("hypertension", "cad"): 0.85,
+        ("hypertension", "heart_failure"): 0.80,
+        ("hypertension", "ckd"): 0.80,
+        ("prostatic_hyperplasia", "ckd"): 0.75,
+        ("prostatic_hyperplasia", "kidney_stones"): 0.80,
+        ("prostatic_hyperplasia", "urinary_incontinence"): 0.70,
+    },
+    "diuretic": {
+        ("hypertension", "stroke"): 0.65,
+        ("hypertension", "heart_failure"): 0.65,
+        ("hypertension", "cad"): 0.75,
+        ("hypertension", "ckd"): 0.70,
+        ("heart_failure", "ckd"): 0.75,
+        ("heart_failure", "arrhythmia"): 0.80,
+        ("ckd", "heart_failure"): 0.80,
+    },
+    "glp1_agonist": {
+        ("diabetes", "ckd"): 0.55,
+        ("diabetes", "heart_failure"): 0.60,
+        ("diabetes", "cad"): 0.60,
+        ("diabetes", "stroke"): 0.65,
+        ("diabetes", "neuropathy"): 0.70,
+        ("diabetes", "vision_loss"): 0.65,
+        ("diabetes", "atherosclerosis"): 0.70,
+        ("obesity", "diabetes"): 0.45,
+        ("obesity", "hypertension"): 0.60,
+        ("obesity", "cad"): 0.65,
+        ("obesity", "heart_failure"): 0.70,
+        ("obesity", "arthrosis"): 0.75,
+        ("pre-diabetes", "diabetes"): 0.40,
+    },
+    "ssri": {
+        ("depression", "anxiety"): 0.50,
+        ("depression", "insomnia"): 0.65,
+        ("depression", "somatoform"): 0.70,
+        ("depression", "dementia"): 0.85,
+        ("anxiety", "depression"): 0.55,
+        ("anxiety", "insomnia"): 0.60,
+        ("anxiety", "hypertension"): 0.85,
+        ("anxiety", "arrhythmia"): 0.85,
+    },
+    "anticoagulant": {
+        ("arrhythmia", "stroke"): 0.35,
+        ("arrhythmia", "dementia"): 0.70,
+        ("cad", "stroke"): 0.60,
+        ("cad", "heart_failure"): 0.80,
+        ("atherosclerosis", "stroke"): 0.55,
+        ("valve_disorder", "stroke"): 0.50,
+        ("stroke", "dementia"): 0.70,
+    },
+    "ppi": {
+        ("gerd", "cancer"): 0.75,
+        ("gerd", "anemia"): 0.70,
+        ("gerd", "asthma_copd"): 0.80,
+        ("liver_disease", "gerd"): 0.65,
+    },
+    "bronchodilator": {
+        ("asthma_copd", "heart_failure"): 0.75,
+        ("asthma_copd", "arrhythmia"): 0.80,
+        ("asthma_copd", "depression"): 0.80,
+        ("asthma_copd", "anxiety"): 0.75,
+        ("asthma_copd", "osteoporosis"): 0.85,
+        ("asthma_copd", "cancer"): 0.90,
     },
 }
 
@@ -261,6 +413,17 @@ CONDITION_LABELS = {
 # from conditions with both HC-233 total expenditure and H239 drug cost data.
 # Typical ratio for chronic conditions is ~2.0-2.5x (drugs are ~40-50% of total).
 _DRUG_TO_TOTAL_RATIO = 2.1
+
+
+def _get_drug_cost(condition: str) -> tuple[float, float]:
+    """
+    Look up annual drug cost and drug OOP for a condition from H239.
+    Returns (drug_cost, drug_oop). Returns (0, 0) if no data.
+    """
+    drug_data = query_drug_cost(condition)
+    if drug_data is not None and drug_data["mean_drug_cost"] > 0:
+        return round(drug_data["mean_drug_cost"], 2), round(drug_data["mean_drug_oop"], 2)
+    return 0.0, 0.0
 
 
 def _get_condition_cost(condition: str, profile: PatientProfile) -> float:
@@ -499,6 +662,7 @@ async def simulate_pathway(
     for condition in profile.conditions:
         node_id = f"current_{condition}"
         cost = _get_condition_cost(condition, profile)
+        dc, dc_oop = _get_drug_cost(condition)
         nodes.append(GraphNode(
             id=node_id,
             label=CONDITION_LABELS.get(condition, condition),
@@ -506,6 +670,8 @@ async def simulate_pathway(
             probability=1.0,
             annual_cost=cost,
             oop_estimate=_estimate_oop(cost, profile),
+            drug_cost=dc,
+            drug_oop=dc_oop,
             year=0,
         ))
         seen_nodes.add(node_id)
@@ -526,6 +692,8 @@ async def simulate_pathway(
             node_type="intervention",
             annual_cost=rx_cost,
             oop_estimate=rx_oop,
+            drug_cost=rx_cost,
+            drug_oop=rx_oop,
             year=0,
         ))
         seen_nodes.add(node_id)
@@ -550,6 +718,7 @@ async def simulate_pathway(
 
         node_id = f"suspected_{condition}"
         cost = _get_condition_cost(condition, profile)
+        dc, dc_oop = _get_drug_cost(condition)
         nodes.append(GraphNode(
             id=node_id,
             label=CONDITION_LABELS.get(condition, condition),
@@ -557,6 +726,8 @@ async def simulate_pathway(
             probability=round(prob, 4),
             annual_cost=cost,
             oop_estimate=_estimate_oop(cost, profile),
+            drug_cost=dc,
+            drug_oop=dc_oop,
             year=0,
             is_llm_generated=True,
         ))
@@ -594,6 +765,7 @@ async def simulate_pathway(
 
             node_id = f"future_{tgt}_y{year}"
             cost = _get_condition_cost(tgt, profile)
+            dc, dc_oop = _get_drug_cost(tgt)
 
             is_high_cost = cost > 10000
             node_type = "high_cost" if is_high_cost else "future"
@@ -607,6 +779,8 @@ async def simulate_pathway(
                     probability=round(joint_prob, 4),
                     annual_cost=cost,
                     oop_estimate=_estimate_oop(cost, profile),
+                    drug_cost=dc,
+                    drug_oop=dc_oop,
                     year=year,
                 ))
                 seen_nodes.add(node_id)
@@ -676,14 +850,20 @@ async def simulate_pathway(
     # Compute 5-year expected costs (simple expected value)
     total_cost = 0.0
     total_oop = 0.0
+    total_drug = 0.0
+    total_drug_oop = 0.0
     for node in nodes:
         years_active = max(1, time_horizon_years - node.year + 1)
         total_cost += node.annual_cost * node.probability * years_active
         total_oop += node.oop_estimate * node.probability * years_active
+        total_drug += node.drug_cost * node.probability * years_active
+        total_drug_oop += node.drug_oop * node.probability * years_active
 
     return CarePathwayGraph(
         nodes=nodes,
         edges=edges,
         total_5yr_cost=round(total_cost, 2),
         total_5yr_oop=round(total_oop, 2),
+        total_5yr_drug_cost=round(total_drug, 2),
+        total_5yr_drug_oop=round(total_drug_oop, 2),
     )

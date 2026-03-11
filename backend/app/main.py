@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.routers import voice, simulation, plans
+from app.routers import voice, simulation, plans, drugs
 
 app = FastAPI(title="CareGraph API", version="0.1.0")
 
@@ -16,6 +16,7 @@ app.add_middleware(
 app.include_router(voice.router, prefix="/api/voice", tags=["voice"])
 app.include_router(simulation.router, prefix="/api/simulation", tags=["simulation"])
 app.include_router(plans.router, prefix="/api/plans", tags=["plans"])
+app.include_router(drugs.router, prefix="/api/drugs", tags=["drugs"])
 
 
 @app.get("/api/health")

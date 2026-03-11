@@ -8,6 +8,8 @@ class GraphNode(BaseModel):
     probability: float = 1.0
     annual_cost: float = 0.0
     oop_estimate: float = 0.0
+    drug_cost: float = 0.0
+    drug_oop: float = 0.0
     year: int = 0
     is_llm_generated: bool = False
 
@@ -25,3 +27,5 @@ class CarePathwayGraph(BaseModel):
     edges: list[GraphEdge]
     total_5yr_cost: float = 0.0
     total_5yr_oop: float = 0.0
+    total_5yr_drug_cost: float = 0.0
+    total_5yr_drug_oop: float = 0.0

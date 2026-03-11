@@ -32,6 +32,8 @@ function chatPreview(chat) {
 export default function ChatHistory({ chatList, activeChatId, onSelect, onDelete, onRename, onPin }) {
   const [editingId, setEditingId] = useState(null);
   const [editValue, setEditValue] = useState("");
+  const [selectMode, setSelectMode] = useState(false);
+  const [selected, setSelected] = useState(new Set());
   const inputRef = useRef(null);
   const containerRef = useRef(null);
   const positionsRef = useRef(new Map());
@@ -95,6 +97,36 @@ export default function ChatHistory({ chatList, activeChatId, onSelect, onDelete
     setEditingId(null);
   };
 
+  const toggleSelect = (chatId) => {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (next.has(chatId)) next.delete(chatId);
+      else next.add(chatId);
+      return next;
+    });
+  };
+
+  const selectAll = () => {
+    if (selected.size === chatList.length) {
+      setSelected(new Set());
+    } else {
+      setSelected(new Set(chatList.map((c) => c.id)));
+    }
+  };
+
+  const deleteSelected = () => {
+    for (const id of selected) {
+      onDelete(id);
+    }
+    setSelected(new Set());
+    setSelectMode(false);
+  };
+
+  const exitSelectMode = () => {
+    setSelectMode(false);
+    setSelected(new Set());
+  };
+
   if (chatList.length === 0) {
     return (
       <div className="chat-history-dropdown">
@@ -104,77 +136,118 @@ export default function ChatHistory({ chatList, activeChatId, onSelect, onDelete
   }
 
   return (
-    <div className="chat-history-dropdown" ref={containerRef}>
-      {chatList.map((chat) => (
-        <div
-          key={chat.id}
-          data-chat-id={chat.id}
-          className={`chat-history-item${chat.id === activeChatId ? " active" : ""}`}
-          onClick={() => editingId !== chat.id && onSelect(chat.id)}
-        >
-          <button
-            className="chat-history-star"
-            onClick={(e) => {
-              e.stopPropagation();
-              onPin(chat.id);
-            }}
-            title={chat.pinned ? "Unstar" : "Star"}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill={chat.pinned ? "#eab308" : "none"} stroke={chat.pinned ? "#eab308" : "#d1d5db"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-            </svg>
+    <div className="chat-history-dropdown">
+      <div className="chat-history-toolbar">
+        {selectMode ? (
+          <>
+            <button className="chat-history-toolbar-btn" onClick={selectAll}>
+              {selected.size === chatList.length ? "Deselect all" : "Select all"}
+            </button>
+            <button
+              className="chat-history-toolbar-btn chat-history-toolbar-delete"
+              onClick={deleteSelected}
+              disabled={selected.size === 0}
+            >
+              Delete ({selected.size})
+            </button>
+            <button className="chat-history-toolbar-btn" onClick={exitSelectMode}>
+              Cancel
+            </button>
+          </>
+        ) : (
+          <button className="chat-history-toolbar-btn" onClick={() => setSelectMode(true)}>
+            Select
           </button>
-          <div className="chat-history-preview">
-            {editingId === chat.id ? (
-              <input
-                ref={inputRef}
-                className="chat-history-rename-input"
-                value={editValue}
-                onChange={(e) => setEditValue(e.target.value)}
-                onBlur={commitRename}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") commitRename();
-                  if (e.key === "Escape") cancelRename();
-                }}
-                onClick={(e) => e.stopPropagation()}
-              />
+        )}
+      </div>
+      <div className="chat-history-list" ref={containerRef}>
+        {chatList.map((chat) => (
+          <div
+            key={chat.id}
+            data-chat-id={chat.id}
+            className={`chat-history-item${chat.id === activeChatId ? " active" : ""}${selectMode && selected.has(chat.id) ? " selected" : ""}`}
+            onClick={() => {
+              if (selectMode) {
+                toggleSelect(chat.id);
+              } else if (editingId !== chat.id) {
+                onSelect(chat.id);
+              }
+            }}
+          >
+            {selectMode ? (
+              <div className={`chat-history-checkbox${selected.has(chat.id) ? " checked" : ""}`}>
+                {selected.has(chat.id) && (
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                )}
+              </div>
             ) : (
-              <>
-                <span className="chat-history-text">{chatPreview(chat)}</span>
-                <span className="chat-history-time">
-                  {timeAgo(chat.updatedAt || chat.createdAt)}
-                </span>
-              </>
-            )}
-          </div>
-          {editingId !== chat.id && (
-            <div className="chat-history-actions">
               <button
-                className="chat-history-action-btn"
-                onClick={(e) => startRename(chat, e)}
-                title="Rename"
-              >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-                </svg>
-              </button>
-              <button
-                className="chat-history-action-btn chat-history-action-delete"
+                className="chat-history-star"
                 onClick={(e) => {
                   e.stopPropagation();
-                  onDelete(chat.id);
+                  onPin(chat.id);
                 }}
-                title="Delete"
+                title={chat.pinned ? "Unstar" : "Star"}
               >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+                <svg width="14" height="14" viewBox="0 0 24 24" fill={chat.pinned ? "#eab308" : "none"} stroke={chat.pinned ? "#eab308" : "#d1d5db"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                 </svg>
               </button>
+            )}
+            <div className="chat-history-preview">
+              {editingId === chat.id ? (
+                <input
+                  ref={inputRef}
+                  className="chat-history-rename-input"
+                  value={editValue}
+                  onChange={(e) => setEditValue(e.target.value)}
+                  onBlur={commitRename}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") commitRename();
+                    if (e.key === "Escape") cancelRename();
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              ) : (
+                <>
+                  <span className="chat-history-text">{chatPreview(chat)}</span>
+                  <span className="chat-history-time">
+                    {timeAgo(chat.updatedAt || chat.createdAt)}
+                  </span>
+                </>
+              )}
             </div>
-          )}
-        </div>
-      ))}
+            {!selectMode && editingId !== chat.id && (
+              <div className="chat-history-actions">
+                <button
+                  className="chat-history-action-btn"
+                  onClick={(e) => startRename(chat, e)}
+                  title="Rename"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                  </svg>
+                </button>
+                <button
+                  className="chat-history-action-btn chat-history-action-delete"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onDelete(chat.id);
+                  }}
+                  title="Delete"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </button>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
